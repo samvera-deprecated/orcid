@@ -9,12 +9,12 @@ class RequestSandboxAuthorizationCode
   attr_reader :oauth_redirect_uri, :orcid_client_id, :authorization_code, :orcid_client_secret
 
   def initialize(options = {})
-    @orcid_client_id = options.fetch(:orcid_client_id) { ENV['ORCID_APP_ID']}
-    @orcid_client_secret = options.fetch(:orcid_client_secret) { ENV['ORCID_APP_SECRET']}
-    @login_url = options.fetch(:login_url) { ENV['ORCID_REMOTE_LOGIN_URL'] || 'https://sandbox-1.orcid.org/signin/auth.json'}
-    @authorize_url = options.fetch(:authorize_url) { ENV['ORCID_AUTHORIZE_URL'] || 'https://sandbox-1.orcid.org/oauth/authorize' }
+    @orcid_client_id = options.fetch(:orcid_client_id) { Orcid.provider.id }
+    @orcid_client_secret = options.fetch(:orcid_client_secret) { Orcid.provider.secret }
+    @login_url = options.fetch(:login_url) { Orcid.provider.signin_via_json_url }
+    @authorize_url = options.fetch(:authorize_url) { Orcid.provider.authorize_url }
     @oauth_redirect_uri = options.fetch(:oauth_redirect_uri) { 'https://developers.google.com/oauthplayground' }
-    @access_scope = options.fetch(:scope) { ENV['ORCID_APP_AUTHENTICATION_SCOPE'] }
+    @access_scope = options.fetch(:scope) { Orcid.provider.authentication_scope }
   end
 
   def call(options = {})

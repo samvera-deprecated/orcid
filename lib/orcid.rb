@@ -21,6 +21,10 @@ module Orcid
     yield(configuration)
   end
 
+  def provider
+    @provider ||= Configuration::Provider.new
+  end
+
   def provider_name
     configuration.provider_name
   end
@@ -56,7 +60,7 @@ module Orcid
     # passing the site: option as Orcid's Sandbox has an invalid certificate
     # for the api.sandbox-1.orcid.org
     @oauth_client ||= Devise::MultiAuth.oauth_client_for(
-      provider_name, options: { site: ENV['ORCID_SITE_URL']}
+      provider_name, options: { site: provider.site_url }
     )
   end
 

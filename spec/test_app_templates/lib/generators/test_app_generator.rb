@@ -11,17 +11,17 @@ class TestAppGenerator < Rails::Generators::Base
     rake "orcid:install:migrations"
   end
 
-  def install_omniauth_strategies
+ def install_omniauth_strategies
     config_code = ", :omniauthable, :omniauth_providers => [:orcid]"
     insert_into_file 'app/models/user.rb', config_code, { :after => /:validatable *$/, :verbose => false }
 
     init_code = %(
-      config.omniauth(:orcid, ENV['ORCID_APP_ID'], ENV['ORCID_APP_SECRET'],
-                      scope: ENV['ORCID_APP_AUTHENTICATION_SCOPE'],
+      config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
+                      scope: Orcid.provider.authentication_scope,
                       client_options: {
-                        site: ENV['ORCID_SITE_URL'],
-                        authorize_url: ENV['ORCID_AUTHORIZE_URL'],
-                        token_url: ENV['ORCID_TOKEN_URL']
+                        site: Orcid.provider.site_url,
+                        authorize_url: Orcid.provider.authorize_url,
+                        token_url: Orcid.provider.token_url
                       }
                       )
     )
