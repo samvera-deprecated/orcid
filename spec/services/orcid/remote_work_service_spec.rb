@@ -9,6 +9,18 @@ module Orcid
     let(:response) { double("Response", body: 'Body') }
 
     context '.call' do
+      let(:token) { double('Token', client: client, token: 'access_token', refresh_token: 'refresh_token')}
+      let(:client) { double('Client', id: '123', site: 'URL', options: {})}
+      it 'raises a more helpful message' do
+        response = double("Response", status: '100', body: 'body')
+        response.stub(:error=)
+        response.stub(:parsed)
+        token.should_receive(:request).and_raise(OAuth2::Error.new(response))
+
+        expect {
+          described_class.call(orcid_profile_id, token: token)
+        }.to raise_error(RemoteServiceError)
+      end
       it 'instantiates and calls underlying instance' do
         token.should_receive(:request).
           with(:post, "v1.1/#{orcid_profile_id}/orcid-works/", body: payload, headers: request_headers).
