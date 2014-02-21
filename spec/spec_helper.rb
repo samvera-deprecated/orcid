@@ -12,6 +12,7 @@ require 'omniauth-orcid'
 require File.expand_path("../internal/config/environment.rb",  __FILE__)
 
 EngineCart.load_application!
+require 'orcid/spec_support'
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
