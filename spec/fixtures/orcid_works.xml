@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orcid-message xmlns="http://www.orcid.org/ns/orcid">
+    <message-version>1.1</message-version>
+    <orcid-profile type="user">
+        <orcid-identifier>
+            <uri>http://sandbox-1.orcid.org/0000-0002-1117-8571</uri>
+            <path>0000-0002-1117-8571</path>
+            <host>sandbox-1.orcid.org</host>
+        </orcid-identifier>
+        <orcid-preferences>
+            <locale>en</locale>
+        </orcid-preferences>
+        <orcid-history>
+            <creation-method>API</creation-method>
+            <completion-date>2014-02-14T15:32:15.453Z</completion-date>
+            <submission-date>2014-02-14T15:31:12.816Z</submission-date>
+            <last-modified-date>2014-02-18T20:23:40.472Z</last-modified-date>
+            <claimed>true</claimed>
+            <source>
+                <source-orcid>
+                    <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                    <path>0000-0002-6683-6607</path>
+                    <host>sandbox-1.orcid.org</host>
+                </source-orcid>
+                <source-name>Hydra ORCID Integrator</source-name>
+            </source>
+        </orcid-history>
+        <orcid-activities>
+            <orcid-works>
+                <orcid-work put-code="303475" visibility="public">
+                    <work-title>
+                        <title>Another Test Drive</title>
+                    </work-title>
+                    <work-type>test</work-type>
+                    <work-source>
+                        <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                        <path>0000-0002-6683-6607</path>
+                        <host>sandbox-1.orcid.org</host>
+                    </work-source>
+                </orcid-work>
+                <orcid-work put-code="303474" visibility="public">
+                    <work-title>
+                        <title>Test Driven Orcid Integration</title>
+                    </work-title>
+                    <work-type>test</work-type>
+                    <work-source>
+                        <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                        <path>0000-0002-6683-6607</path>
+                        <host>sandbox-1.orcid.org</host>
+                    </work-source>
+                </orcid-work>
+            </orcid-works>
+        </orcid-activities>
+    </orcid-profile>
+</orcid-message>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orcid-message xmlns="http://www.orcid.org/ns/orcid"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://raw.github.com/ORCID/ORCID-Source/master/orcid-model/src/main/resources/orcid-message-1.1.xsd">
+<message-version>1.1</message-version>
+<orcid-profile>
+  <orcid-activities>
+    <orcid-works><% works.each do |work| %>
+      <orcid-work>
+        <work-title>
+          <title><%= work.title %></title>
+        </work-title>
+        <work-type><%= work.work_type %></work-type>
+      </orcid-work>
+    <% end %></orcid-works>
+  </orcid-activities>
+</orcid-profile>
+</orcid-message>
