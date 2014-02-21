@@ -26,6 +26,17 @@ module Orcid
     protected
     def deliver
       token.request(request_method, path, body: body, headers: headers)
+    rescue OAuth2::Error => e
+      raise RemoteServiceError.new(
+        response_body: e.response.body,
+        response_status: e.response.status,
+        client: token.client,
+        token: token,
+        request_method: request_method,
+        request_path: path,
+        request_body: body,
+        request_headers: headers
+      )
     end
 
     def default_headers
