@@ -34,12 +34,16 @@ module Orcid
 
     attr_writer :id
     def id
-      @id ||= store.fetch('ORCID_APP_ID')
+      @id ||= store.fetch('ORCID_APP_ID') {
+        Rails.logger.error('Set your Orcid.provider.id')
+      }
     end
 
     attr_writer :secret
     def secret
-      @secret ||= store.fetch('ORCID_APP_SECRET')
+      @secret ||= store.fetch('ORCID_APP_SECRET') {
+        Rails.logger.error('Set your Orcid.provider.secret')
+      }
     end
   end
 end
