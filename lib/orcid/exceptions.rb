@@ -9,6 +9,7 @@ module Orcid
         text << "id:\n\t#{client.id.inspect}"
         text << "site:\n\t#{client.site.inspect}"
         text << "options:\n\t#{client.options.inspect}"
+        text << "scopes:\n\t#{Orcid.provider.authentication_scope}"
       end
       text << "\n-- Token --"
       if token = options[:token]

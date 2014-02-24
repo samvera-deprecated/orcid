@@ -8,7 +8,7 @@ module Orcid
     attr_writer :authentication_scope
     def authentication_scope
       @authentication_scope ||= store.fetch('ORCID_APP_AUTHENTICATION_SCOPE') {
-        "/authenticate,/orcid-works/create,/orcid-works/update,/read-public,/orcid-grants/create"
+        "/authenticate,/orcid-works/create,/orcid-works/update,/read-public"
       }
     end
 
