@@ -12,12 +12,15 @@ require 'simple_form'
 module Orcid
 
   class << self
-    attr_accessor :configuration
+    attr_writer :configuration
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
   end
 
   module_function
   def configure
-    self.configuration ||= Configuration.new
     yield(configuration)
   end
 
@@ -29,27 +32,22 @@ module Orcid
     configuration.provider
   end
 
-  def provider_name
-    configuration.provider_name
-  end
-
   def authentication_model
     configuration.authentication_model
   end
 
-
   def connect_user_and_orcid_profile(user, orcid_profile_id, options = {})
-    authentication_model.create!(provider: provider_name, uid: orcid_profile_id, user: user)
+    authentication_model.create!(provider: 'orcid', uid: orcid_profile_id, user: user)
   end
 
   def access_token_for(orcid_profile_id, options = {})
     client = options.fetch(:client) { oauth_client }
     tokenizer = options.fetch(:tokenizer) { authentication_model }
-    tokenizer.to_access_token(uid: orcid_profile_id, provider: provider_name, client: client)
+    tokenizer.to_access_token(uid: orcid_profile_id, provider: 'orcid', client: client)
   end
 
   def profile_for(user)
-    if auth = authentication_model.where(provider: provider_name, user: user).first
+    if auth = authentication_model.where(provider: 'orcid', user: user).first
       Orcid::Profile.new(auth.uid)
     else
       nil
@@ -64,7 +62,7 @@ module Orcid
     # passing the site: option as Orcid's Sandbox has an invalid certificate
     # for the api.sandbox-1.orcid.org
     @oauth_client ||= Devise::MultiAuth.oauth_client_for(
-      provider_name, options: { site: provider.site_url }
+      'orcid', options: { site: provider.site_url }
     )
   end
 

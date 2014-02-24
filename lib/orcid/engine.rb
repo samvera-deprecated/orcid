@@ -9,11 +9,5 @@ module Orcid
       )
     end
 
-    config.before_initialize do |app|
-      Orcid.configure do |config|
-        config.provider_name = 'orcid'
-      end
-    end
-
   end
 end
