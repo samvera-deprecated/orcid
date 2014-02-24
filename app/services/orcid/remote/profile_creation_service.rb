@@ -1,5 +1,5 @@
 # Responsible for minting a new ORCID for the given payload.
-module Orcid
+module Orcid::Remote
   class ProfileCreationService
 
     def self.call(payload, config = {})

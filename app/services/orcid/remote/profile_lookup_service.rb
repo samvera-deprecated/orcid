@@ -1,4 +1,4 @@
-module Orcid
+module Orcid::Remote
   class ProfileLookupService
     class SearchResponse
       delegate :fetch, :has_key?, :[], to: :@attributes

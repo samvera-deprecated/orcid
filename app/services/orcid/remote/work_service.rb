@@ -1,5 +1,5 @@
-module Orcid
-  class RemoteWorkService
+module Orcid::Remote
+  class WorkService
     def self.call(orcid_profile_id, options = {})
       new(orcid_profile_id, options).call
     end
@@ -27,7 +27,7 @@ module Orcid
     def deliver
       token.request(request_method, path, body: body, headers: headers)
     rescue OAuth2::Error => e
-      raise RemoteServiceError.new(
+      raise Orcid::RemoteServiceError.new(
         response_body: e.response.body,
         response_status: e.response.status,
         client: token.client,

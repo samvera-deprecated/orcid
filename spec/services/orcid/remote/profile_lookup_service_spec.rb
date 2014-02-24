@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ostruct'
 
-module Orcid
+module Orcid::Remote
   describe ProfileLookupService do
     let(:email) { 'corwin@amber.gov' }
     let(:orcid_profile_id) { '0001-0002' }

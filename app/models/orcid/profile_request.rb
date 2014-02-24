@@ -25,7 +25,7 @@ module Orcid
       return false unless before_run_validator.call(self)
 
       payload_xml_builder = options.fetch(:payload_xml_builder) { method(:xml_payload) }
-      profile_creation_service = options.fetch(:profile_creation_service) { Orcid::ProfileCreationService }
+      profile_creation_service = options.fetch(:profile_creation_service) { Orcid::Remote::ProfileCreationService }
       profile_creation_responder = options.fetch(:profile_creation_responder) { method(:handle_profile_creation_response) }
 
       orcid_profile_id = profile_creation_service.call(payload_xml_builder.call(attributes))

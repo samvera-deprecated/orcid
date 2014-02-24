@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-module Orcid
-  describe RemoteWorkService do
+module Orcid::Remote
+  describe WorkService do
     let(:payload) { %(<?xml version="1.0" encoding="UTF-8"?>) }
     let(:token) { double("Token") }
     let(:orcid_profile_id) { '0000-0003-1495-7122' }
@@ -19,7 +19,7 @@ module Orcid
 
         expect {
           described_class.call(orcid_profile_id, token: token)
-        }.to raise_error(RemoteServiceError)
+        }.to raise_error(Orcid::RemoteServiceError)
       end
       it 'instantiates and calls underlying instance' do
         token.should_receive(:request).
