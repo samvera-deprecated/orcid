@@ -18,6 +18,11 @@ module Orcid
       @authentication_model ||= Devise::MultiAuth::Authentication
     end
 
+    def register_mapping_to_orcid_work(source_type, legend)
+      mapper.configure do |config|
+        config.register(source: source_type, target: 'orcid/work', legend: legend)
+      end
+    end
   end
 end
 require 'orcid/configuration/provider'
