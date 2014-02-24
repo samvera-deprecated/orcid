@@ -39,5 +39,9 @@ module Orcid
       route 'mount Orcid::Engine => "/orcid"'
     end
 
+    def install_initializer
+      template 'orcid_initializer.rb.erb', 'config/orcid_initializer.rb'
+    end
+
   end
 end
