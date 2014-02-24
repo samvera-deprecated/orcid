@@ -4,7 +4,13 @@ module Orcid
   describe ProfileConnection do
     let(:email) { 'test@hello.com'}
     let(:user) { FactoryGirl.build_stubbed(:user) }
-    subject { Orcid::ProfileConnection.new(email: email, user: user) }
+    let(:profile_lookup_service) { double("Profile Lookup Service") }
+
+    subject {
+      Orcid::ProfileConnection.new(email: email, user: user).tap { |pc|
+        pc.profile_lookup_service = profile_lookup_service
+      }
+    }
 
     its(:email) { should eq email }
     its(:user) { should eq user }
@@ -31,14 +37,11 @@ module Orcid
     end
 
     context '#with_orcid_profile_candidates' do
-      let(:querier) { double("Querier") }
-      before(:each) do
-        subject.orcid_profile_querier = querier
-      end
       context 'with an email' do
+
         it 'should yield the query response' do
           subject.email = email
-          querier.stub(:call).and_return(:query_response)
+          profile_lookup_service.should_receive(:call).with(email: email).and_return(:query_response)
           expect {|b| subject.with_orcid_profile_candidates(&b) }.to yield_with_args(:query_response)
         end
       end
@@ -46,7 +49,7 @@ module Orcid
       context 'without an email' do
         it 'should not yield' do
           subject.email = nil
-          querier.stub(:call).and_return(:query_response)
+          profile_lookup_service.stub(:call).and_return(:query_response)
           expect {|b| subject.with_orcid_profile_candidates(&b) }.to_not yield_control
         end
       end
