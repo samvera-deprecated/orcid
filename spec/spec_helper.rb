@@ -15,6 +15,7 @@ EngineCart.load_application!
 require 'orcid/spec_support'
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'rspec/given'
 require 'database_cleaner'
 require 'factory_girl'
 require 'rspec-html-matchers'
