@@ -4,7 +4,7 @@ module Orcid
 
     def initialize(config = {})
       @callbacks = NamedCallbacks.new
-      @query_service = config.fetch(:query_service)
+      @query_service = config.fetch(:query_service) { ProfileLookupService }
       yield(@callbacks) if block_given?
     end
     attr_reader :query_service
