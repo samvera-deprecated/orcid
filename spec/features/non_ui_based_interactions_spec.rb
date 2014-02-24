@@ -3,7 +3,6 @@ require 'spec_helper'
 describe 'non-UI based interactions' , requires_net_connect: true do
   around(:each) do |example|
     Mappy.configure {|b|}
-    Mappy.finalize!
     WebMock.allow_net_connect!
 
     example.run
