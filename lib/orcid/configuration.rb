@@ -1,8 +1,8 @@
 module Orcid
   class Configuration
-    attr_reader :store
-    def initialize(store = ::ENV)
-      @store = store
+    attr_reader :mapper
+    def initialize(options = {})
+      @mapper = options.fetch(:mapper) { ::Mappy }
       @provider = Configuration::Provider.new
     end
 

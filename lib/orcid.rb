@@ -21,6 +21,10 @@ module Orcid
     yield(configuration)
   end
 
+  def mapper
+    configuration.mapper
+  end
+
   def provider
     configuration.provider
   end
