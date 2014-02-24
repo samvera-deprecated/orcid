@@ -5,11 +5,7 @@ module Orcid
     def self.it_prompts_unauthenticated_users_for_signin(method, action)
       context 'unauthenticated user' do
         it "should redirect for sign in" do
-          begin
-            send(method, action, use_route: :orcid)
-          rescue NoMethodError => e
-            require 'byebug'; byebug; true;
-          end
+          send(method, action, use_route: :orcid)
           expect(response).to redirect_to(main_app.new_user_session_path)
         end
       end
