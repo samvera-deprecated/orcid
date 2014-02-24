@@ -1,6 +1,6 @@
 require 'orcid/named_callbacks'
 module Orcid
-  class ProfileLookup
+  class ProfileLookupRunner
 
     def initialize(config = {})
       @callbacks = NamedCallbacks.new

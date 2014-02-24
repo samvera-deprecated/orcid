@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Orcid
-  describe ProfileLookup do
+  describe ProfileLookupRunner do
     Given(:context) { double(invoked: true) }
     Given(:query_result) { false }
     Given(:query_service) { double("Query Service", call: query_result) }
