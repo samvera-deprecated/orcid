@@ -3,7 +3,10 @@ module Orcid
     attr_reader :store
     def initialize(store = ::ENV)
       @store = store
+      @provider = Configuration::Provider.new
     end
+
+    attr_reader :provider
 
     attr_writer :provider_name
     def provider_name

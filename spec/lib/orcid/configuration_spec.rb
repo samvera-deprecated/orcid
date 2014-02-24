@@ -6,6 +6,7 @@ module Orcid
     subject { described_class.new }
 
     its(:provider_name) { should eq 'orcid'}
+    its(:provider) { should be_an_instance_of Configuration::Provider }
     its(:authentication_model) { should eq Devise::MultiAuth::Authentication }
 
   end

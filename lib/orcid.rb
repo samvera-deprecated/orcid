@@ -22,7 +22,7 @@ module Orcid
   end
 
   def provider
-    @provider ||= Configuration::Provider.new
+    configuration.provider
   end
 
   def provider_name
