@@ -1,6 +1,6 @@
 require 'orcid/named_callbacks'
 module Orcid
-  class ProfileBatchConnector
+  class ProfileLookup
 
     def initialize(config = {})
       @callbacks = NamedCallbacks.new
