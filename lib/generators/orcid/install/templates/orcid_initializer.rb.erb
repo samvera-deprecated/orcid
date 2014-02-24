@@ -8,8 +8,11 @@ Orcid.configure do |config|
 
   # # Configure how your applications models will be mapped to an Orcid Work so
   # # that your application can append the work to an Orcid Profile.
-  # config.map_to_orcid_work(:article) do |work|
-  #   work.title = :title
-  #   work.publisher = lambda {|article| article.publishers.join("; ")}
-  # end
+  # config.map_to_orcid_work(
+  #   :article,
+  #   [
+  #     [:title, :title],
+  #     [lambda{|article| article.publishers.join("; ")}, :publishers]
+  #   ]
+  # )
 end
