@@ -1,4 +1,5 @@
-# Orcid
+# Orcid [![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid) [![Build Status](https://travis-ci.org/jeremyf/orcid.png?branch=master)][![Build Status](https://travis-ci.org/jeremyf/orcid.png?branch=master)](https://travis-ci.org/jeremyf/orcid)
+
 
 A Rails Engine for integrating with Orcid
 
