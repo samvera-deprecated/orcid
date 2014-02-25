@@ -16,26 +16,32 @@ module Orcid
 
     context '.found' do
       Given(:query_result) { [1,2] }
-      When { runner.call(parameters) }
-      Then {
+
+      When(:returned_value) { runner.call(parameters) }
+
+      Then { expect(returned_value).to eq(query_result) }
+      And {
         query_service.should(
           have_received(:call).
           with(q: "email:#{parameters.fetch(:email)}")
         )
       }
-      Then { context.should have_received(:invoked).with("FOUND", query_result)}
+      And { context.should have_received(:invoked).with("FOUND", query_result)}
     end
 
     context '.not_found' do
       Given(:query_result) { [] }
-      When { runner.call(parameters) }
-      Then {
+
+      When(:returned_value) { runner.call(parameters) }
+
+      Then { expect(returned_value).to eq(query_result) }
+      And {
         query_service.should(
           have_received(:call).
           with(q: "email:#{parameters.fetch(:email)}")
         )
       }
-      Then { context.should have_received(:invoked).with("NOT FOUND")}
+      And { context.should have_received(:invoked).with("NOT FOUND")}
     end
 
   end

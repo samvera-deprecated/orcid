@@ -23,11 +23,11 @@ module Orcid
       else
         callback(:not_found)
       end
+      response
     end
 
     def callback(name, *args)
       @callbacks.call(name, *args)
-      args
     end
   end
 end
