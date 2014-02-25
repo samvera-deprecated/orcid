@@ -1,5 +1,5 @@
 require 'rspec/given'
-require 'spec/support/stub_callback'
+require File.expand_path('../support/stub_callback', __FILE__)
 
 
 unless defined?(require_dependency)
