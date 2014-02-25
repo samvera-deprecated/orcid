@@ -1,18 +1,5 @@
 module Orcid::Remote
   class ProfileLookupService
-    class SearchResponse
-      delegate :fetch, :has_key?, :[], to: :@attributes
-      def initialize(attributes = {})
-        @attributes = attributes.with_indifferent_access
-      end
-      def id
-        @attributes.fetch(:id)
-      end
-
-      def label
-        @attributes.fetch(:label)
-      end
-    end
 
     def self.call(query, config = {})
       new(config).call(query)
@@ -63,3 +50,5 @@ module Orcid::Remote
 
   end
 end
+
+require 'orcid/remote/profile_lookup_service/search_response'
