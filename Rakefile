@@ -10,8 +10,7 @@ Bundler::GemHelper.install_tasks
 begin
   APP_RAKEFILE = File.expand_path("../spec/internal/Rakefile", __FILE__)
   load 'rails/tasks/engine.rake'
-rescue LoadError => e
-  require 'byebug'; byebug; true;
+rescue LoadError
   puts "Unable to load all app tasks for #{APP_RAKEFILE}"
 end
 
