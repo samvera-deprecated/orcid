@@ -2,7 +2,9 @@ require 'spec_helper'
 
 module Orcid
   if ! ENV['ORCID_EXISTING_PUB_EMAIL']
-    Rails.logger.error("Please set ENV['ORCID_EXISTING_PUB_EMAIL'] to run these specs.")
+    message = "Please set ENV['ORCID_EXISTING_PUB_EMAIL'] to run these specs."
+    Rails.logger.error(message)
+    puts "*"*80 << "\n" << message << "\n" << '*' *80
   else
     describe 'profile connection feature', requires_net_connect: true do
       around(:each) do |example|
