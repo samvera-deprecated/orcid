@@ -22,8 +22,15 @@ namespace :orcid do
     task :create => [:environment, :init, :create_runner, :run]
 
     task :create_runner do
-      @creation_service = lambda {|attributes|
+      @creation_service = lambda {|person|
         "@TODO: Extract ProfileCreationRunner from ProfileRequest"
+        puts "Creating Profile for: #{person.email}"
+        Orcid::ProfileCreationRunner.new {|on|
+          on.success {|orcid_profile_id|
+            person.created_orcid = orcid_profile_id
+            puts "\tcreated #{orcid_profile_id}" if verbose
+          }
+        }
       }
       @runner = lambda { |person|
         puts "Processing: #{person.email}"
@@ -35,7 +42,7 @@ namespace :orcid do
           on.not_found {
             person.not_found
             puts "\tnot found" if verbose
-            @creation_service.call(person.attributes)
+            @creation_service.call(person)
           }
         }.call(email: person.email)
       }
@@ -65,31 +72,33 @@ namespace :orcid do
       module Orcid::Batch
         class PersonRecord
           def self.to_header_row
-            ['email', 'given_names', 'family_name', 'orcid(s)', 'queried_at']
+            ['email', 'given_names', 'family_name', 'existing_orcids', 'created_orcid', 'queried_at']
           end
-          attr_reader :email, :given_names, :family_name, :results
+          attr_reader :email, :given_names, :family_name, :existing_orcids
+          attr_accessor :created_orcid
           def initialize(row)
             @email = row.fetch('email')
             @given_names = row['given_names']
             @family_name = row['family_name']
-            @results = nil
+            @existing_orcids = nil
           end
 
           def attributes
             { email: email, given_names: given_names, family_name: family_name }
           end
 
-          def found(results)
-            @results = Array(results).collect(&:orcid_profile_id).join("; ")
+          def found(existing_orcids)
+            @existing_orcids = Array(existing_orcids).collect(&:orcid_profile_id).join("; ")
           end
 
           def to_output_row
-            [email, given_names, family_name, results, Time.now]
+            [email, given_names, family_name, existing_orcids, created_orcid, Time.now]
           end
 
           def not_found
-            @results = 'null'
+            @existing_orcids = 'null'
           end
+
         end
       end
       @person_builder = Orcid::Batch::PersonRecord
