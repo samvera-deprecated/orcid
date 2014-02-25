@@ -88,46 +88,41 @@ module Orcid
 
     context '#run' do
       let(:profile_creation_service) { double('Profile Creation Service') }
-      let(:profile_creation_responder) { double('Payload Creation Responder') }
       let(:payload_xml_builder) { double('Payload Xml Builder') }
-      let(:before_run_validator) { double('Submission Guardian') }
+      let(:validator) { double('Submission Guardian') }
       let(:xml_payload) { double('Xml Payload') }
 
       context 'with the submission guardian permitting the request' do
         before(:each) do
-          before_run_validator.should_receive(:call).with(subject).
+          validator.should_receive(:call).with(subject).
             and_return(true)
           payload_xml_builder.should_receive(:call).with(subject.attributes).
             and_return(xml_payload)
           profile_creation_service.should_receive(:call).with(xml_payload).
             and_return(orcid_profile_id)
-          profile_creation_responder.should_receive(:call).with(orcid_profile_id)
         end
 
         it 'should run a request and handle the response' do
           subject.run(
             payload_xml_builder: payload_xml_builder,
             profile_creation_service: profile_creation_service,
-            profile_creation_responder: profile_creation_responder,
-            before_run_validator: before_run_validator
+            validator: validator
           )
         end
       end
 
       context 'with the submission guardian returning false' do
         before(:each) do
-          before_run_validator.should_receive(:call).with(subject).
+          validator.should_receive(:call).with(subject).
             and_return(false)
           payload_xml_builder.should_not_receive(:call)
-          profile_creation_responder.should_not_receive(:call)
         end
 
         it 'should raise an exception' do
           subject.run(
             payload_xml_builder: payload_xml_builder,
             profile_creation_service: profile_creation_service,
-            profile_creation_responder: profile_creation_responder,
-            before_run_validator: before_run_validator
+            validator: validator
           )
         end
       end
