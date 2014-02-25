@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'batch profile behavior' do
+describe 'batch profile behavior', requires_net_connect: true do
   around(:each) do |example|
     WebMock.allow_net_connect!
     example.run
