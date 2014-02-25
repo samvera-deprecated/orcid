@@ -1,3 +1,4 @@
+require_dependency './lib/orcid/exceptions'
 module Orcid::Remote
   class WorkService
     def self.call(orcid_profile_id, options = {})

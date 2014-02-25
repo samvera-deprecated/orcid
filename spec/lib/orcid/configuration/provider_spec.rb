@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'fast_helper'
+require 'lib/orcid/configuration/provider'
 
 module Orcid
   describe Configuration::Provider do

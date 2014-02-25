@@ -10,8 +10,7 @@ Bundler::GemHelper.install_tasks
 begin
   APP_RAKEFILE = File.expand_path("../spec/internal/Rakefile", __FILE__)
   load 'rails/tasks/engine.rake'
-rescue LoadError => e
-  require 'byebug'; byebug; true;
+rescue LoadError
   puts "Unable to load all app tasks for #{APP_RAKEFILE}"
 end
 
@@ -19,6 +18,9 @@ require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 
 namespace :spec do
+  RSpec::Core::RakeTask.new(:all) do |t|
+    ENV['COVERAGE'] = 'true'
+  end
   desc 'Only run specs that do not require net connect'
   RSpec::Core::RakeTask.new(:offline) do |t|
     t.rspec_opts = "--tag ~requires_net_connect"

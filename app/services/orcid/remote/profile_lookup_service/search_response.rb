@@ -1,10 +1,12 @@
+
 module Orcid::Remote
   class ProfileLookupService
     class SearchResponse
-      delegate :fetch, :has_key?, :[], to: :@attributes
+      delegate :[], :has_key?, :fetch, to: :@records
       def initialize(attributes = {})
         @attributes = attributes.with_indifferent_access
       end
+
       def id
         @attributes.fetch(:id)
       end

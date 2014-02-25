@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'fast_helper'
+require 'app/models/orcid/profile'
 
 module Orcid
   describe Profile do

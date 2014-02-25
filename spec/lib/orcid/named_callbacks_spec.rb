@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'orcid/named_callbacks'
+require 'fast_helper'
+require './lib/orcid/named_callbacks'
 
 module Orcid
   describe NamedCallbacks do

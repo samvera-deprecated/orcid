@@ -11,6 +11,7 @@ module Orcid
 
     self.table_name = :orcid_profile_requests
 
+    alias_attribute :email, :primary_email
     validates :user_id, presence: true, uniqueness: true
     validates :given_names, presence: true
     validates :family_name, presence: true
@@ -21,15 +22,18 @@ module Orcid
     def run(options = {})
       # Why dependency injection? Because this is going to be a plugin, and things
       # can't possibly be simple.
-      before_run_validator = options.fetch(:before_run_validator) { method(:validate_before_run) }
-      return false unless before_run_validator.call(self)
+      validator = options.fetch(:validator) { method(:validate_before_run) }
+      return false unless validator.call(self)
 
       payload_xml_builder = options.fetch(:payload_xml_builder) { method(:xml_payload) }
-      profile_creation_service = options.fetch(:profile_creation_service) { Orcid::Remote::ProfileCreationService }
-      profile_creation_responder = options.fetch(:profile_creation_responder) { method(:handle_profile_creation_response) }
+      profile_creation_service = options.fetch(:profile_creation_service) { default_profile_creation_service }
+      profile_creation_service.call(payload_xml_builder.call(attributes))
+    end
 
-      orcid_profile_id = profile_creation_service.call(payload_xml_builder.call(attributes))
-      profile_creation_responder.call(orcid_profile_id)
+    def default_profile_creation_service
+      @default_profile_creation_service ||= Orcid::Remote::ProfileCreationService.new do |on|
+        on.success {|orcid_profile_id| handle_profile_creation_response(orcid_profile_id) }
+      end
     end
 
     def validate_before_run(context = self)

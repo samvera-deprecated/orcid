@@ -1,7 +1,7 @@
 module Orcid
   # Inspired by Jim Weirich's NamedCallbacks
   # https://github.com/jimweirich/wyriki/blob/master/spec/runners/named_callbacks_spec.rb#L1-L28
-  class NamedCallbacks < BasicObject
+  class NamedCallbacks
     def initialize
       @callbacks = {}
     end
