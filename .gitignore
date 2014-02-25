@@ -3,3 +3,4 @@ log/*.log
 pkg/
 spec/internal
 Gemfile.lock
+tmp/
