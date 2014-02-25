@@ -19,18 +19,23 @@ namespace :orcid do
       }
     end
 
+    desc "Given the input: CSV query for existing Orcids and if not found create new ones recording output: CSV"
     task :create => [:environment, :init, :create_runner, :run]
 
     task :create_runner do
       @creation_service = lambda {|person|
-        "@TODO: Extract ProfileCreationRunner from ProfileRequest"
         puts "Creating Profile for: #{person.email}"
-        Orcid::ProfileCreationRunner.new {|on|
+        profile_creation_service = Orcid::Remote::ProfileCreationService.new do |on|
           on.success {|orcid_profile_id|
-            person.created_orcid = orcid_profile_id
+            person.orcid_profile_id = orcid_profile_id
             puts "\tcreated #{orcid_profile_id}" if verbose
           }
-        }
+        end
+        profile_request = Orcid::ProfileRequest.new(person.attributes)
+        profile_request.run(
+          validator: lambda{|*| true},
+          profile_creation_service: profile_creation_service
+        )
       }
       @runner = lambda { |person|
         puts "Processing: #{person.email}"
@@ -53,15 +58,14 @@ namespace :orcid do
       if defined?(WebMock)
         WebMock.allow_net_connect!
       end
-      require 'byebug'; byebug; true;
       input_file = ENV.fetch('input') { './tmp/orcid_input.csv' }
       output_file = ENV.fetch('output') { './tmp/orcid_output.csv' }
 
       require 'csv'
       CSV.open(output_file, 'wb+') do |output|
         output << @person_builder.to_header_row
-        CSV.foreach(input_file, headers: true) do |input|
-          person = @person_builder.new(input)
+        CSV.foreach(input_file, headers: true, header_converters: [lambda{|col| col.strip }]) do |input|
+          person = @person_builder.new(input.to_hash)
           @runner.call(person)
           output << person.to_output_row
         end
