@@ -18,6 +18,9 @@ require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 
 namespace :spec do
+  RSpec::Core::RakeTask.new(:all) do |t|
+    ENV['COVERAGE'] = 'true'
+  end
   desc 'Only run specs that do not require net connect'
   RSpec::Core::RakeTask.new(:offline) do |t|
     t.rspec_opts = "--tag ~requires_net_connect"
