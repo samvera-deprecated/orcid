@@ -1,4 +1,6 @@
-require 'spec_helper'
+require 'fast_helper'
+require 'oauth2/error'
+require 'app/services/orcid/remote/work_service'
 
 module Orcid::Remote
   describe WorkService do

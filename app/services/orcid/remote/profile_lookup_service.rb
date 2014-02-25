@@ -1,3 +1,4 @@
+require_dependency 'json'
 module Orcid::Remote
   class ProfileLookupService
 
@@ -41,7 +42,7 @@ module Orcid::Remote
         family_name = orcid_bio.fetch('personal-details').fetch('family-name').fetch('value')
         emails = orcid_bio.fetch('contact-details').fetch('email').collect {|email| email.fetch('value') }
         label = "#{given_names} #{family_name}"
-        label << " (" << emails.join(",") << ")" if emails.present?
+        label << " (" << emails.join(",") << ")" if emails.any?
         label << " [ORCID: #{identifier}]"
 
         returning_value << response_builder.new("id" => identifier, "label" => label)
@@ -50,5 +51,3 @@ module Orcid::Remote
 
   end
 end
-
-require 'orcid/remote/profile_lookup_service/search_response'
