@@ -1,13 +1,10 @@
-require_dependency 'forwardable'
-require_dependency 'active_support/hash_with_indifferent_access'
 
 module Orcid::Remote
   class ProfileLookupService
     class SearchResponse
-      extend Forwardable
-      def_delegators :@records, :[], :has_key?, :fetch, :to
+      delegate :[], :has_key?, :fetch, to: :@records
       def initialize(attributes = {})
-        @attributes = HashWithIndifferentAccess.new(attributes)
+        @attributes = attributes.with_indifferent_access
       end
 
       def id

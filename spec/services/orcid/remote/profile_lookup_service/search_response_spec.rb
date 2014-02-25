@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_helper'
 require 'app/services/orcid/remote/profile_lookup_service/search_response'
 
 module Orcid::Remote
