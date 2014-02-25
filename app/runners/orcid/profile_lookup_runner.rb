@@ -1,11 +1,10 @@
-require 'orcid/named_callbacks'
+require_dependency './app/runners/orcid/runner'
 module Orcid
-  class ProfileLookupRunner
+  class ProfileLookupRunner < Runner
 
-    def initialize(config = {})
-      @callbacks = NamedCallbacks.new
+    def initialize(config = {}, &block)
+      super(&block)
       @query_service = config.fetch(:query_service) { Remote::ProfileLookupService }
-      yield(@callbacks) if block_given?
     end
     attr_reader :query_service
     private :query_service
@@ -26,8 +25,5 @@ module Orcid
       response
     end
 
-    def callback(name, *args)
-      @callbacks.call(name, *args)
-    end
   end
 end
