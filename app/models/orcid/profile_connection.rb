@@ -27,9 +27,9 @@ module Orcid
     private :profile_lookup_service
 
     def default_profile_lookup_service
-      ProfileLookup.new {|on|
+      ProfileLookupRunner.new {|on|
         on.found {|results| self.orcid_profile_candidates = results }
-        on.not_found {|results| self.orcid_profile_candidates = [] }
+        on.not_found { self.orcid_profile_candidates = [] }
       }
     end
     private :default_profile_lookup_service
@@ -38,15 +38,15 @@ module Orcid
       yield(orcid_profile_candidates) if email.present?
     end
 
+    attr_writer :orcid_profile_candidates
+    private :orcid_profile_candidates=
     def orcid_profile_candidates
-      @orcid_profile_candidates ||= lookup_profile_candidates
+      @orcid_profile_candidates || lookup_profile_candidates
     end
 
     def lookup_profile_candidates
       if email.present?
         profile_lookup_service.call(email: email)
-      else
-        []
       end
     end
     private :lookup_profile_candidates
