@@ -6,8 +6,15 @@ end
 
 Bundler::GemHelper.install_tasks
 
-require 'engine_cart/rake_task'
 
+begin
+  APP_RAKEFILE = File.expand_path("../spec/internal/Rakefile", __FILE__)
+  load 'rails/tasks/engine.rake'
+rescue LoadError
+  puts "Unable to load all app tasks for #{APP_FILE}"
+end
+
+require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 
 namespace :spec do
@@ -34,3 +41,4 @@ Rake::Task["default"].clear rescue nil
 Rake::Task["spec"].clear
 
 task :spec => 'spec:offline'
+task :default => :spec
