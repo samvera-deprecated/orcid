@@ -5,13 +5,17 @@ module Orcid
     def initialize(config = {}, &block)
       super(&block)
       @query_service = config.fetch(:query_service) { Remote::ProfileLookupService }
+      @query_builder = config.fetch(:query_parameter_builder) {
+        require_dependency 'orcid/query_parameter_builder'
+        Orcid::QueryParameterBuilder
+      }
     end
-    attr_reader :query_service
-    private :query_service
+    attr_reader :query_service, :query_builder
+    private :query_service, :query_builder
 
-    def call(parameters)
-      email = parameters.fetch(:email)
-      response = query_service.call({q: "email:#{email}"})
+    def call(raw_parameters)
+      query_parameters = query_builder.call(raw_parameters)
+      response = query_service.call(query_parameters)
       handle(response)
     end
 
