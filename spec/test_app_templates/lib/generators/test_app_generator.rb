@@ -16,7 +16,7 @@ class TestAppGenerator < Rails::Generators::Base
     if File.exist?(application_yml_file)
       copy_file application_yml_file, 'config/application.yml'
     else
-      message = "*" * 80 << "\n\n" << "Missing #{application_yml_file} file. Some tests will be skipped." << "\n\n" * "*" * 80
+      message = "*" * 80 << "\n\n" << "Missing #{application_yml_file} file. Some tests will be skipped." << "\n\n" << "*" * 80
       Rails.logger.warn(message)
       puts message
     end
