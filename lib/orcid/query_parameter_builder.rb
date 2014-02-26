@@ -13,6 +13,7 @@ module Orcid
       q_params = []
       text_params = []
       input.each do |key, value|
+        next if value.nil? || value.to_s.strip == ''
         case key.to_s
         when 'start', 'row'
           params[key] = value

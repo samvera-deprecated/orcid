@@ -11,6 +11,13 @@ module Orcid
       Then { expect(response).to eq(q: "email:#{input[:email]} AND text:#{input[:text]}") }
     end
 
+    context 'empty string and nil' do
+      Given(:input) {
+        { text: "" , email: nil}
+      }
+      Then { expect(response).to eq(q: "") }
+    end
+
     context 'multi-word named input' do
       Given(:input) {
         { other_names: %("Tim O'Connor" -"Oak"), email: 'jeremy.n.friesen@gmail.com' }
