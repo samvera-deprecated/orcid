@@ -1,4 +1,4 @@
-require_dependency './lib/orcid/named_callbacks'
+require 'orcid/named_callbacks'
 module Orcid::Remote
   class Service
     def initialize

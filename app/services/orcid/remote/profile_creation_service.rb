@@ -1,4 +1,4 @@
-require_dependency './app/services/orcid/remote/service'
+require 'orcid/remote/service'
 module Orcid::Remote
   # Responsible for minting a new ORCID for the given payload.
   class ProfileCreationService < Orcid::Remote::Service

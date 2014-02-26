@@ -1,4 +1,4 @@
-require_dependency './app/runners/orcid/runner'
+require 'orcid/runner'
 module Orcid
   class ProfileLookupRunner < Runner
 
@@ -6,7 +6,7 @@ module Orcid
       super(&block)
       @query_service = config.fetch(:query_service) { Remote::ProfileLookupService }
       @query_builder = config.fetch(:query_parameter_builder) {
-        require_dependency 'orcid/query_parameter_builder'
+        require 'orcid/query_parameter_builder'
         Orcid::QueryParameterBuilder
       }
     end

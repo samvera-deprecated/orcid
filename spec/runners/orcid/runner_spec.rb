@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/runners/orcid/runner'
+require 'orcid/runner'
 
 module Orcid
   describe Runner do
