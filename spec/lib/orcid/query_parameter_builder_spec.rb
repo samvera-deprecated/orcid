@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'lib/orcid/query_parameter_builder'
+require 'orcid/query_parameter_builder'
 
 module Orcid
   describe QueryParameterBuilder do
