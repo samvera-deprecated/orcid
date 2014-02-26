@@ -11,7 +11,6 @@ class TestAppGenerator < Rails::Generators::Base
     create_file 'app/assets/javascripts/jquery.js'
     create_file 'app/assets/javascripts/jquery_ujs.js'
     create_file 'app/assets/javascripts/turbolinks.js'
-    copy_file "/Users/jfriesen/Repositories/orcid_integration/config/application.yml", 'config/application.yml'
   end
 
   def insert_home_route
