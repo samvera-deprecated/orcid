@@ -2,16 +2,22 @@ module Orcid
   class Configuration
     attr_reader :mapper
     def initialize(options = {})
-      @mapper = options.fetch(:mapper) { ::Mappy }
-      @provider = Configuration::Provider.new
+      @mapper = options.fetch(:mapper) {
+        require 'mappy'
+        ::Mappy
+      }
+      @provider = options.fetch(:provider) {
+        require 'orcid/configuration/provider'
+        Provider.new
+      }
+      @authentication_model = options.fetch(:authentication_model) {
+        require 'devise-multi_auth'
+        ::Devise::MultiAuth::Authentication
+      }
     end
 
-    attr_reader :provider
-
-    attr_writer :authentication_model
-    def authentication_model
-      @authentication_model ||= Devise::MultiAuth::Authentication
-    end
+    attr_accessor :provider
+    attr_accessor :authentication_model
 
     def register_mapping_to_orcid_work(source_type, legend)
       mapper.configure do |config|
@@ -20,4 +26,3 @@ module Orcid
     end
   end
 end
-require 'orcid/configuration/provider'
