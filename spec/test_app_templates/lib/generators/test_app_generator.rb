@@ -11,6 +11,15 @@ class TestAppGenerator < Rails::Generators::Base
     create_file 'app/assets/javascripts/jquery.js'
     create_file 'app/assets/javascripts/jquery_ujs.js'
     create_file 'app/assets/javascripts/turbolinks.js'
+
+    application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
+    if File.exist?(application_yml_file)
+      copy_file application_yml_file, 'config/application.yml'
+    else
+      message = "*" * 80 << "\n\n" << "Missing #{application_yml_file} file. Some tests will be skipped." << "\n\n" * "*" * 80
+      Rails.looger.warning(message)
+      puts message
+    end
   end
 
   def insert_home_route

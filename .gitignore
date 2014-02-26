@@ -4,3 +4,4 @@ pkg/
 spec/internal
 Gemfile.lock
 tmp/
+config/application.yml
