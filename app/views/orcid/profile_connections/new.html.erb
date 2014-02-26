@@ -1,6 +1,8 @@
 <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.new_profile_connection_path, method: :get, html: {class: 'search-form'}) do |f| %>
   <%= field_set_tag("Search ORCID Profiles", class: 'accessible-hidden') do %>
-    <%= f.input :email, type: :search %>
+    <% profile_connection.available_query_attribute_names.each do |field_name| %>
+      <%= f.input field_name, as: :search %>
+    <% end %>
   <% end %>
   <button type="submit" class="search-submit btn btn-primary" id="keyword-search-submit" tabindex="2">
     <i class="icon-search icon-white"></i><span class="accessible-hidden">Search</span>

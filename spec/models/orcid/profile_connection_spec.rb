@@ -17,6 +17,28 @@ module Orcid
     its(:persisted?) { should eq false }
     its(:orcid_profile_id) { should be_nil }
 
+    context '.available_query_attribute_names' do
+      subject { Orcid::ProfileConnection.new.available_query_attribute_names }
+      it { should include(:email) }
+      it { should include(:text) }
+    end
+
+    context '#query_attributes' do
+      subject { Orcid::ProfileConnection.new(email: email, user: user)}
+      its(:query_attributes) { should eq(email: email, text: nil) }
+    end
+
+    context '#query_requested?' do
+      context 'with no attributes' do
+        subject { Orcid::ProfileConnection.new }
+        its(:query_requested?) { should eq false }
+      end
+      context 'with attribute set' do
+        subject { Orcid::ProfileConnection.new(email: email, user: user)}
+        its(:query_requested?) { should eq true }
+      end
+    end
+
     context '#save' do
       let(:orcid_profile_id) { '1234-5678' }
       let(:persister) { double("Persister") }
@@ -41,7 +63,7 @@ module Orcid
 
         it 'should yield the query response' do
           subject.email = email
-          profile_lookup_service.should_receive(:call).with(email: email).and_return(:query_response)
+          profile_lookup_service.should_receive(:call).with(subject.query_attributes).and_return(:query_response)
           expect {|b| subject.with_orcid_profile_candidates(&b) }.to yield_with_args(:query_response)
         end
       end

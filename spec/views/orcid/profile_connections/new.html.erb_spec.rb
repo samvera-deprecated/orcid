@@ -7,7 +7,9 @@ describe 'orcid/profile_connections/new.html.erb' do
     render
     expect(rendered).to have_tag('form.search-form', with: {action: orcid.new_profile_connection_path, method: :get}) do
       with_tag('fieldset') do
-        with_tag('input', with: {name: 'profile_connection[email]'})
+        profile_connection.available_query_attribute_names.each do |field_name|
+          with_tag('input', with: {name: "profile_connection[#{field_name}]", type: 'search'})
+        end
       end
       with_tag('button', with: {type: 'submit'})
     end

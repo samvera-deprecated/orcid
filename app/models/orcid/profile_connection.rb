@@ -5,7 +5,14 @@ module Orcid
     include Virtus.model
     include ActiveModel::Validations
     extend ActiveModel::Naming
-    attribute :email
+
+    self.class_attribute :available_query_attribute_names
+    self.available_query_attribute_names = [:email, :text]
+
+    available_query_attribute_names.each do |attribute_name|
+      attribute attribute_name
+    end
+
     attribute :orcid_profile_id
     attribute :user
 
@@ -35,7 +42,7 @@ module Orcid
     private :default_profile_lookup_service
 
     def with_orcid_profile_candidates
-      yield(orcid_profile_candidates) if email.present?
+      yield(orcid_profile_candidates) if query_requested?
     end
 
     attr_writer :orcid_profile_candidates
@@ -45,11 +52,22 @@ module Orcid
     end
 
     def lookup_profile_candidates
-      if email.present?
-        profile_lookup_service.call(email: email)
+      if query_requested?
+        profile_lookup_service.call(query_attributes)
       end
     end
     private :lookup_profile_candidates
+
+    def query_requested?
+      !!available_query_attribute_names.detect { |attribute_name|
+        attributes[attribute_name].present?
+      }
+    end
+    private :query_requested?
+
+    def query_attributes
+      attributes.slice(*available_query_attribute_names)
+    end
 
   end
 end
