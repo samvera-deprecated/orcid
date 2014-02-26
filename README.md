@@ -16,3 +16,8 @@ And then execute:
 And then install:
 
     $ rails generate orcid:install
+
+
+## TODO Items
+
+* When searching for your profile, expose Name and associated DOI as query parameters.
