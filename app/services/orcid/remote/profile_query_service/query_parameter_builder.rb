@@ -1,4 +1,4 @@
-require_dependency 'orcid/remote/profile_lookup_service'
+require_dependency 'orcid/remote/profile_query_service'
 module Orcid::Remote
   class ProfileLookupService
     # http://support.orcid.org/knowledgebase/articles/132354-searching-with-the-public-api

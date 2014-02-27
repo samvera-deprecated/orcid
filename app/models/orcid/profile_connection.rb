@@ -27,19 +27,19 @@ module Orcid
 
     def persisted?; false; end
 
-    attr_writer :profile_lookup_service
-    def profile_lookup_service
-      @profile_lookup_service ||= default_profile_lookup_service
+    attr_writer :profile_query_service
+    def profile_query_service
+      @profile_query_service ||= default_profile_query_service
     end
-    private :profile_lookup_service
+    private :profile_query_service
 
-    def default_profile_lookup_service
+    def default_profile_query_service
       Remote::ProfileLookupService.new {|on|
         on.found {|results| self.orcid_profile_candidates = results }
         on.not_found { self.orcid_profile_candidates = [] }
       }
     end
-    private :default_profile_lookup_service
+    private :default_profile_query_service
 
     def with_orcid_profile_candidates
       yield(orcid_profile_candidates) if query_requested?
@@ -53,7 +53,7 @@ module Orcid
 
     def lookup_profile_candidates
       if query_requested?
-        profile_lookup_service.call(query_attributes)
+        profile_query_service.call(query_attributes)
       end
     end
     private :lookup_profile_candidates

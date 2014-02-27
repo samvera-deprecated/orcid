@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'orcid/remote/profile_lookup_service/search_response'
+require 'orcid/remote/profile_query_service/search_response'
 
 module Orcid::Remote
   describe ProfileLookupService::SearchResponse do
