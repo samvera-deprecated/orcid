@@ -1,4 +1,4 @@
-
+require_dependency 'orcid/remote/profile_lookup_service'
 module Orcid::Remote
   class ProfileLookupService
     class SearchResponse

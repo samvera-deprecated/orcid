@@ -1,9 +1,10 @@
 require 'fast_helper'
-require 'orcid/query_parameter_builder'
+require 'orcid/remote/profile_lookup_service/query_parameter_builder'
 
-module Orcid
-  describe QueryParameterBuilder do
-    When(:response) { QueryParameterBuilder.call(input) }
+module Orcid::Remote
+
+  describe ProfileLookupService::QueryParameterBuilder do
+    When(:response) { described_class.call(input) }
     context 'single word input' do
       Given(:input) {
         { text: "Hello", email: 'jeremy.n.friesen@gmail.com' }
@@ -38,5 +39,6 @@ module Orcid
       }
       Then { expect(response).to eq(q: "text:((#{input[:q]}) AND (#{input[:text]}))") }
     end
+
   end
 end

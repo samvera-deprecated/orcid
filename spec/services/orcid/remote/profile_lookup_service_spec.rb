@@ -4,23 +4,37 @@ require 'ostruct'
 
 module Orcid::Remote
   describe ProfileLookupService do
-    let(:email) { 'corwin@amber.gov' }
-    let(:orcid_profile_id) { '0001-0002' }
-    let(:config) { { token: token, path: 'somehwere', headers: 'headers', response_builder: OpenStruct } }
-    let(:response) { double("Response", body: response_body)} # See below
-    let(:token) { double("Token") }
-    let(:json_response) { [ OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]" }) ] }
-    let(:parameters) { {q: "email:#{email}"} }
+    Given(:email) { 'corwin@amber.gov' }
+    Given(:orcid_profile_id) { '0001-0002' }
+    Given(:config) {
+      {
+        token: token,
+        path: 'somehwere',
+        headers: 'headers',
+        response_builder: OpenStruct,
+        query_parameter_builder: query_parameter_builder
+      }
+    }
+    Given(:query_parameter_builder) { double('Query Builder')}
+    Given(:response) { double("Response", body: response_body)} # See below
+    Given(:token) { double("Token") }
+    Given(:json_response) { [ OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]" }) ] }
+    Given(:parameters) { double("Parameters") }
+    Given(:normalized_parameters) { double("Normalized Parameters") }
+    Given(:callback) { StubCallback.new }
+    Given(:callback_config) { callback.configure(:found, :not_found) }
 
     context '.call' do
-      it 'should return a JSON object' do
-        token.should_receive(:get).with(config[:path], headers: config[:headers], params: parameters).and_return(response)
-        expect(described_class.call(parameters, config)).to eq(json_response)
+      before(:each) do
+        query_parameter_builder.should_receive(:call).with(parameters).and_return(normalized_parameters)
+        token.should_receive(:get).with(config[:path], headers: config[:headers], params: normalized_parameters).and_return(response)
       end
+      When(:result) { described_class.call(parameters, config, &callback_config) }
+      Then { expect(result).to eq(json_response) }
+      And { expect(callback.invoked).to eq [:found, json_response] }
     end
 
-
-    let(:response_body) {
+    Given(:response_body) {
       %(
         {
           "message-version": "1.1",
