@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/services/orcid/remote/profile_lookup_service'
+require 'orcid/remote/profile_lookup_service'
 require 'ostruct'
 
 module Orcid::Remote

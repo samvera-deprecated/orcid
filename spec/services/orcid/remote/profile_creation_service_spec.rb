@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/services/orcid/remote/profile_creation_service'
+require 'orcid/remote/profile_creation_service'
 
 module Orcid::Remote
   describe ProfileCreationService do

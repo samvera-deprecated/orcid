@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/services/orcid/remote/service'
+require 'orcid/remote/service'
 
 module Orcid::Remote
   describe Service do

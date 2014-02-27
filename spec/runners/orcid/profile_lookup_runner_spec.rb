@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/runners/orcid/profile_lookup_runner'
+require 'orcid/profile_lookup_runner'
 
 module Orcid
   describe ProfileLookupRunner do
