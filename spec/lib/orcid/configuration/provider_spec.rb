@@ -26,5 +26,15 @@ module Orcid
     its(:id) { should eq storage.fetch('ORCID_APP_ID') }
     its(:secret) { should eq storage.fetch('ORCID_APP_SECRET') }
 
+    context 'with an empty ENV' do
+      Given(:provider) { described_class.new({}) }
+      Then { expect(provider.authentication_scope).to be_an_instance_of(String) }
+      And { expect(provider.site_url).to be_an_instance_of(String) }
+      And { expect(provider.token_url).to be_an_instance_of(String) }
+      And { expect(provider.signin_via_json_url).to be_an_instance_of(String) }
+      And { expect(provider.authorize_url).to be_an_instance_of(String) }
+      And { expect { provider.id }.to raise_error(KeyError) }
+      And { expect { provider.secret }.to raise_error(KeyError) }
+    end
   end
 end

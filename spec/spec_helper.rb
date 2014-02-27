@@ -1,4 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+# Normally loaded via application config; I want the production code to
+# choke when app_id and app_secret is not set.
+ENV['ORCID_APP_ID'] ||= 'Orcid.provider.id not set'.to_sym
+ENV['ORCID_APP_SECRET'] ||= 'Orcid.provider.secret not set'.to_sym
+
 ENV["RAILS_ENV"] ||= 'test'
 if ENV['COVERAGE']
   require 'simplecov'
@@ -6,12 +12,14 @@ if ENV['COVERAGE']
   SimpleCov.command_name "spec"
 end
 
+
 require 'figaro' # must declare before the application loads
 require 'engine_cart'
 require 'omniauth-orcid'
 require File.expand_path("../internal/config/environment.rb",  __FILE__)
 
 EngineCart.load_application!
+
 require 'orcid/spec_support'
 require 'rspec/rails'
 require 'rspec/autorun'
