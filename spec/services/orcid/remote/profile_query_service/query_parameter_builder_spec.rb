@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'orcid/remote/profile_lookup_service/query_parameter_builder'
+require 'orcid/remote/profile_query_service/query_parameter_builder'
 
 module Orcid::Remote
 
