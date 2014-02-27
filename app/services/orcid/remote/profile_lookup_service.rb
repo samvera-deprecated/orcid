@@ -1,13 +1,16 @@
 require_dependency 'json'
+require 'orcid/remote/service'
 module Orcid::Remote
-  class ProfileLookupService
+  class ProfileLookupService < Orcid::Remote::Service
 
-    def self.call(query, config = {})
-      new(config).call(query)
+    def self.call(query, config = {}, &callbacks)
+      new(config, &callbacks).call(query)
     end
 
-    attr_reader :token, :path, :headers, :response_builder
-    def initialize(config = {})
+    attr_reader :token, :path, :headers, :response_builder, :query_builder
+    def initialize(config = {}, &callbacks)
+      super(&callbacks)
+      @query_builder = config.fetch(:query_parameter_builder) { QueryParameterBuilder }
       @token = config.fetch(:token) { Orcid.client_credentials_token('/read-public') }
       @response_builder = config.fetch(:response_builder) { SearchResponse }
       @path = config.fetch(:path) { "v1.1/search/orcid-bio/" }
@@ -19,13 +22,25 @@ module Orcid::Remote
       }
     end
 
-    def call(parameters)
+    def call(input)
+      parameters = query_builder.call(input)
       response = deliver(parameters)
-      parse(response.body)
+      parsed_response = parse(response.body)
+      issue_callbacks(parsed_response)
+      parsed_response
     end
     alias_method :search, :call
 
     protected
+
+    def issue_callbacks(search_results)
+      if search_results.any?
+        callback(:found, search_results)
+      else
+        callback(:not_found)
+      end
+    end
+
     attr_reader :host, :access_token
     def deliver(parameters)
       token.get(path, headers: headers, params: parameters)

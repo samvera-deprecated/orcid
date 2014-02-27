@@ -34,7 +34,7 @@ module Orcid
     private :profile_lookup_service
 
     def default_profile_lookup_service
-      ProfileLookupRunner.new {|on|
+      Remote::ProfileLookupService.new {|on|
         on.found {|results| self.orcid_profile_candidates = results }
         on.not_found { self.orcid_profile_candidates = [] }
       }
