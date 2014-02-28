@@ -5,3 +5,5 @@ spec/internal
 Gemfile.lock
 tmp/
 config/application.yml
+tags
+.tags*
