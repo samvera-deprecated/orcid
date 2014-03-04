@@ -22,8 +22,8 @@ And then install:
 Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
  (this could take days to come back)
  
-Register two ORCID user: https://sandbox-1.orcid.org/register (make sure to use <blah>@maininator.com as your email)
-Save the email addresses for later
+Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@maininator.com as your email)
+Save the email addresses, orcid ids, and passwords for editing application.yml
 
 Go to maininator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
  
