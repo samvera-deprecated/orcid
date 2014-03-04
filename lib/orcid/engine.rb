@@ -1,6 +1,10 @@
 module Orcid
+  def self.table_name_prefix
+    "orcid_"
+  end
+
   class Engine < ::Rails::Engine
-    isolate_namespace Orcid
+    engine_name 'orcid'
 
     initializer 'orcid.initializers' do |app|
       app.config.paths.add 'app/services', eager_load: true
