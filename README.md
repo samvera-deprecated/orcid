@@ -25,7 +25,7 @@ Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/1167
 Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
 Save the email addresses, orcid ids, and passwords for editing application.yml
 
-Go to maininator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
+Go to mailinator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
  
 `cp config/application.yml.sample config/application.yml`
 
