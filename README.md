@@ -17,6 +17,19 @@ And then install:
 
     $ rails generate orcid:install
 
+## Running the tests
+
+Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
+ (this could take days to come back)
+ 
+Register an ORCID user: https://sandbox-1.orcid.org/register
+ 
+`cp config/application.yml.sample config/application.yml`
+
+Update the application.yml with your information
+
+`rake`
+
 
 ## TODO Items
 
