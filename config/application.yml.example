@@ -1,0 +1,25 @@
+# Add account credentials and API keys here.
+# See http://railsapps.github.io/rails-environment-variables.html
+# This file should be listed in .gitignore to keep your settings secret!
+# Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
+# For example, setting:
+# GMAIL_USERNAME: Your_Gmail_Username
+# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+
+# Add application configuration variables here, as shown below.
+#
+ADMIN_NAME: First User
+ADMIN_EMAIL: user@example.com
+ADMIN_PASSWORD: changeme
+
+# From http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-profile-using-curl
+ORCID_APP_ID: 0000-0000-0000-0000
+ORCID_APP_SECRET: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+ORCID_EXISTING_PUB_EMAIL: an_email@mailinator.com
+ORCID_EXISTING_PUB_PROFILE_ID: 0000-0000-0000-0000
+ORCID_EXISTING_PUB_NAME: Namefor An' Email
+
+ORCID_CLAIMED_PROFILE_ID: 0000-0000-0000-0000
+ORCID_CLAIMED_PROFILE_PASSWORD: password1A
+ORCID_CLAIMED_PROFILE_EMAIL: cwksfxyqkmrudrfrdxvlzjxl@mailinator.com
