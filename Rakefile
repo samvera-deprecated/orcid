@@ -44,4 +44,4 @@ Rake::Task["default"].clear rescue nil
 Rake::Task["spec"].clear
 
 task :spec => 'spec:offline'
-task :default => :spec
+task :default => 'spec:travis'
