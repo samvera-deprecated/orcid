@@ -7,9 +7,13 @@ require "orcid/version"
 Gem::Specification.new do |s|
   s.name        = "orcid"
   s.version     = Orcid::VERSION
-  s.authors     = ["Jeremy Friesen"]
-  s.email       = ["jeremy.n.friesen@gmail.com"]
-  s.homepage    = "https://github.com/jeremyf/orcid_integration"
+  s.authors     = [
+    "Jeremy Friesen"
+  ]
+  s.email       = [
+    "jeremy.n.friesen@gmail.com"
+  ]
+  s.homepage    = "https://github.com/jeremyf/orcid"
   s.summary     = "A Rails engine for orcid.org integration."
   s.description = "A Rails engine for orcid.org integration."
 
