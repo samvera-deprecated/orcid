@@ -1,7 +1,13 @@
 module Orcid
   # A well-defined data structure that coordinates with its :template in order
   # to generate XML that can be POSTed/PUT as an Orcid Work.
+
+  require "om"
+
   class Work
+
+    include OM::XML::Document
+
     VALID_WORK_TYPES = [
       "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
     ].freeze
@@ -17,6 +23,18 @@ module Orcid
     validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
     attribute :put_code, String
+
+    set_terminology do |t|
+      t.root(path: "fields")
+      t.title
+      t.author
+    end
+
+    # This method is called when you create new XML documents from scratch.
+    # It must return a Nokogiri::Document.  Other than that, you can make your "default" documents look however you want.
+    def self.xml_template
+      Nokogiri::XML.parse("<fields/>")
+    end
 
     def to_xml
       XmlRenderer.call(self)
