@@ -35,12 +35,12 @@ module Orcid
 
       attr_writer :id
       def id
-        @id ||= store.fetch('ORCID_APP_ID')
+        @id ||= store.fetch('ORCID_APP_ID') { "missing Orcid.provider.id".to_sym }
       end
 
       attr_writer :secret
       def secret
-        @secret ||= store.fetch('ORCID_APP_SECRET')
+        @secret ||= store.fetch('ORCID_APP_SECRET') { "missing Orcid.provider.secret".to_sym }
       end
     end
   end

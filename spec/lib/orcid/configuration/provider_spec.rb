@@ -33,8 +33,8 @@ module Orcid
       And { expect(provider.token_url).to be_an_instance_of(String) }
       And { expect(provider.signin_via_json_url).to be_an_instance_of(String) }
       And { expect(provider.authorize_url).to be_an_instance_of(String) }
-      And { expect { provider.id }.to raise_error(KeyError) }
-      And { expect { provider.secret }.to raise_error(KeyError) }
+      And { expect(provider.id).to be_an_instance_of(Symbol) }
+      And { expect(provider.secret).to be_an_instance_of(Symbol) }
     end
   end
 end

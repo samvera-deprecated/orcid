@@ -2,8 +2,6 @@
 
 # Normally loaded via application config; I want the production code to
 # choke when app_id and app_secret is not set.
-ENV['ORCID_APP_ID'] ||= 'Orcid.provider.id not set'
-ENV['ORCID_APP_SECRET'] ||= 'Orcid.provider.secret not set'
 ENV["RAILS_ENV"] ||= 'test'
 if ENV['COVERAGE']
   require 'simplecov'
