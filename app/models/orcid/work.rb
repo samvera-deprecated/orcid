@@ -16,29 +16,28 @@ module Orcid
     include ActiveModel::Validations
     extend ActiveModel::Naming
 
-    attribute :title, String
-    validates :title, presence: true
+    #attribute :title, String
+    #validates :title, presence: true
 
-    attribute :work_type, String
-    validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
+    #attribute :work_type, String
+    #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
-    attribute :put_code, String
+    #attribute :put_code, String
 
     set_terminology do |t|
-      t.root(path: "fields")
-      t.title
-      t.author
+      t.root(path: "orcid-message")
+      t.message_version(path: "message-version")
     end
 
     # This method is called when you create new XML documents from scratch.
     # It must return a Nokogiri::Document.  Other than that, you can make your "default" documents look however you want.
     def self.xml_template
-      Nokogiri::XML.parse("<fields/>")
+      Nokogiri::XML.parse("<orcid-message/>")
     end
 
-    def to_xml
-      XmlRenderer.call(self)
-    end
+    #def to_xml
+    #  XmlRenderer.call(self)
+    #end
 
     def ==(comparison_object)
       super || comparison_object.instance_of?(self.class) &&
