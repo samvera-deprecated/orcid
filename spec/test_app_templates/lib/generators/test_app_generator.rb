@@ -14,7 +14,7 @@ class TestAppGenerator < Rails::Generators::Base
 
     application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
     if File.exist?(application_yml_file)
-      copy_file application_yml_file, 'config/application.yml'
+      create_link 'config/application.yml', application_yml_file, symbolic:true
     else
       message = "*" * 80 << "\n\n" << "Missing #{application_yml_file} file. Some tests will be skipped." << "\n\n" << "*" * 80
       Rails.logger.warn(message)
