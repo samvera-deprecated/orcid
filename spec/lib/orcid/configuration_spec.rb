@@ -5,6 +5,7 @@ module Orcid
 
     subject { described_class.new }
 
+    its(:parent_controller) { should be_an_instance_of String }
     its(:provider) { should be_an_instance_of Configuration::Provider }
     its(:authentication_model) { should eq Devise::MultiAuth::Authentication }
 

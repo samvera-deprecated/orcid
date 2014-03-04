@@ -14,10 +14,12 @@ module Orcid
         require 'devise-multi_auth'
         ::Devise::MultiAuth::Authentication
       }
+      @parent_controller = options.fetch(:parent_controller) { '::ApplicationController' }
     end
 
     attr_accessor :provider
     attr_accessor :authentication_model
+    attr_accessor :parent_controller
 
     def register_mapping_to_orcid_work(source_type, legend)
       mapper.configure do |config|

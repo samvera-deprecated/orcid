@@ -32,6 +32,10 @@ module Orcid
     configuration.provider
   end
 
+  def parent_controller
+    configuration.parent_controller
+  end
+
   def authentication_model
     configuration.authentication_model
   end

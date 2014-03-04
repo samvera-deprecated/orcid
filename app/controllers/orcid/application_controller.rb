@@ -1,5 +1,5 @@
 module Orcid
-  class ApplicationController < "::#{Devise.parent_controller}".constantize
+  class ApplicationController < Orcid.parent_controller.constantize
     private
     def redirecting_because_user_already_has_a_connected_orcid_profile
       if orcid_profile = Orcid.profile_for(current_user)
