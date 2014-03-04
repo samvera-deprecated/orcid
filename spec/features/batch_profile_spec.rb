@@ -9,7 +9,7 @@ describe 'batch profile behavior', requires_net_connect: true do
 
   Given(:runner) {
     lambda { |person|
-      Orcid::Remote::ProfileLookupService.new {|on|
+      Orcid::Remote::ProfileQueryService.new {|on|
         on.found {|results| person.found(results) }
         on.not_found { person.not_found }
       }.call(email: person.email)

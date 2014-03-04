@@ -3,7 +3,7 @@ require 'orcid/remote/profile_query_service'
 require 'ostruct'
 
 module Orcid::Remote
-  describe ProfileLookupService do
+  describe ProfileQueryService do
     Given(:email) { 'corwin@amber.gov' }
     Given(:orcid_profile_id) { '0001-0002' }
     Given(:config) {

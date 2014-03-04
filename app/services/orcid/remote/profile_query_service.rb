@@ -1,7 +1,7 @@
 require_dependency 'json'
 require 'orcid/remote/service'
 module Orcid::Remote
-  class ProfileLookupService < Orcid::Remote::Service
+  class ProfileQueryService < Orcid::Remote::Service
 
     def self.call(query, config = {}, &callbacks)
       new(config, &callbacks).call(query)

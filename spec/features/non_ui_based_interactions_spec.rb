@@ -47,7 +47,7 @@ describe 'non-UI based interactions' , requires_net_connect: true do
 
   end
 
-  context 'appending a work to an already claimed orcid and authorized', requires_net_connect: true do
+  context 'appending a work to an already claimed and authorize orcid', requires_net_connect: true do
     let(:orcid_profile_id) { ENV.fetch('ORCID_CLAIMED_PROFILE_ID')}
     let(:orcid_profile_password) { ENV.fetch('ORCID_CLAIMED_PROFILE_PASSWORD')}
 

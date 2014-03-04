@@ -39,7 +39,7 @@ namespace :orcid do
       }
       @runner = lambda { |person|
         puts "Processing: #{person.email}"
-        Orcid::Remote::ProfileLookupService.new {|on|
+        Orcid::Remote::ProfileQueryService.new {|on|
           on.found {|results|
             person.found(results)
             puts "\tfound" if verbose

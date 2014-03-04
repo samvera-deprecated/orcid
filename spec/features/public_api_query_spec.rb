@@ -8,7 +8,7 @@ describe 'public api query', requires_net_connect: true do
   end
 
   Given(:runner) {
-    Orcid::Remote::ProfileLookupService.new
+    Orcid::Remote::ProfileQueryService.new
   }
   context 'with simple query' do
     Given(:parameters) { { email: 'jeremy.n.friesen@gmail.com' } }

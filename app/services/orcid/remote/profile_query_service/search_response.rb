@@ -1,6 +1,6 @@
 require_dependency 'orcid/remote/profile_query_service'
 module Orcid::Remote
-  class ProfileLookupService
+  class ProfileQueryService
     class SearchResponse
       delegate :[], :has_key?, :fetch, to: :@records
       def initialize(attributes = {})

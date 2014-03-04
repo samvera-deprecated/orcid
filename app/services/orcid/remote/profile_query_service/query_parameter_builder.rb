@@ -1,6 +1,6 @@
 require_dependency 'orcid/remote/profile_query_service'
 module Orcid::Remote
-  class ProfileLookupService
+  class ProfileQueryService
     # http://support.orcid.org/knowledgebase/articles/132354-searching-with-the-public-api
     module QueryParameterBuilder
 

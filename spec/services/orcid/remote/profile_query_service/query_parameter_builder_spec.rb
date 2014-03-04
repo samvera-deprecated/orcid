@@ -3,7 +3,7 @@ require 'orcid/remote/profile_query_service/query_parameter_builder'
 
 module Orcid::Remote
 
-  describe ProfileLookupService::QueryParameterBuilder do
+  describe ProfileQueryService::QueryParameterBuilder do
     When(:response) { described_class.call(input) }
     context 'single word input' do
       Given(:input) {
