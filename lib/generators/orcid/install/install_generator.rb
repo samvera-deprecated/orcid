@@ -16,6 +16,7 @@ module Orcid
 
     def install_migrations
       rake "orcid:install:migrations"
+      rake "db:migrate"
     end
 
     def install_omniauth_strategies
