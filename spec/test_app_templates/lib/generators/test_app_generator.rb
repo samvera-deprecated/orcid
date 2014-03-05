@@ -3,15 +3,7 @@ require 'rails/generators'
 class TestAppGenerator < Rails::Generators::Base
   source_root "spec/test_app_templates"
 
-  def run_install_oricd
-    generate 'orcid:install --devise --skip_application_yml'
-  end
-
-  def create_shims
-    create_file 'app/assets/javascripts/jquery.js'
-    create_file 'app/assets/javascripts/jquery_ujs.js'
-    create_file 'app/assets/javascripts/turbolinks.js'
-
+  def create_application_yml
     application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
     if File.exist?(application_yml_file)
       create_link 'config/application.yml', application_yml_file, symbolic:true
@@ -20,6 +12,17 @@ class TestAppGenerator < Rails::Generators::Base
       Rails.logger.warn(message)
       puts message
     end
+  end
+
+  def run_install_oricd
+    generate 'orcid:install --devise --skip_application_yml '
+  end
+
+  def create_shims
+    create_file 'app/assets/javascripts/jquery.js'
+    create_file 'app/assets/javascripts/jquery_ujs.js'
+    create_file 'app/assets/javascripts/turbolinks.js'
+
   end
 
   def insert_home_route

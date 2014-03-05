@@ -7,6 +7,16 @@ module Orcid
     class_option :devise, default: false, type: :boolean
     class_option :skip_application_yml, default: false, type: :boolean
 
+    def create_application_yml
+      if !options[:skip_application_yml]
+        create_file 'config/application.yml' do
+          orcid_app_id = ask("What is your Orcid Client ID?")
+          orcid_app_secret = ask("What is your Orcid Client Secret?")
+          "\nORCID_APP_ID: #{orcid_app_id}\nORCID_APP_SECRET: #{orcid_app_secret}\n"
+        end
+      end
+    end
+
     def install_devise_multi_auth
       if options[:devise]
         generate 'devise:multi_auth:install --install_devise'
@@ -17,8 +27,8 @@ module Orcid
 
     def install_migrations
       rake "orcid:install:migrations"
-      rake "db:migrate"
     end
+
 
     def install_omniauth_strategies
       config_code = ", :omniauthable, :omniauth_providers => [:orcid]"
@@ -41,15 +51,10 @@ module Orcid
       route 'mount Orcid::Engine => "/orcid"'
     end
 
-    def create_application_yml
-      if !options[:skip_application_yml]
-        create_file 'config/application.yml' do
-          orcid_app_id = ask("What is your Orcid Client ID?")
-          orcid_app_secret = ask("What is your Orcid Client Secret?")
-          "\nORCID_APP_ID: #{orcid_app_id}\nORCID_APP_SECRET: #{orcid_app_secret}\n"
-        end
-      end
+    def migrate_the_database
+      rake "db:migrate"
     end
+
 
     def install_initializer
       template 'orcid_initializer.rb.erb', 'config/orcid_initializer.rb'

@@ -35,6 +35,8 @@ namespace :spec do
   task :travis do
     ENV['RAILS_ENV'] = 'test'
     ENV['SPEC_OPTS'] = "--profile 20"
+    ENV['ORCID_APP_ID'] = 'bleck'
+    ENV['ORCID_APP_SECRET'] = 'bleck'
     Rake::Task['engine_cart:clean'].invoke
     Rake::Task['engine_cart:generate'].invoke
     Rake::Task['spec:offline'].invoke
