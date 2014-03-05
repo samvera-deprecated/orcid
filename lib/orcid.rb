@@ -2,6 +2,7 @@ require 'orcid/engine'
 require 'orcid/configuration'
 require 'orcid/exceptions'
 
+require 'figaro'
 require 'mappy'
 require 'devise_multi_auth'
 require 'virtus'
