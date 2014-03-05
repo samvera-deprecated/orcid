@@ -1,5 +1,6 @@
 require 'fast_helper'
 require 'orcid/profile'
+require 'orcid'
 
 module Orcid
   describe Profile do
@@ -57,6 +58,20 @@ module Orcid
         should_map(non_orcid_work, orcid_work)
 
         subject.replace_works_with(non_orcid_work)
+      end
+    end
+
+    context '#verified_authentication' do
+      it 'should not be authorized' do
+        subject.verified_authentication?.should eq false
+      end
+    end
+
+    context '#verified_authentication' do
+      it 'should be authorized' do
+        Orcid.stub(:access_token_for).and_return(Object.new())
+
+        subject.verified_authentication?.should eq true
       end
     end
   end

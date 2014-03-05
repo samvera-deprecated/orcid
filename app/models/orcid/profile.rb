@@ -11,6 +11,11 @@ module Orcid
       @xml_parser = config.fetch(:xml_parser) { Orcid::Work::XmlParser }
     end
 
+    # Answers the question: Has the user been authenticated via the ORCID system.
+    def verified_authentication?()
+      return Orcid.authenticated_orcid?(orcid_profile_id)
+    end
+
     def remote_works(options = {})
       @remote_works = nil if options.fetch(:force, false)
       @remote_works ||= begin

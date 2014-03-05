@@ -79,4 +79,19 @@ describe Orcid do
     end
   end
 
+  context '#authenticated_orcid' do
+    it 'should not be authenticated' do
+      Orcid.authenticated_orcid?(orcid_profile_id).should eq false
+    end
+  end
+
+=begin
+  context '#authenticated_orcid' do
+    it 'should be authenticated' do
+      Orcid.should_receive(:authenticated_orcid).with(orcid_profile_id).and_return(true)
+      Orcid.authenticated_orcid?(orcid_profile_id).should eq true
+    end
+  end
+=end
+
 end

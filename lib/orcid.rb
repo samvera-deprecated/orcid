@@ -55,6 +55,15 @@ module Orcid
     tokenizer.to_access_token(uid: orcid_profile_id, provider: 'orcid', client: client)
   end
 
+  # Returns true if the person with the given ORCID has already obtained an ORCID access token by authenticating via ORCID.
+  def authenticated_orcid?(orcid_profile_id)
+    begin
+      return !(Orcid.access_token_for(orcid_profile_id).nil?)
+    rescue
+      return false
+    end
+  end
+
   def profile_for(user)
     if auth = authentication_model.where(provider: 'orcid', user: user).first
       Orcid::Profile.new(auth.uid)
