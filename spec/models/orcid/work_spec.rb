@@ -29,7 +29,7 @@ module Orcid
     context '#to_xml' do
       it 'should return an XML document' do
         rendered = subject.to_xml
-        expect(rendered).to have_tag('orcid-profile orcid-activities orcid-works orcid-work') do
+        expect(rendered).to have_tag('orcid-work') do
           with_tag('work-title title', text: subject.title)
           with_tag('work-type', text: subject.work_type)
         end
@@ -37,38 +37,5 @@ module Orcid
     end
   end
 
-  describe Work::XmlRenderer do
-    let(:work) { Orcid::Work.new(title: 'Hello', work_type: 'journal-article') }
-    subject { described_class.new(work) }
 
-    context '#call' do
-      it 'should return an XML document' do
-        rendered = subject.call
-        expect(rendered).to have_tag('orcid-profile orcid-activities orcid-works orcid-work') do
-          with_tag('work-title title', text: work.title)
-          with_tag('work-type', text: work.work_type)
-        end
-      end
-    end
-  end
-
-  describe Work::XmlParser do
-    let(:xml) { fixture_file('orcid_works.xml').read }
-    let(:work_1) { Orcid::Work.new(title: 'Another Test Drive', work_type: 'test', put_code: '303475')}
-    let(:work_2) { Orcid::Work.new(title: 'Test Driven Orcid Integration', work_type: 'test', put_code: '303474')}
-    subject { described_class.new(xml) }
-
-    context '.call' do
-      it 'should return an array of Orcid::Work' do
-        expect(described_class.call(xml)).to eq([work_1, work_2])
-      end
-    end
-
-    context '#call' do
-      it 'should return an array of Orcid::Work' do
-        returned = subject.call
-        expect(returned).to eq([work_1, work_2])
-      end
-    end
-  end
 end
