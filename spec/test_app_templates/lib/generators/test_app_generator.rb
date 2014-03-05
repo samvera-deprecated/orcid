@@ -4,7 +4,7 @@ class TestAppGenerator < Rails::Generators::Base
   source_root "spec/test_app_templates"
 
   def run_install_oricd
-    generate 'orcid:install --devise'
+    generate 'orcid:install --devise --skip_application_yml'
   end
 
   def create_shims

@@ -5,6 +5,7 @@ module Orcid
     source_root File.expand_path('../templates', __FILE__)
 
     class_option :devise, default: false, type: :boolean
+    class_option :skip_application_yml, default: false, type: :boolean
 
     def install_devise_multi_auth
       if options[:devise]
@@ -38,6 +39,16 @@ module Orcid
 
     def mount_orcid_engine
       route 'mount Orcid::Engine => "/orcid"'
+    end
+
+    def create_application_yml
+      if !options[:skip_application_yml]
+        create_file 'config/application.yml' do
+          orcid_app_id = ask("What is your Orcid Client ID?")
+          orcid_app_secret = ask("What is your Orcid Client Secret?")
+          "\nORCID_APP_ID: #{orcid_app_id}\nORCID_APP_SECRET: #{orcid_app_secret}\n"
+        end
+      end
     end
 
     def install_initializer
