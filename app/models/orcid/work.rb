@@ -38,68 +38,72 @@ module Orcid
     end
 
     set_terminology do |t|
-      t.root(path: "orcid-work")
+      t.root(path: "orcid_work")
       t.title(:path=> "title")
       t.subtitle(:path=> "subtitle")
-      t.translated_title(:path=> "translated-title") {
-        t.language_code(:path=>{:attribute=>"language-code"})
+      t.translated_title(:path=> "translated_title") {
+        t.language_code(:path=>{:attribute=>"language_code"})
       }
-      t.journal_title(:path=> "journal-title")
-      t.short_description(:path=> "short-description")
+      t.journal_title(:path=> "journal_title")
+      t.short_description(:path=> "short_description")
       t.citation(:path=> "citation")
-      t.citation_type(:path=> "work-citation-type")
-      t.work_type(:path=> "work-type")
+      t.citation_type(:path=> "work_citation_type")
+      t.work_type(:path=> "work_type")
       t.publication_date_year(:path=> "year")
       t.publication_date_month(:path=> "month")
-      t.external_identifier_type(:path=> "work-external-identifier-type")
-      t.external_identifier_id(:path=> "work-external-identifier-id")
+      t.external_identifiers(:path=>"work_external_identifiers"){
+        t.external_identifier(:path=>"work_external_identifier"){
+          t.external_identifier_type(:path=> "work_external_identifier_type")
+          t.external_identifier_id(:path=> "work_external_identifier_id")
+        }
+      }
       t.url(:path=> "url")
-      t.contributor_credit_name(:path=> "credit-name")
-      t.contributor_sequence(:path=> "contributor-sequence")
-      t.contributor_role(:path=> "contributor-role")
-      t.language_code(:path=> "language-code")
+      t.contributor_credit_name(:path=> "credit_name")
+      t.contributor_sequence(:path=> "contributor_sequence")
+      t.contributor_role(:path=> "contributor_role")
+      t.language_code(:path=> "language_code")
       t.country(:path=> "country")
     end
 
     def self.xml_template
       Nokogiri::XML.parse("
-            <orcid-work>
-              <work-title>
+            <orcid_work>
+              <work_title>
                 <title/>
                 <subtitle/>
-                <translated-title language-code=\"\">
-                </translated-title>
-              </work-title>
-              <journal-title/>
-              <short-description/>
-              <work-citation>
-                <work-citation-type/>
+                <translated_title language_code=\"\">
+                </translated_title>
+              </work_title>
+              <journal_title/>
+              <short_description/>
+              <work_citation>
+                <work_citation_type/>
                 <citation/>
-              </work-citation>
-              <work-type/>
-              <publication-date>
+              </work_citation>
+              <work_type/>
+              <publication_date>
                 <year/>
                 <month/>
-              </publication-date>
-              <work-external-identifiers>
-                <work-external-identifier>
-                  <work-external-identifier-type/>
-                  <work-external-identifier-id/>
-                </work-external-identifier>
-              </work-external-identifiers>
+              </publication_date>
+              <work_external_identifiers>
+                <work_external_identifier>
+                  <work_external_identifier_type/>
+                  <work_external_identifier_id/>
+                </work_external_identifier>
+              </work_external_identifiers>
               <url/>
-              <work-contributors>
+              <work_contributors>
                 <contributor>
-                  <credit-name/>
-                  <contributor-attributes>
-                    <contributor-sequence/>
-                    <contributor-role/>
-                  </contributor-attributes>
+                  <credit_name/>
+                  <contributor_attributes>
+                    <contributor_sequence/>
+                    <contributor_role/>
+                  </contributor_attributes>
                 </contributor>
-              </work-contributors>
-              <language-code/>
+              </work_contributors>
+              <language_code/>
               <country/>
-            </orcid-work>")
+            </orcid_work>")
     end
 
     def ==(comparison_object)
