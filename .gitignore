@@ -7,3 +7,4 @@ tmp/
 config/application.yml
 tags
 .tags*
+*.project
