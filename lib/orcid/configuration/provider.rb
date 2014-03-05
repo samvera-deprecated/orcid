@@ -1,3 +1,4 @@
+require 'orcid/exceptions'
 module Orcid
   class Configuration
     class Provider
@@ -35,12 +36,16 @@ module Orcid
 
       attr_writer :id
       def id
-        @id ||= store.fetch('ORCID_APP_ID') { "missing Orcid.provider.id".to_sym }
+        @id ||= store.fetch('ORCID_APP_ID')
+      rescue KeyError
+        raise ConfigurationError.new('ORCID_APP_ID')
       end
 
       attr_writer :secret
       def secret
-        @secret ||= store.fetch('ORCID_APP_SECRET') { "missing Orcid.provider.secret".to_sym }
+        @secret ||= store.fetch('ORCID_APP_SECRET')
+      rescue KeyError
+        raise ConfigurationError.new('ORCID_APP_SECRET')
       end
     end
   end

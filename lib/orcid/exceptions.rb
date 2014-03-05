@@ -1,4 +1,11 @@
 module Orcid
+
+  class ConfigurationError < RuntimeError
+    def initialize(key_name)
+      super("Unable to find #{key_name.inspect} in configuration storage.")
+    end
+  end
+
   # Because in trouble shooting what all goes into this remote call,
   # you may very well want all of this.
   class RemoteServiceError < RuntimeError
