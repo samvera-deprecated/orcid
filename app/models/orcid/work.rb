@@ -18,6 +18,17 @@ module Orcid
 
     attribute :put_code, String
 
+    attribute :subtitle, String
+    attribute :translated_title, String
+    attribute :translated_title_language, String
+    attribute :journal_title, String
+    attribute :short_description, String
+    attribute :citation, String
+    attribute :citation_type, String
+    attribute :publication_year, String
+    attribute :publication_month, String
+    attribute :url, String
+
     def to_xml
       XmlRenderer.call(self)
     end

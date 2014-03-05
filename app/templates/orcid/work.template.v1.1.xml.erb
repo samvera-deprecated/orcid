@@ -9,8 +9,21 @@
       <orcid-work>
         <work-title>
           <title><%= work.title %></title>
+          <subtitle><%= work.subtitle %></subtitle>
+          <translated-title language-code="<%= work.translated_title_language %>"><%= work.translated_title %></translated-title>
         </work-title>
+        <journal-title><%= work.journal_title %></journal-title>
+        <short-description><%= work.short_description %></short-description>
+        <work-citation>
+          <work-citation-type><%= work.citation_type %></work-citation-type>
+          <citation><%= work.citation %></citation>
+        </work-citation>
         <work-type><%= work.work_type %></work-type>
+        <publication-date>
+          <year><%= work.publication_year %></year>
+          <month><%= work.publication_month %></month>
+        </publication-date>
+        <url><%= work.url %></url>
       </orcid-work>
     <% end %></orcid-works>
   </orcid-activities>
