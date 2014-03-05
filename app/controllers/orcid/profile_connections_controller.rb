@@ -4,7 +4,18 @@ module Orcid
     before_filter :authenticate_user!
 
     def index
-      render text: 'Not yet implemented!'
+      profile = Orcid.profile_for (current_user)
+      client = Devise::MultiAuth::oauth_client_for("orcid")
+
+      #"https://sandbox.orcid.org/oauth/authorize?client_id=0000-0002-6683-6607&response_type=code&scope=/orcid-profile/read-limited&redirect_uri=https://localhost:3000/users/auth/orcid/callback"
+      #logger.info "\n\n PATH #{user_omniauth_callback_path("orcid")}\n\n"
+      #redirect_to client.authorize_url#( :redirect_uri => user_omniauth_callback_url("orcid"))
+
+      if profile.verified_authentication?
+        render text: "yeah"
+      else
+        redirect_to user_omniauth_authorize_url("orcid")#,:redirect_uri => user_omniauth_callback_url("orcid"))
+      end
     end
 
     def new

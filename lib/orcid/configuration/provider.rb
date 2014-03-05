@@ -16,22 +16,22 @@ module Orcid
 
       attr_writer :site_url
       def site_url
-        @site_url ||= store.fetch('ORCID_SITE_URL') { "http://api.sandbox-1.orcid.org" }
+        @site_url ||= store.fetch('ORCID_SITE_URL') { "http://api.sandbox.orcid.org" }
       end
 
       attr_writer :token_url
       def token_url
-        @token_url ||= store.fetch('ORCID_TOKEN_URL') { "https://api.sandbox-1.orcid.org/oauth/token" }
+        @token_url ||= store.fetch('ORCID_TOKEN_URL') { "https://api.sandbox.orcid.org/oauth/token" }
       end
 
       attr_writer :signin_via_json_url
       def signin_via_json_url
-        @signin_via_json_url ||= store.fetch('ORCID_REMOTE_SIGNIN_URL') { "https://sandbox-1.orcid.org/signin/auth.json" }
+        @signin_via_json_url ||= store.fetch('ORCID_REMOTE_SIGNIN_URL') { "https://sandbox.orcid.org/signin/auth.json" }
       end
 
       attr_writer :authorize_url
       def authorize_url
-        @authorize_url ||= store.fetch('ORCID_AUTHORIZE_URL') { "https://sandbox-1.orcid.org/oauth/authorize" }
+        @authorize_url ||= store.fetch('ORCID_AUTHORIZE_URL') { "https://sandbox.orcid.org/oauth/authorize" }
       end
 
       attr_writer :id
