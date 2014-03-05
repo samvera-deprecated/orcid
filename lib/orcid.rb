@@ -57,11 +57,9 @@ module Orcid
 
   # Returns true if the person with the given ORCID has already obtained an ORCID access token by authenticating via ORCID.
   def authenticated_orcid?(orcid_profile_id)
-    begin
-      return !(Orcid.access_token_for(orcid_profile_id).nil?)
-    rescue
-      return false
-    end
+    Orcid.access_token_for(orcid_profile_id).present?
+  rescue ActiveRecord::RecordNotFound
+    return false
   end
 
   def profile_for(user)
