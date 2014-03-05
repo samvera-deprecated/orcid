@@ -62,8 +62,12 @@ module Orcid::Remote
         label = "#{given_names} #{family_name}"
         label << " (" << emails.join(", ") << ")" if emails.any?
         label << " [ORCID: #{identifier}]"
+        biography = ""
+        if bio = orcid_bio['biography']
+          biography = bio['value']
+        end
 
-        returning_value << response_builder.new("id" => identifier, "label" => label)
+        returning_value << response_builder.new("id" => identifier, "label" => label, "biography" => biography)
       end
     end
 

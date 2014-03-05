@@ -5,6 +5,7 @@ require 'ostruct'
 module Orcid::Remote
   describe ProfileQueryService do
     Given(:email) { 'corwin@amber.gov' }
+    Given(:biography) { 'King of Amber' }
     Given(:orcid_profile_id) { '0001-0002' }
     Given(:config) {
       {
@@ -18,7 +19,11 @@ module Orcid::Remote
     Given(:query_parameter_builder) { double('Query Builder')}
     Given(:response) { double("Response", body: response_body)} # See below
     Given(:token) { double("Token") }
-    Given(:json_response) { [ OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]" }) ] }
+    Given(:json_response) {
+      [
+        OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]", 'biography' => biography })
+      ]
+    }
     Given(:parameters) { double("Parameters") }
     Given(:normalized_parameters) { double("Normalized Parameters") }
     Given(:callback) { StubCallback.new }
@@ -62,7 +67,7 @@ module Orcid::Remote
                       }
                     },
                     "biography": {
-                      "value": "King of Amber",
+                      "value": "#{biography}",
                       "visibility": null
                     },
                     "contact-details": {
