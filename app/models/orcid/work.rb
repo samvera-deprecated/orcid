@@ -67,7 +67,7 @@ module Orcid
               <work-title>
                 <title/>
                 <subtitle/>
-                <translated-title language-code=\"x\">
+                <translated-title language-code=\"\">
                 </translated-title>
               </work-title>
               <journal-title/>
