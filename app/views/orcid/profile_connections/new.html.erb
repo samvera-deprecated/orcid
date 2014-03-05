@@ -1,4 +1,4 @@
-<%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.new_profile_connection_path, method: :get, html: {class: 'search-form'}) do |f| %>
+<%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.new_orcid_profile_connection_path, method: :get, html: {class: 'search-form'}) do |f| %>
   <%= field_set_tag("Search ORCID Profiles", class: 'accessible-hidden') do %>
     <% profile_connection.available_query_attribute_names.each do |field_name| %>
       <%= f.input field_name, as: :search %>
@@ -10,7 +10,7 @@
 <% end %>
 
 <% profile_connection.with_orcid_profile_candidates do |candidates| %>
-  <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path,) do |f| %>
+  <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.orcid_profile_connections_path,) do |f| %>
     <%= field_set_tag("Select an ORCID Profile", class: 'accessible-hidden') do %>
       <%= f.collection_radio_buttons :orcid_profile_id, candidates, :id, :label %>
     <% end %>
