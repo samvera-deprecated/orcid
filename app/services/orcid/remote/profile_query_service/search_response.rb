@@ -18,6 +18,10 @@ module Orcid::Remote
       def label
         @attributes.fetch(:label)
       end
+
+      def biography
+        @attributes.fetch(:biography)
+      end
     end
   end
 end
