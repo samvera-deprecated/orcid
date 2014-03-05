@@ -10,14 +10,14 @@ module Orcid
     def new
       return false if redirecting_because_user_already_has_a_connected_orcid_profile
       assign_attributes(new_profile_connection)
-      respond_with(new_profile_connection)
+      respond_with(orcid,new_profile_connection)
     end
 
     def create
       return false if redirecting_because_user_already_has_a_connected_orcid_profile
       assign_attributes(new_profile_connection)
       create_profile_connection(new_profile_connection)
-      respond_with(new_profile_connection)
+      respond_with(orcid,new_profile_connection)
     end
 
     protected

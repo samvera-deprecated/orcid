@@ -1,1 +1,8 @@
-Hello World
+<h2>ORCID</h2>
+<% profile_connection = Orcid::ProfileConnection.new(userid:user.id) %>
+<%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.orcid_profile_connections_path, method: :post) do |f| %>
+    <%= f.input :orcid_profile_id, label: "ID", class:"orcid-input" %>
+    <button type="submit" class="search-submit btn btn-primary" id="keyword-search-submit" tabindex="2">
+      <span class="orcid-connect">Connect</span>
+    </button>
+<% end %>
