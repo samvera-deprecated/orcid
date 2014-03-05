@@ -66,7 +66,7 @@ module Orcid
 
           post :create, profile_connection: { orcid_profile_id: orcid_profile_id }, use_route: :orcid
           expect(assigns(:profile_connection)).to be_an_instance_of(Orcid::ProfileConnection)
-          expect(response).to redirect_to(controller.orcid.orcid_profile_connections_path)
+          expect(response).to redirect_to(orcid.profile_connections_path)
         end
       end
     end

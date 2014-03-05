@@ -59,7 +59,7 @@ module Orcid
           get :show, use_route: :orcid
 
           expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request_not_found"))
-          expect(response).to redirect_to(controller.orcid.new_orcid_profile_request_path)
+          expect(response).to redirect_to(orcid.new_profile_request_path)
         end
       end
     end
@@ -83,7 +83,7 @@ module Orcid
           Orcid::ProfileRequest.should_receive(:find_by_user).with(user).and_return(Orcid::ProfileRequest.new)
           get :new, use_route: :orcid
           expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request"))
-          expect(response).to redirect_to(controller.orcid.orcid_profile_request_path)
+          expect(response).to redirect_to(orcid.profile_request_path)
         end
       end
     end
@@ -107,7 +107,7 @@ module Orcid
           post :create, profile_request: profile_request_attributes, use_route: :orcid
 
           expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request"))
-          expect(response).to redirect_to(controller.orcid.orcid_profile_request_path)
+          expect(response).to redirect_to(orcid.profile_request_path)
         end
 
       end

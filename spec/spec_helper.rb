@@ -51,7 +51,7 @@ module ControllerHelpers
   end
 
   def orcid
-    controller
+    controller.orcid
   end
 
 end

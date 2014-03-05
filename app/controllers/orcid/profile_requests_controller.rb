@@ -32,14 +32,14 @@ module Orcid
     def redirecting_because_no_profile_request_was_found
       return false if existing_profile_request
       flash[:notice] = I18n.t("orcid.requests.messages.existing_request_not_found")
-      redirect_to orcid.new_orcid_profile_request_path
+      redirect_to orcid.new_profile_request_path
       true
     end
 
     def redirecting_because_user_has_existing_profile_request
       return false if ! existing_profile_request
       flash[:notice] = I18n.t("orcid.requests.messages.existing_request")
-      redirect_to orcid.orcid_profile_request_path
+      redirect_to orcid.profile_request_path
       true
     end
 
