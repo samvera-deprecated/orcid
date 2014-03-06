@@ -2,12 +2,13 @@ module Orcid
   # A well-defined data structure that coordinates with its :template in order
   # to generate XML that can be POSTed/PUT as an Orcid Work.
 
+  require 'orcid/xml_scrubber'
   require "om"
-
+  
   class Work
 
     include OM::XML::Document
-    include XmlScrubber
+    include Orcid::XmlScrubber
 
     VALID_WORK_TYPES = [
       "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
@@ -24,16 +25,6 @@ module Orcid
     #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
     attribute :put_code, String
-
-    # Get the xml to send to ORCID's API's. This replaces underscores with hyphens for element names.
-    def outgoing_xml
-      scrub(to_xml, "_", "-")
-    end
-    
-    # Scrub the xml from ORCID's API's. This replaces hyphens with underscores for element names.
-    def scrub_incoming_xml
-      scrub(to_xml, "-", "_")
-    end
 
     def valid?
       if (title[0].empty?)
@@ -127,9 +118,9 @@ module Orcid
       if put_code.present?
         put_code
       elsif title[0].empty? && work_type[0].empty?
-        [title, work_type]
-      else
         nil
+      else
+        [title[0], work_type[0]]
       end
     end
   end

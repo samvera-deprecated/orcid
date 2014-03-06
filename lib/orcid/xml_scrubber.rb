@@ -2,6 +2,16 @@ module Orcid
 
   module XmlScrubber
     
+    # Get the xml to send to ORCID's API's. This replaces underscores with hyphens for element names.
+    def outgoing_xml
+      scrub(to_xml, "_", "-")
+    end
+
+    # Scrub the xml from ORCID's API's. This replaces hyphens with underscores for element names.
+    def scrub_incoming_xml
+      scrub(to_xml, "-", "_")
+    end
+
     # Using the xml, loop through the elements and replace the orig_character with new_character
     def scrub(xml, orig_character, new_character, namespace_name, namespace_url)
      
