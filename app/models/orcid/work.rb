@@ -26,6 +26,11 @@ module Orcid
 
     attr_accessor :put_code
 
+    # This allows the OM-based object to be initialized with a hash. The OM terms aren't
+    # attributes, but Mappy needs to intialize this object with a hash.
+    # This loops through the hash and calls OM term methods, like this:
+    # "title" => "test title" will be self.title = "test title"
+
     def initialize(attributes={})
       attributes.each do |key, value|
         send("#{key}=", value)
@@ -46,19 +51,26 @@ module Orcid
     end
 
     set_terminology do |t|
-      t.root(path: "orcid_work", :xmlns => "http://www.orcid.org/ns/orcid" )
-      t.title(:path=> "title")
-      t.subtitle(:path=> "subtitle")
-      t.translated_title(:path=> "translated_title") {
-        t.language_code(:path=>{:attribute=>"language_code"})
+    
+     t.root(path: "orcid_work", :xmlns => "http://www.orcid.org/ns/orcid" )
+      t.work_title(:path=>"work_title"){
+        t.title(:path=> "title")
+        t.subtitle(:path=> "subtitle")
+        t.translated_title(:path=> "translated_title") {
+          t.language_code(:path=>{:attribute=>"language_code"})
+        }
       }
       t.journal_title(:path=> "journal_title")
       t.short_description(:path=> "short_description")
-      t.citation(:path=> "citation")
-      t.citation_type(:path=> "work_citation_type")
+      t.work_citation(:path=> "work_citation"){
+        t.citation_type(:path=> "work_citation_type")
+        t.citation(:path=> "citation")
+      }
       t.work_type(:path=> "work_type")
-      t.publication_date_year(:path=> "year")
-      t.publication_date_month(:path=> "month")
+      t.publication_date(:path=> "publication_date"){
+        t.publication_date_year(:path=> "year")
+        t.publication_date_month(:path=> "month")
+      }
       t.external_identifiers(:path=>"work_external_identifiers"){
         t.external_identifier(:path=>"work_external_identifier"){
           t.external_identifier_type(:path=> "work_external_identifier_type")
@@ -66,52 +78,24 @@ module Orcid
         }
       }
       t.url(:path=> "url")
-      t.contributor_credit_name(:path=> "credit_name")
-      t.contributor_sequence(:path=> "contributor_sequence")
-      t.contributor_role(:path=> "contributor_role")
+      t.work_contributors(:path=>"work_contributors"){
+        t.contributor(:path=>"contributor"){
+          t.contributor_orcid(:path=> "contributor_orcid")
+          t.contributor_credit_name(:path=> "credit_name")
+          t.contributor_email(:path=> "contributor_email")
+          t.contributor_attributes(:path=>"contributor_attributes"){
+            t.contributor_sequence(:path=> "contributor_sequence")
+            t.contributor_role(:path=> "contributor_role")
+          }
+        }
+      }
+      
       t.language_code(:path=> "language_code")
       t.country(:path=> "country")
     end
 
     def self.xml_template
-      Nokogiri::XML.parse('
-            <orcid_work xmlns="http://www.orcid.org/ns/orcid">
-              <work_title>
-                <title/>
-                <subtitle/>
-                <translated_title language_code="">
-                </translated_title>
-              </work_title>
-              <journal_title/>
-              <short_description/>
-              <work_citation>
-                <work_citation_type/>
-                <citation/>
-              </work_citation>
-              <work_type/>
-              <publication_date>
-                <year/>
-                <month/>
-              </publication_date>
-              <work_external_identifiers>
-                <work_external_identifier>
-                  <work_external_identifier_type/>
-                  <work_external_identifier_id/>
-                </work_external_identifier>
-              </work_external_identifiers>
-              <url/>
-              <work_contributors>
-                <contributor>
-                  <credit_name/>
-                  <contributor_attributes>
-                    <contributor_sequence/>
-                    <contributor_role/>
-                  </contributor_attributes>
-                </contributor>
-              </work_contributors>
-              <language_code/>
-              <country/>
-            </orcid_work>')
+      Nokogiri::XML.parse("<orcid_work/>")
     end
 
     def ==(comparison_object)
