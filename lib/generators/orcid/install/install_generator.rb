@@ -25,6 +25,10 @@ module Orcid
       end
     end
 
+    def copy_locale
+      copy_file "../../../../../config/locales/orcid.en.yml", "config/locales/orcid.en.yml"
+    end
+
     def install_migrations
       rake "orcid:install:migrations"
     end
