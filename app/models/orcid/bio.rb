@@ -13,8 +13,8 @@ module Orcid
       # "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
     # ].freeze
 
-    include Virtus.model
-    include ActiveModel::Validations
+    # include Virtus.model
+    # include ActiveModel::Validations
     extend ActiveModel::Naming
 
     #attribute :title, String
@@ -35,6 +35,12 @@ module Orcid
       scrub(to_xml, "-", "_")
     end
 
+    def initialize(attributes={})
+      attributes.each do |key, value|
+        send("#{key}=", value)
+      end
+    end
+    
     def valid?
       if (given_names[0].empty?)
         return false
@@ -52,30 +58,35 @@ module Orcid
           t.other_name(:path=>"other_name")
         }
       }
-      t.title(:path=> "title")
-      t.subtitle(:path=> "subtitle")
-      t.translated_title(:path=> "translated_title") {
-        t.language_code(:path=>{:attribute=>"language_code"})
-      }
-      t.journal_title(:path=> "journal_title")
-      t.short_description(:path=> "short_description")
-      t.citation(:path=> "citation")
-      t.citation_type(:path=> "work_citation_type")
-      t.work_type(:path=> "work_type")
-      t.publication_date_year(:path=> "year")
-      t.publication_date_month(:path=> "month")
-      t.external_identifiers(:path=>"work_external_identifiers"){
-        t.external_identifier(:path=>"work_external_identifier"){
-          t.external_identifier_type(:path=> "work_external_identifier_type")
-          t.external_identifier_id(:path=> "work_external_identifier_id")
+      t.biography(:path=>"biography")
+      t.researcher_urls(:path=>"researcher_urls"){
+        t.researcher_url(:path=>"researcher_url"){
+          t.url_name(:path=>"url_name")
+          t.url(:path=>"url")
         }
       }
-      t.url(:path=> "url")
-      t.contributor_credit_name(:path=> "credit_name")
-      t.contributor_sequence(:path=> "contributor_sequence")
-      t.contributor_role(:path=> "contributor_role")
-      t.language_code(:path=> "language_code")
-      t.country(:path=> "country")
+ 
+      t.contact_details(:path=>"contact_details"){
+        t.email(:path=>"email"){
+          t.current(:path=>{:attribute=>"current"})
+          t.primary(:path=>{:attribute=>"primary"})
+        }
+        t.address(:path=>"address"){
+          t.country(:path=>"country")
+        }
+      }
+      t.keywords(:path=>"keywords"){
+        t.keyword(:path=>"keyword")
+      }
+  
+      t.external_identifiers(:path=>"work_external_identifiers"){
+        t.external_identifier(:path=>"work_external_identifier"){
+          t.external_id_common_name(:path=> "external_id_common_name")
+          t.external_id_reference(:path=> "external_id_reference")
+          t.external_id_url(:path=> "external_id_url")
+        }
+      }
+      
     end
 
     def self.xml_template
@@ -91,8 +102,8 @@ module Orcid
     def id
       if put_code.present?
         put_code
-      elsif title[0].empty? && work_type[0].empty?
-        [title, work_type]
+      elsif given_names[0].empty?
+        [given_names]
       else
         nil
       end
