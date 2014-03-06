@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module Orcid
   describe Work do
-    let(:attributes) { {put_code: '1234' }}
+    let(:attributes) { {title: 'Title', work_type: 'journal-article', put_code: '1234' }}
     subject {
-      described_class.new(put_code: '1234')
+      described_class.new(attributes)
     }
 
     its(:title) { should eq 'Title' }
