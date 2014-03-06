@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.summary     = "A Rails engine for orcid.org integration."
   s.description = "A Rails engine for orcid.org integration."
 
-  s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "config/**/*" "LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 4.0.3"
   s.add_dependency 'mappy', '~> 0.1.0'
