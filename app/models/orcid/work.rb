@@ -40,7 +40,7 @@ module Orcid
     end
 
     set_terminology do |t|
-      t.root(path: "orcid_work")
+      t.root(path: "orcid_work", :xmlns => "http://www.orcid.org/ns/orcid" )
       t.title(:path=> "title")
       t.subtitle(:path=> "subtitle")
       t.translated_title(:path=> "translated_title") {
@@ -68,12 +68,12 @@ module Orcid
     end
 
     def self.xml_template
-      Nokogiri::XML.parse("
-            <orcid_work>
+      Nokogiri::XML.parse('
+            <orcid_work xmlns="http://www.orcid.org/ns/orcid">
               <work_title>
                 <title/>
                 <subtitle/>
-                <translated_title language_code=\"\">
+                <translated_title language_code="">
                 </translated_title>
               </work_title>
               <journal_title/>
@@ -105,7 +105,7 @@ module Orcid
               </work_contributors>
               <language_code/>
               <country/>
-            </orcid_work>")
+            </orcid_work>')
     end
 
     def ==(comparison_object)
