@@ -14,8 +14,8 @@ module Orcid
       "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
     ].freeze
 
-    include Virtus.model
-    include ActiveModel::Validations
+    #include Virtus.model
+    #include ActiveModel::Validations
     extend ActiveModel::Naming
 
     #attribute :title, String
@@ -24,7 +24,13 @@ module Orcid
     #attribute :work_type, String
     #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
-    attribute :put_code, String
+    #attribute :put_code, String
+
+    def initialize(attributes={})
+      attributes.each do |key, value|
+        send("#{key}=", value)
+      end
+    end
 
     def valid?
       if (title[0].empty?)
