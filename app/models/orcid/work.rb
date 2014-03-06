@@ -114,7 +114,32 @@ module Orcid
       
       t.language_code(:path=> "language_code")
       t.country(:path=> "country")
+
+      # This allows nested nodes to be referenced directly, like work.citation_type instead
+      # of work.work_citation.citation_type
+
+      t.title(:proxy=>[:work_title, :title])
+      t.subtitle(:proxy=>[:work_title, :subtitle])
+      t.translated_title(:proxy=>[:work_title, :translated_title])
+      t.language_code(:proxy=>[:work_title, :translated_title, :language_code])
+      t.citation_type(:proxy=>[:work_citation, :citation_type])
+      t.citation(:proxy=>[:work_citation, :citation])
+      t.publication_date_year(:proxy=>[:publication_date, :publication_date_year])
+      t.publication_date_month(:proxy=>[:publication_date, :publication_date_month])
+      t.external_identifier(:proxy=>[:external_identifiers, :external_identifier])
+      t.external_identifier_type(:proxy=>[:external_identifiers, :external_identifier, :external_identifier_type])
+      t.external_identifier_id(:proxy=>[:external_identifiers, :external_identifier, :external_identifier_id])
+      t.contributor(:proxy=>[:work_contributors, :contributor])
+      t.contributor_orcid(:proxy=>[:work_contributors, :contributor, :contributor_orcid])
+      t.contributor_credit_name(:proxy=>[:work_contributors, :contributor, :contributor_credit_name])
+      t.contributor_email(:proxy=>[:work_contributors, :contributor, :contributor_email])
+      t.contributor_attributes(:proxy=>[:work_contributors, :contributor, :contributor_attributes])
+      t.contributor_sequence(:proxy=>[:work_contributors, :contributor, :contributor_attributes, :contributor_sequence])
+      t.contributor_role(:proxy=>[:work_contributors, :contributor, :contributor_attributes, :contributor_role])
+  
     end
+    
+  
 
     def self.xml_template
       Nokogiri::XML.parse('<orcid_work xmlns="http://www.orcid.org/ns/orcid">
