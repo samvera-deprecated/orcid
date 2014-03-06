@@ -24,7 +24,7 @@ module Orcid
     #attribute :work_type, String
     #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
-    #attribute :put_code, String
+    attr_accessor :put_code
 
     def initialize(attributes={})
       attributes.each do |key, value|
@@ -42,7 +42,7 @@ module Orcid
       if (!VALID_WORK_TYPES.include? work_type[0])
         return false
       end
-      super
+      true
     end
 
     set_terminology do |t|
