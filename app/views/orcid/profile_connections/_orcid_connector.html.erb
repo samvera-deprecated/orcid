@@ -1,11 +1,14 @@
 <% profile_connection = Orcid::ProfileConnection.new(userid:user.id) %>
 <p><br />
 <%= link_to "Look up your existing ORCID", orcid.new_profile_connection_path(profile_connection:{text: user.name}) %>
+  <span>-OR-</span>
+<%= link_to "Create an ORCID", orcid.new_profile_request_path %>
 </p>
-<p>OR</p>
+<p>-OR-</p>
 <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path, method: :post) do |f| %>
     <%= f.input :orcid_profile_id, label: "Enter your existing ORCID (####-####-####-####)", class:"orcid-input" %>
     <button type="submit" class="search-submit btn btn-primary" id="keyword-search-submit" tabindex="2">
       <span class="orcid-connect">Connect</span>
     </button>
 <% end %>
+
