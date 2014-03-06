@@ -26,6 +26,11 @@ module Orcid
 
     #attribute :put_code, String
 
+    # This allows the OM-based object to be initialized with a hash. The OM terms aren't
+    # attributes, but Mappy needs to intialize this object with a hash.
+    # This loops through the hash and calls OM term methods, like this:
+    # "title" => "test title" will be self.title = "test title"
+
     def initialize(attributes={})
       attributes.each do |key, value|
         send("#{key}=", value)
