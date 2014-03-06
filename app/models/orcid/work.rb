@@ -90,7 +90,43 @@ module Orcid
     end
 
     def self.xml_template
-      Nokogiri::XML.parse("<orcid_work/>")
+      Nokogiri::XML.parse('<orcid_work xmlns="http://www.orcid.org/ns/orcid">
+              <work_title>
+                <title/>
+                <subtitle/>
+                <translated_title language_code="">
+                </translated_title>
+              </work_title>
+              <journal_title/>
+              <short_description/>
+              <work_citation>
+                <work_citation_type/>
+                <citation/>
+              </work_citation>
+              <work_type/>
+              <publication_date>
+                <year/>
+                <month/>
+              </publication_date>
+              <work_external_identifiers>
+                <work_external_identifier>
+                  <work_external_identifier_type/>
+                  <work_external_identifier_id/>
+                </work_external_identifier>
+              </work_external_identifiers>
+              <url/>
+              <work_contributors>
+                <contributor>
+                  <credit_name/>
+                  <contributor_attributes>
+                    <contributor_sequence/>
+                    <contributor_role/>
+                  </contributor_attributes>
+                </contributor>
+              </work_contributors>
+              <language_code/>
+              <country/>
+            </orcid_work>')
     end
 
     def ==(comparison_object)
