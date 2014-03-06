@@ -1,6 +1,17 @@
 module Orcid
-  def self.table_name_prefix
-    "orcid_"
+  class << self
+
+    # As per an isolated_namespace Rails engine.
+    # But the isolated namespace creates issues.
+    def table_name_prefix
+      "orcid_"
+    end
+
+    # Because I am not using isolate_namespace for Orcid::Engine
+    # I need this for the application router to find the appropriate routes.
+    def use_relative_model_naming?
+      true
+    end
   end
 
   class Engine < ::Rails::Engine
