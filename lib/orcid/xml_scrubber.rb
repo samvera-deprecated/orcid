@@ -35,7 +35,7 @@ module Orcid
         end
       end
 
-      xml_doc.to_s
+      xml_doc.root.to_s
 
     end  
   end

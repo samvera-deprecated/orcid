@@ -14,22 +14,9 @@ module Orcid
       "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
     ].freeze
 
-    #include Virtus.model
-    #include ActiveModel::Validations
     extend ActiveModel::Naming
 
-    #attribute :title, String
-    #validates :title, presence: true
-
-    #attribute :work_type, String
-    #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
-
     attr_accessor :put_code
-
-    # This allows the OM-based object to be initialized with a hash. The OM terms aren't
-    # attributes, but Mappy needs to intialize this object with a hash.
-    # This loops through the hash and calls OM term methods, like this:
-    # "title" => "test title" will be self.title = "test title"
 
     def initialize(attributes={})
       attributes.each do |key, value|
@@ -167,7 +154,7 @@ module Orcid
     end
     
   
-
+    #the entire node tree must be specified here, otherwise errors will occur
     def self.xml_template
       Nokogiri::XML.parse('<orcid_work xmlns="http://www.orcid.org/ns/orcid">
               <work_title>
