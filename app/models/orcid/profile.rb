@@ -12,8 +12,8 @@ module Orcid
     end
 
     # Answers the question: Has the user been authenticated via the ORCID system.
-    def verified_authentication?()
-      return Orcid.authenticated_orcid?(orcid_profile_id)
+    def verified_authentication?
+      Orcid.authenticated_orcid?(orcid_profile_id)
     end
 
     def remote_works(options = {})

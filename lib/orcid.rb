@@ -54,7 +54,7 @@ module Orcid
   # Returns true if the person with the given ORCID has already obtained an ORCID access token by authenticating via ORCID.
   def authenticated_orcid?(orcid_profile_id)
     Orcid.access_token_for(orcid_profile_id).present?
-  rescue ActiveRecord::RecordNotFound
+  rescue Devise::MultiAuth::AccessTokenError
     return false
   end
 
