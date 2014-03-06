@@ -24,7 +24,12 @@ module Orcid
     #attribute :work_type, String
     #validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
-    #attribute :put_code, String
+    attr_accessor :put_code
+
+    # This allows the OM-based object to be initialized with a hash. The OM terms aren't
+    # attributes, but Mappy needs to intialize this object with a hash.
+    # This loops through the hash and calls OM term methods, like this:
+    # "title" => "test title" will be self.title = "test title"
 
     def initialize(attributes={})
       attributes.each do |key, value|
@@ -42,7 +47,7 @@ module Orcid
       if (!VALID_WORK_TYPES.include? work_type[0])
         return false
       end
-      super
+      true
     end
 
     set_terminology do |t|

@@ -26,8 +26,8 @@ module Orcid
 
       it 'should configure the mapper' do
         orcid_work = subject.mapper.map(article, target: 'orcid/work')
-        expect(orcid_work.work_type).to eq('spaghetti')
-        expect(orcid_work.title).to eq(title)
+        expect(orcid_work.work_type).to eq(['spaghetti'])
+        expect(orcid_work.title).to eq([title])
         expect(orcid_work).to be_an_instance_of(Orcid::Work)
       end
 
