@@ -127,9 +127,9 @@ module Orcid
       if put_code.present?
         put_code
       elsif title[0].empty? && work_type[0].empty?
-        [title, work_type]
-      else
         nil
+      else
+        [title[0], work_type[0]]
       end
     end
   end

@@ -2,26 +2,43 @@ require 'spec_helper'
 
 module Orcid
   describe Work do
-    let(:attributes) { {title: 'Hello', work_type: 'journal-article', put_code: '1234' }}
-    subject { described_class.new(attributes) }
+    before :all do
+      @test_work = Orcid::Work.new
+      @test_work.title = "Title"
+      @test_work.work_type = "journal-article"
+      @test_work.put_code = "1234"
+    end
+    subject{@test_work}
 
-    its(:title) { should eq attributes[:title] }
-    its(:work_type) { should eq attributes[:work_type] }
-    its(:put_code) { should eq attributes[:put_code] }
+    its(:title) { should eq ['Title'] }
+    its(:work_type) { should eq ['journal-article'] }
+    its(:put_code) { should eq '1234' }
     its(:valid?) { should eq true }
 
     context '#id' do
       context 'with put_code' do
-        subject { described_class.new(put_code: '123') }
+        before :all do
+          @test_work = Orcid::Work.new
+          @test_work.put_code = "1234"
+        end
+        subject{@test_work}
         its(:id) { should eq subject.put_code}
       end
       context 'with title and work type' do
-        subject { described_class.new(title: 'Title', work_type: 'journal-article') }
-        its(:id) { should eq [subject.title, subject.work_type]}
+        before :all do
+          @test_work = Orcid::Work.new
+          @test_work.title = "Title"
+          @test_work.work_type = "journal-article"
+        end
+        subject{@test_work}
+        its(:id) { should eq [subject.title(0), subject.work_type(0)]}
       end
 
       context 'without title, work type, and put_code' do
-        subject { described_class.new }
+        before :all do
+          @test_work = Orcid::Work.new
+        end
+        subject{@test_work}
         its(:id) { should eq nil }
       end
     end
