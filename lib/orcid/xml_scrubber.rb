@@ -13,7 +13,7 @@ module Orcid
     end
 
     # Using the xml, loop through the elements and replace the orig_character with new_character
-    def scrub(xml, orig_character, new_character, namespace_name, namespace_url)
+    def scrub(xml, orig_character, new_character, namespace_name=nil, namespace_url=nil)
      
       #Create a Nokogiri document
       xml_doc = Nokogiri::XML(xml)
