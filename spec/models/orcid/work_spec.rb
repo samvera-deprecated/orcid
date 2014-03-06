@@ -2,12 +2,14 @@ require 'spec_helper'
 
 module Orcid
   describe Work do
-    let(:attributes) { {title: 'Hello', work_type: 'journal-article', put_code: '1234' }}
-    subject { described_class.new(attributes) }
+    let(:attributes) { {title: 'Title', work_type: 'journal-article', put_code: '1234' }}
+    subject {
+      described_class.new(attributes)
+    }
 
-    its(:title) { should eq attributes[:title] }
-    its(:work_type) { should eq attributes[:work_type] }
-    its(:put_code) { should eq attributes[:put_code] }
+    its(:title) { should eq 'Title' }
+    its(:work_type) { should eq 'journal-article' }
+    its(:put_code) { should eq '1234' }
     its(:valid?) { should eq true }
 
     context '#id' do
@@ -27,8 +29,8 @@ module Orcid
     end
 
     context '#to_xml' do
-      it 'should return an XML document' do
-        rendered = subject.to_xml
+      it 'should return a scrubbed XML document' do
+        rendered = subject.outgoing_xml
         expect(rendered).to have_tag('orcid-work') do
           with_tag('work-title title', text: subject.title)
           with_tag('work-type', text: subject.work_type)
