@@ -6,12 +6,7 @@
 <orcid-profile>
   <orcid-activities>
     <orcid-works><% works.each do |work| %>
-      <orcid-work>
-        <work-title>
-          <title><%= work.title %></title>
-        </work-title>
-        <work-type><%= work.work_type %></work-type>
-      </orcid-work>
+        <%= work.outgoing_xml %>
     <% end %></orcid-works>
   </orcid-activities>
 </orcid-profile>
