@@ -18,6 +18,8 @@ module Orcid
       #Create a Nokogiri document
       xml_doc = Nokogiri::XML(xml)
 
+
+
       #get all nodes
       if namespace_name && namespace_url
         node_set  = xml_doc.xpath( "//#{namespace_name}:*", namespace_name => namespace_url )
@@ -33,8 +35,32 @@ module Orcid
         if node.node_name.include? orig_character
           node.name = node.name.gsub(orig_character, new_character)
         end
+
+        #have to remove empty nodes so ORCID won't barf
+        if (node.element_children.empty? && node.content.strip.empty?)
+          node.remove
+        end
+
       end
 
+      #we're going to run this 3 more times to pick up nodes that were cleaned up previously
+      #this should really be recursive instead
+      node_set.each do |node|
+        if (node.element_children.empty? && node.content.strip.empty?)
+          node.remove
+        end
+      end
+      node_set.each do |node|
+        if (node.element_children.empty? && node.content.strip.empty?)
+          node.remove
+        end
+      end
+      node_set.each do |node|
+        if (node.element_children.empty? && node.content.strip.empty?)
+          node.remove
+        end
+      end
+      #have to pull the root rather to to_xml so we don't get the XML header info
       xml_doc.root.to_s
 
     end  
