@@ -21,20 +21,18 @@ And then install:
 
 ## Running the tests
 
-Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
+Run `rake` to generate the dummy app and run the offline tests.
+
+To run the online tests, you'll need ORCID application credentials:
+1. Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
  (this could take days to come back)
-
-Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
+1. Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
 Save the email addresses, orcid ids, and passwords for editing application.yml
+1. Go to mailinator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
+1. `cp config/application.yml.sample config/application.yml`
+1. Update the application.yml with your information
 
-Go to mailinator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
-
-`cp config/application.yml.sample config/application.yml`
-
-Update the application.yml with your information
-
-`rake`
-
+Run the online tests with `rake spec:online`
 
 ## TODO Items
 
