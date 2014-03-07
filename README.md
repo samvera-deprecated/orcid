@@ -24,6 +24,7 @@ And then install:
 Run `rake` to generate the dummy app and run the offline tests.
 
 To run the online tests, you'll need ORCID application credentials:
+
 1. Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
  (this could take days to come back)
 1. Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
