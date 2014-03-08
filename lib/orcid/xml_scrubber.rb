@@ -12,13 +12,38 @@ module Orcid
       scrub(to_xml, "-", "_", "orcid", "http://www.orcid.org/ns/orcid")
     end
 
+    private
+
+    # Iterate through the xml nodes, depth-first
+    # On the way up remove elements that are empty and text nodes that are blank
+    # Return the xml doc
+    def remove_empty_nodes( xml )
+
+      # Iterate through each child node of the xml root
+      xml.children.each do |el| 
+        # Recurse
+        remove_empty_nodes( el )
+
+        # Check if the current node is an element with no children ...
+        empty_el = el.elem? && el.children.empty?
+        # or an empty text node
+        empty_text = el.text? && el.blank?
+
+        # If the current node has no children or is empty text ...
+        if empty_el || empty_text
+          # remove it
+          el.remove
+        end
+      end
+
+      return xml
+    end
+
     # Using the xml, loop through the elements and replace the orig_character with new_character
     def scrub(xml, orig_character, new_character, namespace_name=nil, namespace_url=nil)
      
       #Create a Nokogiri document
       xml_doc = Nokogiri::XML(xml)
-
-
 
       #get all nodes
       if namespace_name && namespace_url
@@ -30,38 +55,16 @@ module Orcid
       end
 
       node_set.each do |node|
-
         # rename the node if it has the character that needs replacing
         if node.node_name.include? orig_character
           node.name = node.name.gsub(orig_character, new_character)
         end
-
-        #have to remove empty nodes so ORCID won't barf
-        if (node.element_children.empty? && node.content.strip.empty?)
-          node.remove
-        end
-
       end
 
-      #we're going to run this 3 more times to pick up nodes that were cleaned up previously
-      #this should really be recursive instead
-      node_set.each do |node|
-        if (node.element_children.empty? && node.content.strip.empty?)
-          node.remove
-        end
-      end
-      node_set.each do |node|
-        if (node.element_children.empty? && node.content.strip.empty?)
-          node.remove
-        end
-      end
-      node_set.each do |node|
-        if (node.element_children.empty? && node.content.strip.empty?)
-          node.remove
-        end
-      end
-      #have to pull the root rather to to_xml so we don't get the XML header info
-      xml_doc.root.to_s
+      #have to remove empty nodes so ORCID won't barf
+      xml_doc = remove_empty_nodes( xml_doc.root )
+
+      return xml_doc.to_xml
 
     end  
   end
