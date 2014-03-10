@@ -3,14 +3,28 @@ module Orcid
     respond_to :html
     before_filter :authenticate_user!
 
-    def index
-      profile = Orcid.profile_for (current_user)
+    def redirecting_because_user_does_not_have_a_connected_orcid_profile
+      return false if Orcid.profile_for(current_user)
+      flash[:notice] = I18n.t("orcid.connections.messages.profile_connection_not_found")
+      redirect_to orcid.new_profile_connection_path
+      return true
+    end
+    protected :redirecting_because_user_does_not_have_a_connected_orcid_profile
 
-      if profile.verified_authentication?
-        render text: "yeah"
-      else
-        redirect_to user_omniauth_authorize_url("orcid")
-      end
+    def redirecting_because_user_must_verify_their_connected_profile
+      return false unless profile = Orcid.profile_for(current_user)
+      return false if profile.verified_authentication?
+
+      redirect_to user_omniauth_authorize_url("orcid")
+      return true
+    end
+    protected :redirecting_because_user_must_verify_their_connected_profile
+
+    def index
+      return false if redirecting_because_user_does_not_have_a_connected_orcid_profile
+      return false if redirecting_because_user_must_verify_their_connected_profile
+      orcid_profile = Orcid.profile_for(current_user)
+      redirect_to '/', flash: {notice: I18n.t("orcid.connections.messages.verified_profile_connection_exists", orcid_profile_id: orcid_profile.orcid_profile_id)}
     end
 
     def new

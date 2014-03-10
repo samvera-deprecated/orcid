@@ -35,6 +35,33 @@ module Orcid
 
     context 'GET #index' do
       it_prompts_unauthenticated_users_for_signin(:get, :index)
+      it 'redirects because the user does not have a connected orcid profile' do
+        sign_in(user)
+        Orcid.should_receive(:profile_for).with(user).and_return(nil)
+        get :index, use_route: :orcid
+        expect(flash[:notice]).to eq(I18n.t("orcid.connections.messages.profile_connection_not_found"))
+        expect(response).to redirect_to(orcid.new_profile_connection_path)
+      end
+
+      it 'redirects user has an orcid profile but it is not verified' do
+        sign_in(user)
+        orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002', verified_authentication?: false)
+        Orcid.stub(:profile_for).with(user).and_return(orcid_profile)
+
+        get :index, use_route: :orcid
+        expect(response).to redirect_to(user_omniauth_authorize_url("orcid"))
+        expect(orcid_profile).to have_received(:verified_authentication?)
+      end
+
+      it 'redirects to configured location if user orcid profile is connected and verified' do
+        orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002', verified_authentication?: true)
+        Orcid.stub(:profile_for).with(user).and_return(orcid_profile)
+
+        sign_in(user)
+        get :index, use_route: :orcid
+        expect(response).to redirect_to('/')
+        expect(flash[:notice]).to eq(I18n.t("orcid.connections.messages.verified_profile_connection_exists", orcid_profile_id: orcid_profile.orcid_profile_id))
+      end
     end
 
     context 'GET #new' do

@@ -26,3 +26,7 @@ en:
         existing_request_not_found: "Unable to find an existing Orcid Profile request. Go ahead and create one."
         existing_request: "You have already submitted an Orcid Profile request."
         previously_connected_profile: "You have already connected to an Orcid Profile (%{orcid_profile_id})."
+    connections:
+      messages:
+        profile_connection_not_found: "Unable to find an existing Orcid Profile connection."
+        verified_profile_connection_exists: "You have already connected and verified your Orcid Profile (%{orcid_profile_id})."
