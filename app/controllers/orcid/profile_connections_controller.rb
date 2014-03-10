@@ -3,6 +3,12 @@ module Orcid
     respond_to :html
     before_filter :authenticate_user!
 
+    def index
+      redirecting_because_user_does_not_have_a_connected_orcid_profile ||
+      redirecting_because_user_must_verify_their_connected_profile ||
+      redirecting_because_user_has_verified_their_connected_profile
+    end
+
     def redirecting_because_user_does_not_have_a_connected_orcid_profile
       return false if Orcid.profile_for(current_user)
       flash[:notice] = I18n.t("orcid.connections.messages.profile_connection_not_found")
@@ -20,12 +26,12 @@ module Orcid
     end
     protected :redirecting_because_user_must_verify_their_connected_profile
 
-    def index
-      return false if redirecting_because_user_does_not_have_a_connected_orcid_profile
-      return false if redirecting_because_user_must_verify_their_connected_profile
+    def redirecting_because_user_has_verified_their_connected_profile
       orcid_profile = Orcid.profile_for(current_user)
       redirect_to '/', flash: {notice: I18n.t("orcid.connections.messages.verified_profile_connection_exists", orcid_profile_id: orcid_profile.orcid_profile_id)}
+      return true
     end
+    private :redirecting_because_user_has_verified_their_connected_profile
 
     def new
       return false if redirecting_because_user_already_has_a_connected_orcid_profile
