@@ -27,7 +27,7 @@ To run the online tests, you'll need ORCID application credentials:
 
 1. Register for an ORCID app:  http://support.orcid.org/knowledgebase/articles/116739-register-a-client-application
  (this could take days to come back)
-1. Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
+1. Register two ORCID users: https://sandbox.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
 Save the email addresses, orcid ids, and passwords for editing application.yml
 1. Go to mailinator (http://mailinator.com/) and claim 1 ORCID by clicking the verify link in the email.
 1. `cp config/application.yml.sample config/application.yml`
