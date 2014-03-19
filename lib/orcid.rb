@@ -72,7 +72,7 @@ module Orcid
 
   def oauth_client
     # passing the site: option as Orcid's Sandbox has an invalid certificate
-    # for the api.sandbox-1.orcid.org
+    # for the api.sandbox.orcid.org
     @oauth_client ||= Devise::MultiAuth.oauth_client_for(
       'orcid', options: { site: provider.site_url }
     )

@@ -61,7 +61,7 @@ module Orcid
 
 
     def install_initializer
-      template 'orcid_initializer.rb.erb', 'config/orcid_initializer.rb'
+      template 'orcid_initializer.rb.erb', 'config/initializers/orcid_initializer.rb'
     end
 
   end

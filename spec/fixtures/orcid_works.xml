@@ -3,9 +3,9 @@
     <message-version>1.1</message-version>
     <orcid-profile type="user">
         <orcid-identifier>
-            <uri>http://sandbox-1.orcid.org/0000-0002-1117-8571</uri>
+            <uri>http://sandbox.orcid.org/0000-0002-1117-8571</uri>
             <path>0000-0002-1117-8571</path>
-            <host>sandbox-1.orcid.org</host>
+            <host>sandbox.orcid.org</host>
         </orcid-identifier>
         <orcid-preferences>
             <locale>en</locale>
@@ -18,9 +18,9 @@
             <claimed>true</claimed>
             <source>
                 <source-orcid>
-                    <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                    <uri>http://sandbox.orcid.org/0000-0002-6683-6607</uri>
                     <path>0000-0002-6683-6607</path>
-                    <host>sandbox-1.orcid.org</host>
+                    <host>sandbox.orcid.org</host>
                 </source-orcid>
                 <source-name>Hydra ORCID Integrator</source-name>
             </source>
@@ -33,9 +33,9 @@
                     </work-title>
                     <work-type>test</work-type>
                     <work-source>
-                        <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                        <uri>http://sandbox.orcid.org/0000-0002-6683-6607</uri>
                         <path>0000-0002-6683-6607</path>
-                        <host>sandbox-1.orcid.org</host>
+                        <host>sandbox.orcid.org</host>
                     </work-source>
                 </orcid-work>
                 <orcid-work put-code="303474" visibility="public">
@@ -44,9 +44,9 @@
                     </work-title>
                     <work-type>test</work-type>
                     <work-source>
-                        <uri>http://sandbox-1.orcid.org/0000-0002-6683-6607</uri>
+                        <uri>http://sandbox.orcid.org/0000-0002-6683-6607</uri>
                         <path>0000-0002-6683-6607</path>
-                        <host>sandbox-1.orcid.org</host>
+                        <host>sandbox.orcid.org</host>
                     </work-source>
                 </orcid-work>
             </orcid-works>
