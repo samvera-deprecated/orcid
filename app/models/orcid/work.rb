@@ -16,7 +16,25 @@ module Orcid
     attribute :work_type, String
     validates :work_type, presence: true, inclusion: { in: VALID_WORK_TYPES }
 
+    attribute :subtitle, String
+    attribute :journal_title, String
+    attribute :short_description, String
+    attribute :citation_type, String
+    attribute :citation, String
+    attribute :publication_year, Integer
+    attribute :publication_month, Integer
+    attribute :url, String
+    attribute :language_code, String
+    attribute :country, String
     attribute :put_code, String
+
+    def work_citation?
+      citation_type.present? || citation.present?
+    end
+
+    def publication_date?
+      publication_year.present? || publication_month.present?
+    end
 
     def to_xml
       XmlRenderer.call(self)

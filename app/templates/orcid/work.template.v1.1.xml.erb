@@ -9,8 +9,41 @@
       <orcid-work>
         <work-title>
           <title><%= work.title %></title>
+          <% if work.subtitle.present? %><subtitle><%= work.subtitle %></subtitle><% end %>
         </work-title>
+        <% if work.journal_title.present? %><journal-title><%= work.journal_title %></journal-title><% end %>
+        <% if work.short_description.present? %><short-description><%= work.short_description %></short-description><% end %>
+        <% if work.work_citation? %><work-citation>
+          <work-citation-type><%= work.citation_type %></work-citation-type>
+          <citation><%= work.citation %></citation>
+        </work-citation><% end %>
         <work-type><%= work.work_type %></work-type>
+        <% if work.publication_date? %><publication-date>
+        <year><%= work.publication_year %></year>
+        <% if work.publication_month.present? %><month><%= work.publication_month %></month><% end %>
+        <publication-date><% end %>
+        <!--
+        <work_external_identifiers>
+          <work_external_identifier>
+            <work_external_identifier_type/>
+            <work_external_identifier_id/>
+          </work_external_identifier>
+        </work_external_identifiers>
+        -->
+        <% if work.url.present? %><url><%= work.url %></url><% end %>
+        <!--
+        <work_contributors>
+          <contributor>
+            <credit_name/>
+            <contributor_attributes>
+              <contributor_sequence/>
+              <contributor_role/>
+            </contributor_attributes>
+          </contributor>
+        </work_contributors>
+        -->
+        <% if work.language_code.present? %><language_code><%= work.language_code %></language_code><% end %>
+        <% if work.country.present? %><country><%= work.country %></country><% end %>
       </orcid-work>
     <% end %></orcid-works>
   </orcid-activities>

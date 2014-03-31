@@ -6,6 +6,7 @@ module Orcid
     subject { described_class.new(attributes) }
 
     its(:title) { should eq attributes[:title] }
+    its(:subtitle) { should eq nil }
     its(:work_type) { should eq attributes[:work_type] }
     its(:put_code) { should eq attributes[:put_code] }
     its(:valid?) { should eq true }
