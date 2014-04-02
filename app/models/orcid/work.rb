@@ -55,54 +55,5 @@ module Orcid
         nil
       end
     end
-
-    class XmlRenderer
-      def self.call(works, options = {})
-        new(works, options).call
-      end
-
-      attr_reader :works, :template
-      def initialize(works, options = {})
-        self.works = works
-        @template = options.fetch(:template_path) { Orcid::Engine.root.join('app/templates/orcid/work.template.v1.1.xml.erb').read }
-      end
-
-      def call
-        ERB.new(template).result(binding)
-      end
-
-      protected
-      def works=(thing)
-        @works = Array(thing)
-      end
-
-    end
-
-    class XmlParser
-      def self.call(xml)
-        new(xml).call
-      end
-
-      attr_reader :xml
-      def initialize(xml)
-        @xml = xml
-      end
-
-      def call
-        document = Nokogiri::XML.parse(xml)
-        document.css('orcid-works orcid-work').collect do |node|
-          transform(node)
-        end
-      end
-
-      private
-      def transform(node)
-        Orcid::Work.new.tap do |work|
-          work.put_code = node.attributes.fetch("put-code").value
-          work.title = node.css('work-title title').text
-          work.work_type = node.css('work-type').text
-        end
-      end
-    end
   end
 end
