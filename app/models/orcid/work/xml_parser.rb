@@ -11,13 +11,16 @@ module Orcid
       end
 
       def call
-        document = Nokogiri::XML.parse(xml)
         document.css('orcid-works orcid-work').collect do |node|
           transform(node)
         end
       end
 
       private
+      def document
+        @document ||= Nokogiri::XML.parse(xml)
+      end
+
       def transform(node)
         Work.new.tap do |work|
           work.put_code = node.attributes.fetch("put-code").value
