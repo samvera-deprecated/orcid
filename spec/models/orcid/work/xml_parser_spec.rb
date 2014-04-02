@@ -16,6 +16,15 @@ module Orcid
         its(:title) { should eq "Another Test Drive" }
         its(:put_code) { should eq "303475" }
         its(:work_type) { should eq "test" }
+        its(:journal_title) { should_not be_present }
+        its(:short_description) { should_not be_present }
+        its(:citation_type) { should_not be_present }
+        its(:citation) { should_not be_present }
+        its(:publication_month) { should_not be_present }
+        its(:publication_year) { should_not be_present }
+        its(:url) { should_not be_present }
+        its(:language_code) { should_not be_present }
+        its(:country) { should_not be_present }
       end
 
       context 'last element' do
