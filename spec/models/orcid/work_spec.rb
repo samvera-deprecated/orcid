@@ -2,13 +2,21 @@ require 'spec_helper'
 
 module Orcid
   describe Work do
-    let(:attributes) { {title: 'Hello', work_type: 'journal-article', put_code: '1234' }}
+    let(:attributes) {
+      {
+        title: 'Hello',
+        work_type: 'journal-article',
+        put_code: '1234',
+        external_identifiers: [ {type: 'doi', identifier: 'abc-123' }]
+      }
+    }
     subject { described_class.new(attributes) }
 
     its(:title) { should eq attributes[:title] }
     its(:subtitle) { should eq nil }
     its(:work_type) { should eq attributes[:work_type] }
     its(:put_code) { should eq attributes[:put_code] }
+    its(:external_identifiers) { should be_an_instance_of(Array) }
     its(:valid?) { should eq true }
 
     context '#id' do
@@ -33,6 +41,10 @@ module Orcid
         expect(rendered).to have_tag('orcid-profile orcid-activities orcid-works orcid-work') do
           with_tag('work-title title', text: subject.title)
           with_tag('work-type', text: subject.work_type)
+          with_tag('work-external-identifiers work-external-identifier', count: 1) do
+            with_tag('work-external-identifier-type', text: 'doi')
+            with_tag('work-external-identifier-id', text: 'abc-123')
+          end
         end
       end
     end

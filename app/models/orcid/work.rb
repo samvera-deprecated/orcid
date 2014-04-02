@@ -6,6 +6,14 @@ module Orcid
       "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
     ].freeze
 
+    class ExternalIdentifier
+      include Virtus.value_object
+      values do
+        attribute :type,  String
+        attribute :identifier, String
+      end
+    end
+
     include Virtus.model
     include ActiveModel::Validations
     extend ActiveModel::Naming
@@ -27,6 +35,7 @@ module Orcid
     attribute :language_code, String
     attribute :country, String
     attribute :put_code, String
+    attribute :external_identifiers, Array[ExternalIdentifier]
 
     def work_citation?
       citation_type.present? || citation.present?

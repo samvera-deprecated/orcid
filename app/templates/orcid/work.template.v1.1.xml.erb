@@ -22,14 +22,12 @@
         <year><%= work.publication_year %></year>
         <% if work.publication_month.present? %><month><%= work.publication_month %></month><% end %>
         <publication-date><% end %>
-        <!--
-        <work_external_identifiers>
-          <work_external_identifier>
-            <work_external_identifier_type/>
-            <work_external_identifier_id/>
-          </work_external_identifier>
-        </work_external_identifiers>
-        -->
+        <% if work.external_identifiers.present? %><work-external-identifiers>
+          <% work.external_identifiers.each do |external_identifier| %><work-external-identifier>
+            <work-external-identifier-type><%= external_identifier.type %></work-external-identifier-type>
+            <work-external-identifier-id><%= external_identifier.identifier %></work-external-identifier-id>
+          </work-external-identifier><% end %>
+        </work-external-identifiers><% end %>
         <% if work.url.present? %><url><%= work.url %></url><% end %>
         <!--
         <work_contributors>
