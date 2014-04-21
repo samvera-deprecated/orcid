@@ -50,7 +50,8 @@ module Orcid
     end
 
     def ==(comparison_object)
-      super || comparison_object.instance_of?(self.class) &&
+      super ||
+        comparison_object.instance_of?(self.class) &&
         id.present? &&
         comparison_object.id == id
     end
