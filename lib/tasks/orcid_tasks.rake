@@ -92,7 +92,7 @@ namespace :orcid do
           end
 
           def found(existing_orcids)
-            @existing_orcids = Array(existing_orcids).collect(&:orcid_profile_id).join("; ")
+            @existing_orcids = Array.wrap(existing_orcids).collect(&:orcid_profile_id).join("; ")
           end
 
           def to_output_row

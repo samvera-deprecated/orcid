@@ -40,7 +40,7 @@ module Orcid
 
     # Note: We can handle
     def normalize_work(*works)
-      Array(works).flatten.compact.collect do |work|
+      Array.wrap(works).collect do |work|
         mapper.map(work, target: 'orcid/work')
       end
     end

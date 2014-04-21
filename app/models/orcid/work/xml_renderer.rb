@@ -17,7 +17,7 @@ module Orcid
 
       protected
       def works=(thing)
-        @works = Array(thing)
+        @works = Array.wrap(thing)
       end
 
     end
