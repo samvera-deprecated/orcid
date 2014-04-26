@@ -1,6 +1,6 @@
-<% profile_connection = Orcid::ProfileConnection.new(userid:user.id) %>
+<% profile_connection = Orcid::ProfileConnection.new %>
 <p><br />
-<%= link_to "Look up your existing ORCID", orcid.new_profile_connection_path(profile_connection:{text: user.name}) %>
+<%= link_to "Look up your existing ORCID", orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
   <span>-OR-</span>
 <%= link_to "Create an ORCID", orcid.new_profile_request_path %>
 </p>

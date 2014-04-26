@@ -1,6 +1,5 @@
 # Orcid [![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid) [![Build Status](https://travis-ci.org/jeremyf/orcid.png?branch=master)](https://travis-ci.org/jeremyf/orcid)
 
-
 A Rails Engine for integrating with Orcid
 
 ## Registering for an ORCID application profile
@@ -110,17 +109,17 @@ In order to facilitate integration of this ORCID gem into your application, a wi
 1. Look up the ORCID of the current user of your application.
 1. Create an ORCID to be associated with the current user of your application.
 
-The widget is contained in the partial app/views/orcid/profile_connections/_orcid_connector.html.erb.  It requires an object representing the
-current user of your system.  At a minimum this object must have:
-
-  1. name  - a string
-  1. id   - a string for the unique id of the user in your system
+The widget is contained in the partial `app/views/orcid/profile_connections/_orcid_connector.html.erb`.
 
 An example use of the partial is shown below.
 
-<code>
-    <%= render :partial => 'orcid/profile_connections/orcid_connector', :locals => {:user => @user} %>
-</code>
+```rails
+# The `if defined?(Orcid)` could be viewed as a courtesy.
+# Don't attempt to render this partial if the Orcid gem is not being used.
+if defined?(Orcid)
+  <%= render partial: 'orcid/profile_connections/orcid_connector', locals: {default_search_text: current_user.name } %>
+end
+```
 
 ## TODO Items
 
