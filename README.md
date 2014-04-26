@@ -55,16 +55,16 @@ If bundle fails, you may need to install Qt: https://github.com/thoughtbot/capyb
 
 And then install:
 
-<code>
-    $ rails generate orcid:install
-</code>
+```console
+$ rails generate orcid:install
+```
 
 ## Setting up the config/application.yml file
 Customize the sample yml file by first copying it to config/application.yml and opening it for editing.
 
-<code>
-    cp config/application.yml.sample config/application.yml
-</code>
+```console
+cp config/application.yml.sample config/application.yml
+```
 
 The config/application.yml file contains 4 sections of information for your application which uses ORCID.
 
@@ -98,16 +98,16 @@ To run the online tests, you'll need ORCID application credentials:
 
 Run the online tests with
 
-<code>
-    rake spec:online
-</code>
+```console
+rake spec:online
+```
 
 ## Using the orcid_connector widget in your application
 
 In order to facilitate integration of this ORCID gem into your application, a widget has been provided to offer these functions:
 
 1. Enter a known ORCID and connect to the ORCID repository.
-1. Look up the ORCID of the current user of your application, using the email and user name information, then connect to the ORCID repository.
+1. Look up the ORCID of the current user of your application.
 1. Create an ORCID to be associated with the current user of your application.
 
 The widget is contained in the partial app/views/orcid/profile_connections/_orcid_connector.html.erb.  It requires an object representing the
