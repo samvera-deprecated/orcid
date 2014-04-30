@@ -2,10 +2,21 @@ module Orcid
   # A well-defined data structure that coordinates with its :template in order
   # to generate XML that can be POSTed/PUT as an Orcid Work.
   class Work
-    VALID_WORK_TYPES = [
-      "artistic-performance","book-chapter","book-review","book","conference-abstract","conference-paper","conference-poster","data-set","dictionary-entry","disclosure","dissertation","edited-book","encyclopedia-entry","invention","journal-article","journal-issue","lecture-speech","license","magazine-article","manual","newsletter-article","newspaper-article","online-resource","other","patent","registered-copyright","report","research-technique","research-tool","spin-off-company","standards-and-policy","supervised-student-publication","technical-standard","test","translation","trademark","website","working-paper",
-    ].freeze
+    VALID_WORK_TYPES =
+    %w(artistic-performance book-chapter book-review book
+       conference-abstract conference-paper conference-poster
+       data-set dictionary-entry disclosure dissertation
+       edited-book encyclopedia-entry invention journal-article
+       journal-issue lecture-speech license magazine-article
+       manual newsletter-article newspaper-article online-resource
+       other patent registered-copyright report research-technique
+       research-tool spin-off-company standards-and-policy
+       supervised-student-publication technical-standard test
+       translation trademark website working-paper
+       ).freeze
 
+    # An Orcid Work's external identifier is not represented in a single
+    # attribute.
     class ExternalIdentifier
       include Virtus.value_object
       values do
@@ -49,11 +60,11 @@ module Orcid
       XmlRenderer.call(self)
     end
 
-    def ==(comparison_object)
+    def ==(other)
       super ||
-        comparison_object.instance_of?(self.class) &&
+        other.instance_of?(self.class) &&
         id.present? &&
-        comparison_object.id == id
+        other.id == id
     end
 
     def id

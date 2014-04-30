@@ -1,0 +1,11 @@
+MethodLength:
+  Max: 10
+  CountComments: false
+
+LineLength:
+  Max: 80
+  CountComments: false
+
+ClassLength:
+  Max: 100
+  CountComments: false

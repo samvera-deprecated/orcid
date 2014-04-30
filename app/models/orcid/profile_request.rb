@@ -20,19 +20,28 @@ module Orcid
     belongs_to :user
 
     def run(options = {})
-      # Why dependency injection? Because this is going to be a plugin, and things
-      # can't possibly be simple.
+      # Why dependency injection? Because this is going to be a plugin, and
+      # things can't possibly be simple. I also found it easier to test the
+      # #run method with these injected dependencies
       validator = options.fetch(:validator) { method(:validate_before_run) }
       return false unless validator.call(self)
 
-      payload_xml_builder = options.fetch(:payload_xml_builder) { method(:xml_payload) }
-      profile_creation_service = options.fetch(:profile_creation_service) { default_profile_creation_service }
+      payload_xml_builder = options.fetch(:payload_xml_builder) do
+        method(:xml_payload)
+      end
+      profile_creation_service = options.fetch(:profile_creation_service) do
+        default_profile_creation_service
+      end
       profile_creation_service.call(payload_xml_builder.call(attributes))
     end
 
     def default_profile_creation_service
-      @default_profile_creation_service ||= Orcid::Remote::ProfileCreationService.new do |on|
-        on.success {|orcid_profile_id| handle_profile_creation_response(orcid_profile_id) }
+      @default_profile_creation_service ||= begin
+        Orcid::Remote::ProfileCreationService.new do |on|
+          on.success do |orcid_profile_id|
+            handle_profile_creation_response(orcid_profile_id)
+          end
+        end
       end
     end
 
@@ -43,7 +52,8 @@ module Orcid
         return false
       end
 
-      if user_orcid_profile = Orcid.profile_for(context.user)
+      user_orcid_profile = Orcid.profile_for(context.user)
+      if user_orcid_profile
         context.errors.add(:base, "#{context.class} ID=#{context.to_param}'s associated user #{context.user.to_param} already has an assigned :orcid_profile_id #{user_orcid_profile.to_param}")
         return false
       end
@@ -83,6 +93,5 @@ module Orcid
         Orcid.connect_user_and_orcid_profile(user, orcid_profile_id)
       end
     end
-
   end
 end

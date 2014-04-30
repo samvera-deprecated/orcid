@@ -1,4 +1,5 @@
 module Orcid
+  # Responsible for helping a user request a new Orcid Profile.
   class ProfileRequestsController < Orcid::ApplicationController
     respond_to :html
     before_filter :authenticate_user!
@@ -7,20 +8,20 @@ module Orcid
     helper_method :profile_request
 
     def show
-      return false if redirecting_because_user_already_has_a_connected_orcid_profile
+      return false if redirecting_because_user_has_connected_orcid_profile
       return false if redirecting_because_no_profile_request_was_found
       respond_with(orcid, existing_profile_request)
     end
 
     def new
-      return false if redirecting_because_user_already_has_a_connected_orcid_profile
+      return false if redirecting_because_user_has_connected_orcid_profile
       return false if redirecting_because_user_has_existing_profile_request
       assign_attributes(new_profile_request)
       respond_with(orcid, new_profile_request)
     end
 
     def create
-      return false if redirecting_because_user_already_has_a_connected_orcid_profile
+      return false if redirecting_because_user_has_connected_orcid_profile
       return false if redirecting_because_user_has_existing_profile_request
       assign_attributes(new_profile_request)
       create_profile_request(new_profile_request)
@@ -31,16 +32,16 @@ module Orcid
 
     def redirecting_because_no_profile_request_was_found
       return false if existing_profile_request
-      flash[:notice] = I18n.t("orcid.requests.messages.existing_request_not_found")
+      flash[:notice] = I18n.t(
+        'orcid.requests.messages.existing_request_not_found'
+      )
       redirect_to orcid.new_profile_request_path
-      true
     end
 
     def redirecting_because_user_has_existing_profile_request
-      return false if ! existing_profile_request
-      flash[:notice] = I18n.t("orcid.requests.messages.existing_request")
+      return false unless existing_profile_request
+      flash[:notice] = I18n.t('orcid.requests.messages.existing_request')
       redirect_to orcid.profile_request_path
-      true
     end
 
     def existing_profile_request
@@ -60,8 +61,10 @@ module Orcid
     end
 
     def profile_request_params
-      return {} unless params.has_key?(:profile_request)
-      params[:profile_request].permit(:given_names, :family_name, :primary_email, :primary_email_confirmation)
+      return {} unless params.key?(:profile_request)
+      params[:profile_request].permit(
+        :given_names, :family_name, :primary_email, :primary_email_confirmation
+      )
     end
   end
 end

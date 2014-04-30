@@ -1,5 +1,6 @@
 module Orcid
   class Work
+    # Responsible for transforming a Work into an Orcid Work XML document
     class XmlRenderer
       def self.call(works, options = {})
         new(works, options).call
@@ -8,7 +9,10 @@ module Orcid
       attr_reader :works, :template
       def initialize(works, options = {})
         self.works = works
-        @template = options.fetch(:template_path) { Orcid::Engine.root.join('app/templates/orcid/work.template.v1.1.xml.erb').read }
+        @template = options.fetch(:template_path) do
+          template_name = 'app/templates/orcid/work.template.v1.1.xml.erb'
+          Orcid::Engine.root.join(template_name).read
+        end
       end
 
       def call
@@ -16,10 +20,10 @@ module Orcid
       end
 
       protected
+
       def works=(thing)
         @works = Array.wrap(thing)
       end
-
     end
   end
 end
