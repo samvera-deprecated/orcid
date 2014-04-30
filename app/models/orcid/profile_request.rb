@@ -4,7 +4,6 @@ module Orcid
   # * submitting a request for an ORCID Profile
   # * handling the response for the ORCID Profile creation
   class ProfileRequest < ActiveRecord::Base
-
     def self.find_by_user(user)
       where(user: user).first
     end
@@ -46,23 +45,34 @@ module Orcid
     end
 
     def validate_before_run(context = self)
-
-      if context.orcid_profile_id?
-        context.errors.add(:base, "#{context.class} ID=#{context.to_param} already has an assigned :orcid_profile_id #{context.orcid_profile_id.inspect}")
-        return false
-      end
-
-      user_orcid_profile = Orcid.profile_for(context.user)
-      if user_orcid_profile
-        context.errors.add(:base, "#{context.class} ID=#{context.to_param}'s associated user #{context.user.to_param} already has an assigned :orcid_profile_id #{user_orcid_profile.to_param}")
-        return false
-      end
-
-      true
+      validate_profile_id_is_unassigned(context) &&
+        validate_user_does_not_have_profile(context)
     end
 
-    # NOTE: This one lies -> http://support.orcid.org/knowledgebase/articles/177522-create-an-id-technical-developer
-    # NOTE: This one was true at 2014-02-06:14:55 -> http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-record-using-curl
+    def validate_user_does_not_have_profile(context)
+      user_orcid_profile = Orcid.profile_for(context.user)
+      return true unless user_orcid_profile
+      message = "#{context.class} ID=#{context.to_param}'s associated user" \
+       " #{context.user.to_param} already has an assigned :orcid_profile_id" \
+       " #{user_orcid_profile.to_param}"
+      context.errors.add(:base, message)
+      false
+    end
+    private :validate_user_does_not_have_profile
+
+    def validate_profile_id_is_unassigned(context)
+      return true unless context.orcid_profile_id?
+      message = "#{context.class} ID=#{context.to_param} already has an" \
+        " assigned :orcid_profile_id #{context.orcid_profile_id.inspect}"
+      context.errors.add(:base, message)
+      false
+    end
+    private :validate_profile_id_is_unassigned
+
+    # NOTE: This one lies ->
+    #   http://support.orcid.org/knowledgebase/articles/177522-create-an-id-technical-developer
+    # NOTE: This one was true at 2014-02-06:14:55 ->
+    #   http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-record-using-curl
     def xml_payload(input = attributes)
       attrs = input.with_indifferent_access
       returning_value = <<-XML_TEMPLATE
