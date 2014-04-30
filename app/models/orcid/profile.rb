@@ -1,17 +1,23 @@
 module Orcid
+  # Provides a container around an Orcid Profile and its relation to the Orcid
+  # Works.
   class Profile
-
-    attr_reader :orcid_profile_id, :mapper, :remote_service, :xml_renderer, :xml_parser
+    attr_reader(
+      :orcid_profile_id, :mapper, :remote_service, :xml_renderer, :xml_parser
+    )
     private :mapper
     def initialize(orcid_profile_id, config = {})
       @orcid_profile_id = orcid_profile_id
       @mapper = config.fetch(:mapper) { Orcid.mapper }
-      @remote_service = config.fetch(:remote_service) { Orcid::Remote::WorkService }
+      @remote_service = config.fetch(:remote_service) do
+        Orcid::Remote::WorkService
+      end
       @xml_renderer = config.fetch(:xml_renderer) { Orcid::Work::XmlRenderer }
       @xml_parser = config.fetch(:xml_parser) { Orcid::Work::XmlParser }
     end
 
-    # Answers the question: Has the user been authenticated via the ORCID system.
+    # Answers the question: Has the user been authenticated via the ORCID
+    # system.
     def verified_authentication?
       Orcid.authenticated_orcid?(orcid_profile_id)
     end
@@ -40,10 +46,9 @@ module Orcid
 
     # Note: We can handle
     def normalize_work(*works)
-      Array.wrap(works).collect do |work|
+      Array.wrap(works).map do |work|
         mapper.map(work, target: 'orcid/work')
       end
     end
-
   end
 end

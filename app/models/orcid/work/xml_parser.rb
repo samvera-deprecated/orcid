@@ -1,5 +1,7 @@
 module Orcid
   class Work
+    # Responsible for taking an Orcid Work and extracting the value/text from
+    # the document and reifying an Orcid::Work object.
     class XmlParser
       def self.call(xml)
         new(xml).call
@@ -11,19 +13,20 @@ module Orcid
       end
 
       def call
-        document.css('orcid-works orcid-work').collect do |node|
+        document.css('orcid-works orcid-work').map do |node|
           transform(node)
         end
       end
 
       private
+
       def document
         @document ||= Nokogiri::XML.parse(xml)
       end
 
       def transform(node)
         Work.new.tap do |work|
-          work.put_code = node.attributes.fetch("put-code").value
+          work.put_code = node.attributes.fetch('put-code').value
           work.title = node.css('work-title title').text
           work.work_type = node.css('work-type').text
           work.journal_title = node.css('journal-title').text
