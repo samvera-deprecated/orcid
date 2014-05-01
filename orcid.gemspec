@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
 require 'orcid/version'
@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.description = 'A Rails engine for orcid.org integration.'
 
   s.files         = `git ls-files -z`.split("\x0")
-  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-  s.require_paths = ["lib"]
+  s.executables   = s.files.grep(/^bin\//) { |f| File.basename(f) }
+  s.test_files    = s.files.grep(/^(test|spec|features)\//)
+  s.require_paths = ['lib']
 
   s.add_dependency 'rails', '~> 4.0.3'
   s.add_dependency 'mappy', '~> 0.1.0'
