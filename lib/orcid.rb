@@ -1,7 +1,6 @@
 require 'orcid/engine'
 require 'orcid/configuration'
 require 'orcid/exceptions'
-
 require 'figaro'
 require 'mappy'
 require 'devise_multi_auth'
@@ -10,8 +9,8 @@ require 'omniauth-orcid'
 require 'email_validator'
 require 'simple_form'
 
+# The namespace for all things related to Orcid integration
 module Orcid
-
   class << self
     attr_writer :configuration
 
@@ -42,16 +41,21 @@ module Orcid
   end
 
   def connect_user_and_orcid_profile(user, orcid_profile_id)
-    authentication_model.create!(provider: 'orcid', uid: orcid_profile_id, user: user)
+    authentication_model.create!(
+      provider: 'orcid', uid: orcid_profile_id, user: user
+    )
   end
 
   def access_token_for(orcid_profile_id, options = {})
     client = options.fetch(:client) { oauth_client }
     tokenizer = options.fetch(:tokenizer) { authentication_model }
-    tokenizer.to_access_token(uid: orcid_profile_id, provider: 'orcid', client: client)
+    tokenizer.to_access_token(
+      uid: orcid_profile_id, provider: 'orcid', client: client
+    )
   end
 
-  # Returns true if the person with the given ORCID has already obtained an ORCID access token by authenticating via ORCID.
+  # Returns true if the person with the given ORCID has already obtained an
+  # ORCID access token by authenticating via ORCID.
   def authenticated_orcid?(orcid_profile_id)
     Orcid.access_token_for(orcid_profile_id).present?
   rescue Devise::MultiAuth::AccessTokenError
@@ -59,11 +63,8 @@ module Orcid
   end
 
   def profile_for(user)
-    if auth = authentication_model.where(provider: 'orcid', user: user).first
-      Orcid::Profile.new(auth.uid)
-    else
-      nil
-    end
+    auth = authentication_model.where(provider: 'orcid', user: user).first
+    auth && Orcid::Profile.new(auth.uid)
   end
 
   def enqueue(object)
@@ -82,5 +83,4 @@ module Orcid
     tokenizer = options.fetch(:tokenizer) { oauth_client.client_credentials }
     tokenizer.get_token(scope: scope)
   end
-
 end
