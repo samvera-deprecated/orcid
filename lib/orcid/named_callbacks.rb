@@ -6,7 +6,9 @@ module Orcid
       @callbacks = {}
     end
 
-    def method_missing(callback_name, *args, &block)
+    # Note this very specific implementation of #method_missing will raise
+    # errors on non-zero method arity.
+    def method_missing(callback_name, &block)
       @callbacks[callback_name] = block
     end
 

@@ -15,7 +15,7 @@ module Orcid
         @token = config.fetch(:token) { default_token }
         @response_builder = config.fetch(:response_builder) { SearchResponse }
         @path = config.fetch(:path) { 'v1.1/search/orcid-bio/' }
-        @headers = config.fetch(:headers) { default_header }
+        @headers = config.fetch(:headers) { default_headers }
       end
 
       def call(input)

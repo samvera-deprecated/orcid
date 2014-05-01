@@ -12,7 +12,17 @@ module Orcid
     def initialize(options)
       text = []
       text << "-- Client --"
-      if client = options[:client]
+      append_client_options(options[:client], text)
+      append_token(options[:token], text)
+      append_request(options, text)
+      append_response(options, text)
+      super(text.join("\n"))
+    end
+
+    private
+
+    def append_client_options(client, text)
+      if client
         text << "id:\n\t#{client.id.inspect}"
         text << "site:\n\t#{client.site.inspect}"
         text << "options:\n\t#{client.options.inspect}"
@@ -20,19 +30,31 @@ module Orcid
           text << "scopes:\n\t#{Orcid.provider.authentication_scope}"
         end
       end
+      text
+    end
+
+    def append_token(token, text)
       text << "\n-- Token --"
-      if token = options[:token]
+      if token
         text << "access_token:\n\t#{token.token.inspect}"
         text << "refresh_token:\n\t#{token.refresh_token.inspect}"
       end
+      text
+    end
+
+    def append_request(options, text)
       text << "\n-- Request --"
       text << "path:\n\t#{options[:request_path].inspect}" if options[:request_path]
       text << "headers:\n\t#{options[:request_headers].inspect}" if options[:request_headers]
       text << "body:\n\t#{options[:request_body]}" if options[:request_body]
+      text
+    end
+
+    def append_response(options, text)
       text << "\n-- Response --"
       text << "status:\n\t#{options[:response_status].inspect}" if options[:response_status]
       text << "body:\n\t#{options[:response_body]}" if options[:response_body]
-      super(text.join("\n"))
+      text
     end
   end
 end
