@@ -2,6 +2,7 @@
 
 require 'rake'
 
+# A helper function for answering: Does this spec run fast?
 module Fast
   module_function
   def spec?(fn)
@@ -9,12 +10,13 @@ module Fast
   end
 end
 
-fast_specs = FileList['spec/**/*_spec.rb'].select { |fn|
+fast_specs = FileList['spec/**/*_spec.rb'].select do |fn|
   Fast.spec?(fn)
-}
+end
+
 if fast_specs.any?
   system "rspec #{fast_specs}"
 else
-  puts "Unable to find any fast specs"
+  puts 'Unable to find any fast specs'
   exit(-1)
 end
