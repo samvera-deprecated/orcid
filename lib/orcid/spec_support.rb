@@ -19,7 +19,7 @@ class RequestSandboxAuthorizationCode
 
   def call(options = {})
     orcid_profile_id = options.fetch(:orcid_profile_id) { ENV['ORCID_CLAIMED_PROFILE_ID'] }
-    password = options.fetch(:password) { ENV['ORCID_CLAIMED_PROFILE_PASSWORD']}
+    password = options.fetch(:password) { ENV['ORCID_CLAIMED_PROFILE_PASSWORD'] }
 
     login_to_orcid(orcid_profile_id, password)
     request_authorization
@@ -30,25 +30,35 @@ class RequestSandboxAuthorizationCode
   private :cookies
 
   private
+
   def login_to_orcid(orcid_profile_id, password)
-    response = RestClient.post(login_url, userId: orcid_profile_id, password: password )
-    if ! JSON.parse(response)["success"]
-      raise "Response not successful: \n#{response}"
-    else
+    response = RestClient.post(
+      login_url, userId: orcid_profile_id, password: password
+    )
+    if JSON.parse(response)['success']
       self.cookies = response.cookies
+    else
+      fail "Response not successful: \n#{response}"
     end
   end
 
   def request_authorization
-    parameters = { client_id: orcid_client_id, response_type: 'code', scope: access_scope, redirect_uri: oauth_redirect_uri }
-    RestClient.get(authorize_url, {params: parameters, cookies: cookies})
+    parameters = {
+      client_id: orcid_client_id,
+      response_type: 'code',
+      scope: access_scope,
+      redirect_uri: oauth_redirect_uri
+    }
+    RestClient.get(authorize_url, { params: parameters, cookies: cookies })
   end
 
   def request_authorization_code
-    RestClient.post(authorize_url, {user_oauth_approval: true}, {cookies: cookies})
+    RestClient.post(
+      authorize_url, { user_oauth_approval: true }, { cookies: cookies }
+    )
   rescue RestClient::Found => e
     uri = URI.parse(e.response.headers.fetch(:location))
-    CGI::parse(uri.query).fetch('code').first
+    CGI.parse(uri.query).fetch('code').first
   end
 
 end
