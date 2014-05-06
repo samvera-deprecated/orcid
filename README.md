@@ -96,7 +96,7 @@ click on Email and select the little icon with the group of heads to make your P
 Customize the sample application.yml file by first copying it to config/application.yml and opening it for editing.
 
 ```console
-cp config/application.yml.sample config/application.yml
+$ cp config/application.yml.sample config/application.yml
 ```
 
 ## Running the tests
@@ -112,7 +112,7 @@ To run the online tests, you'll need ORCID application credentials:
 Run the online tests with
 
 ```console
-rake spec:online
+$ rake spec:online
 ```
 
 ## TODO Items
