@@ -30,6 +30,12 @@ And then install:
 $ rails generate orcid:install
 ```
 
+You may find it helpful to review the help text, as there are a few options for the generator.
+
+```console
+$ rails generate orcid:install -h
+```
+
 ## Using the Orcid widget in your application
 
 In order to facilitate integration of this ORCID gem into your application, a widget has been provided to offer these functions:
@@ -42,7 +48,7 @@ The widget is contained in the partial `app/views/orcid/profile_connections/_orc
 
 An example use of the partial is shown below.
 
-```rails
+```ruby
 # The `if defined?(Orcid)` could be viewed as a courtesy.
 # Don't attempt to render this partial if the Orcid gem is not being used.
 if defined?(Orcid)
@@ -72,7 +78,8 @@ file discussed below.
 ### NOTE: Application home page URL
 You must enter the same URL for the application home page on the form as you would enter into your browser.  For example, if you specify "https://localhost:3000" on
 the ORCID registration form, then you MUST invoke your application via the browser with "https://localhost:3000" in order for all of the ORCID functionality to work.
-For development work in particular, there are multiple ways to specify the local machine, 127.0.0.1, ::1, 192.168.1.1, and localhost.  It is strongly recommended that you use 'localhost'
+
+For development work in particular, there are multiple ways to specify the local machine: 127.0.0.1, ::1, 192.168.1.1, and localhost.  It is strongly recommended that you use 'localhost'
 in the ORCID form's URL for your application and when invoking your application from the browser rather than using any IP address for your local machine.
 
 ## Setting up your own ORCIDs in the ORCID Development Sandbox
@@ -91,20 +98,6 @@ Customize the sample application.yml file by first copying it to config/applicat
 ```console
 cp config/application.yml.sample config/application.yml
 ```
-
-The config/application.yml file contains 4 sections of information for your application which uses ORCID.
-
-The next section contains the client-id and client-secret from the xml file sent back to you after registering your application with ORCID.
-
-    ORCID_APP_ID: 0000-0000-0000-0000
-    ORCID_APP_SECRET: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-
-The ORCID_CLAIMED elements are the ORCID profile under which the ORCID API calls will be made.  These fields should be filled in with the
-information of the claimed ORCID and mailinator account set up above in **Setting up your own ORCIDs in the ORCID Development Sandbox** .
-
-    ORCID_CLAIMED_PROFILE_ID: 0000-0000-0000-0000
-    ORCID_CLAIMED_PROFILE_PASSWORD: password1A
-    ORCID_CLAIMED_PROFILE_EMAIL: cwksfxyqkmrudrfrdxvlzjxl@mailinator.com
 
 ## Running the tests
 
