@@ -18,7 +18,11 @@ Gem::Specification.new do |s|
   s.description = 'A Rails engine for orcid.org integration.'
 
   s.files         = `git ls-files -z`.split("\x0")
-  s.executables   = s.files.grep(/^bin\//) { |f| File.basename(f) }
+  # Deliberately removing bin executables as it appears to relate to
+  # https://github.com/cbeer/engine_cart/issues/9
+  s.executables   = s.executables   = s.files.grep(%r{^bin/}) do |f|
+    f == 'bin/rails' ? nil : File.basename(f)
+  end.compact
   s.test_files    = s.files.grep(/^(test|spec|features)\//)
   s.require_paths = ['lib']
 

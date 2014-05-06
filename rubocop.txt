@@ -1,0 +1,1164 @@
+Inspecting 93 files
+.....CC...C.C..C..C....C.CCWCWCCCC.WCWCCCCC....W...C.C...WC..CC..C.C..CCCCCCCCCCCCCCCCCCCWC..
+
+Offenses:
+
+app/models/orcid/profile_request.rb:76:5: C: Method has too many lines. [21/10]
+    def xml_payload(input = attributes)
+    ^^^
+app/models/orcid/profile_request.rb:81:141: C: Line is too long. [149/140]
+      xmlns:xsi="http://www.orcid.org/ns/orcid https://raw.github.com/ORCID/ORCID-Source/master/orcid-model/src/main/resources/orcid-message-1.1.xsd"
+                                                                                                                                            ^^^^^^^^^
+app/models/orcid/work/xml_parser.rb:27:7: C: Method has too many lines. [14/10]
+      def transform(node)
+      ^^^
+app/services/orcid/remote/profile_query_service/query_parameter_builder.rb:7:1: C: Extra empty line detected at body beginning.
+app/services/orcid/remote/profile_query_service/query_parameter_builder.rb:14:9: C: Cyclomatic complexity for call is too high. [7/6]
+        def call(input = {})
+        ^^^
+app/services/orcid/remote/profile_query_service/query_parameter_builder.rb:14:9: C: Method has too many lines. [23/10]
+        def call(input = {})
+        ^^^
+app/services/orcid/remote/profile_query_service.rb:56:7: C: Method has too many lines. [20/10]
+      def parse(document)
+      ^^^
+app/services/orcid/remote/profile_query_service.rb:69:59: C: Space between { and | missing.
+            emails = (contact_details['email'] || []).map {|email| email.fetch('value') }
+                                                          ^^
+app/services/orcid/remote/profile_query_service.rb:79:1: C: Extra empty line detected at body end.
+app/services/orcid/remote.rb:2:3: C: Missing top-level module documentation comment.
+  module Remote
+  ^^^^^^
+app/services/orcid/remote.rb:4:4: C: Final newline missing.
+end
+   
+db/migrate/20140205185338_create_orcid_profile_requests.rb:1:1: C: Missing top-level class documentation comment.
+class CreateOrcidProfileRequests < ActiveRecord::Migration
+^^^^^
+lib/orcid/exceptions.rb:2:1: C: Extra empty line detected at body beginning.
+lib/orcid/exceptions.rb:3:3: C: Missing top-level class documentation comment.
+  class ConfigurationError < RuntimeError
+  ^^^^^
+lib/orcid/exceptions.rb:14:15: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      text << "-- Client --"
+              ^^^^^^^^^^^^^^
+lib/orcid/spec_support.rb:2:1: C: Missing top-level class documentation comment.
+class RequestSandboxAuthorizationCode
+^^^^^
+lib/orcid/spec_support.rb:3:1: C: Extra empty line detected at body beginning.
+lib/orcid/spec_support.rb:52:35: C: Redundant curly braces around a hash parameter.
+    RestClient.get(authorize_url, { params: parameters, cookies: cookies })
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/orcid/spec_support.rb:57:53: C: Redundant curly braces around a hash parameter.
+      authorize_url, { user_oauth_approval: true }, { cookies: cookies }
+                                                    ^^^^^^^^^^^^^^^^^^^^
+lib/orcid/spec_support.rb:63:1: C: Extra empty line detected at body end.
+lib/orcid/version.rb:1:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+lib/orcid.rb:13:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+lib/orcid.rb:14:1: C: Extra empty line detected at body beginning.
+lib/orcid.rb:62:13: W: Assignment in condition - you probably meant to use ==.
+    if auth = authentication_model.where(provider: 'orcid', user: user).first
+            ^
+lib/orcid.rb:85:1: C: Extra empty line detected at body end.
+orcid.gemspec:1:1: C: Prefer $LOAD_PATH over $:.
+$:.push File.expand_path("../lib", __FILE__)
+^^
+orcid.gemspec:1:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+$:.push File.expand_path("../lib", __FILE__)
+                         ^^^^^^^^
+orcid.gemspec:21:34: C: Use %r only for regular expressions matching more than 1 '/' character.
+  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+                                 ^^^^^^^^^
+orcid.gemspec:22:34: C: Use %r only for regular expressions matching more than 1 '/' character.
+  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+orcid.gemspec:23:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  s.require_paths = ["lib"]
+                     ^^^^^
+Rakefile:9:1: C: Extra blank line detected.
+Rakefile:11:35: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  APP_RAKEFILE = File.expand_path("../spec/internal/Rakefile", __FILE__)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rakefile:21:39: W: Unused block argument - t. You can omit the argument if you don't care about it.
+  RSpec::Core::RakeTask.new(:all) do |t|
+                                      ^
+Rakefile:26:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.rspec_opts = "--tag ~requires_net_connect"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rakefile:31:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.rspec_opts = "--tag requires_net_connect"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rakefile:37:24: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    ENV['SPEC_OPTS'] = "--profile 20"
+                       ^^^^^^^^^^^^^^
+Rakefile:45:1: C: Avoid using rescue in its modifier form.
+Rake::Task["default"].clear rescue nil
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rakefile:45:12: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+Rake::Task["default"].clear rescue nil
+           ^^^^^^^^^
+Rakefile:46:12: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+Rake::Task["spec"].clear
+           ^^^^^^
+Rakefile:48:6: C: Use the new Ruby 1.9 hash syntax.
+task :spec => 'spec:offline'
+     ^^^^^^^^
+Rakefile:49:6: C: Use the new Ruby 1.9 hash syntax.
+task :default => 'spec:travis'
+     ^^^^^^^^^^^
+Rakefile:49:31: C: Final newline missing.
+task :default => 'spec:travis'
+                              
+script/fast_specs:5:1: C: Missing top-level module documentation comment.
+module Fast
+^^^^^^
+script/fast_specs:12:51: C: Avoid using {...} for multi-line blocks.
+fast_specs = FileList['spec/**/*_spec.rb'].select { |fn|
+                                                  ^
+script/fast_specs:18:8: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  puts "Unable to find any fast specs"
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:14:5: C: Method has too many lines. [12/10]
+    def self.it_redirects_if_user_has_previously_connected_to_orcid_profile(method, action)
+    ^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:18:34: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002')
+                                 ^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:25:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+            I18n.t("orcid.requests.messages.previously_connected_profile", orcid_profile_id: orcid_profile.orcid_profile_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:42:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        expect(flash[:notice]).to eq(I18n.t("orcid.connections.messages.profile_connection_not_found"))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:48:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002', verified_authentication?: false)
+                               ^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:52:69: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        expect(response).to redirect_to(user_omniauth_authorize_url("orcid"))
+                                                                    ^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:57:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002', verified_authentication?: true)
+                               ^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:63:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        expect(flash[:notice]).to eq(I18n.t("orcid.connections.messages.verified_profile_connection_exists", orcid_profile_id: orcid_profile.orcid_profile_id))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:63:141: C: Line is too long. [159/140]
+        expect(flash[:notice]).to eq(I18n.t("orcid.connections.messages.verified_profile_connection_exists", orcid_profile_id: orcid_profile.orcid_profile_id))
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_connections_controller_spec.rb:88:33: C: Space missing inside {.
+        let(:orcid_profile_id) {'0000-0001-8025-637X'}
+                                ^
+spec/controllers/orcid/profile_connections_controller_spec.rb:88:54: C: Space missing inside }.
+        let(:orcid_profile_id) {'0000-0001-8025-637X'}
+                                                     ^
+spec/controllers/orcid/profile_requests_controller_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:7:12: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        it "should redirect for sign in" do
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:14:5: C: Method has too many lines. [12/10]
+    def self.it_redirects_if_user_has_previously_connected_to_orcid_profile(method, action)
+    ^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:18:34: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          orcid_profile = double("Orcid::Profile", orcid_profile_id: '1234-5678-0001-0002')
+                                 ^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:25:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+            I18n.t("orcid.requests.messages.previously_connected_profile", orcid_profile_id: orcid_profile.orcid_profile_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:42:94: C: Space missing inside }.
+        let(:profile_request) { FactoryGirl.build_stubbed(:orcid_profile_request, user: user)}
+                                                                                             ^
+spec/controllers/orcid/profile_requests_controller_spec.rb:45:62: C: Place the . on the next line, together with the method name.
+          Orcid::ProfileRequest.should_receive(:find_by_user).
+                                                             ^
+spec/controllers/orcid/profile_requests_controller_spec.rb:56:62: C: Place the . on the next line, together with the method name.
+          Orcid::ProfileRequest.should_receive(:find_by_user).
+                                                             ^
+spec/controllers/orcid/profile_requests_controller_spec.rb:61:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request_not_found"))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:85:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request"))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/orcid/profile_requests_controller_spec.rb:109:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          expect(flash[:notice]).to eq(I18n.t("orcid.requests.messages.existing_request"))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/factories/orcid_profile_requests.rb:4:35: C: Use the new Ruby 1.9 hash syntax.
+  factory :orcid_profile_request, :class => 'Orcid::ProfileRequest' do
+                                  ^^^^^^^^^
+spec/fast_helper.rb:2:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+Dir[File.expand_path("../../app/*", __FILE__)].each do |dir|
+                     ^^^^^^^^^^^^^
+spec/fast_helper.rb:5:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+$LOAD_PATH << File.expand_path("../../lib", __FILE__)
+                               ^^^^^^^^^^^
+spec/fast_helper.rb:10:13: W: Ambiguous splat operator. Parenthesize the method arguments if it's surely a splat operator, or add a whitespace to the right of the * if it should be a multiplication.
+    require *files
+            ^
+spec/features/batch_profile_spec.rb:10:18: C: Avoid using {...} for multi-line blocks.
+  Given(:runner) {
+                 ^
+spec/features/batch_profile_spec.rb:11:12: C: Avoid using {...} for multi-line blocks.
+    lambda { |person|
+           ^
+spec/features/batch_profile_spec.rb:12:46: C: Avoid using {...} for multi-line blocks.
+      Orcid::Remote::ProfileQueryService.new {|on|
+                                             ^
+spec/features/batch_profile_spec.rb:13:18: C: Space between { and | missing.
+        on.found {|results| person.found(results) }
+                 ^^
+spec/features/batch_profile_spec.rb:18:18: C: Avoid using {...} for multi-line blocks.
+  Given(:person) {
+                 ^
+spec/features/non_ui_based_interactions_spec.rb:5:21: C: Space between { and | missing.
+    Mappy.configure {|b|}
+                    ^^
+spec/features/non_ui_based_interactions_spec.rb:5:23: W: Unused block argument - b. You can omit the argument if you don't care about it.
+    Mappy.configure {|b|}
+                      ^
+spec/features/non_ui_based_interactions_spec.rb:5:25: C: Space missing inside }.
+    Mappy.configure {|b|}
+                        ^
+spec/features/non_ui_based_interactions_spec.rb:12:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  let(:work) { Orcid::Work.new(title: "Test Driven Orcid Integration", work_type: 'test') }
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/non_ui_based_interactions_spec.rb:21:27: C: Avoid using {...} for multi-line blocks.
+    let(:profile_request) {
+                          ^
+spec/features/non_ui_based_interactions_spec.rb:51:67: C: Space missing inside }.
+    let(:orcid_profile_id) { ENV.fetch('ORCID_CLAIMED_PROFILE_ID')}
+                                                                  ^
+spec/features/non_ui_based_interactions_spec.rb:52:79: C: Space missing inside }.
+    let(:orcid_profile_password) { ENV.fetch('ORCID_CLAIMED_PROFILE_PASSWORD')}
+                                                                              ^
+spec/features/non_ui_based_interactions_spec.rb:61:49: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      replacement_work = Orcid::Work.new(title: "Test Driven Orcid Integration", work_type: 'test')
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/non_ui_based_interactions_spec.rb:62:46: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      appended_work = Orcid::Work.new(title: "Another Test Drive", work_type: 'test')
+                                             ^^^^^^^^^^^^^^^^^^^^
+spec/features/non_ui_based_interactions_spec.rb:66:14: C: Avoid using {...} for multi-line blocks.
+      expect {
+             ^
+spec/features/non_ui_based_interactions_spec.rb:77:24: C: Space inside { missing.
+    normalized_token = {provider: 'orcid', uid: orcid_profile_id, credentials: {token: token.token, refresh_token: token.refresh_token }}
+                       ^
+spec/features/non_ui_based_interactions_spec.rb:77:80: C: Space inside { missing.
+    normalized_token = {provider: 'orcid', uid: orcid_profile_id, credentials: {token: token.token, refresh_token: token.refresh_token }}
+                                                                               ^
+spec/features/non_ui_based_interactions_spec.rb:77:137: C: Space inside } missing.
+    normalized_token = {provider: 'orcid', uid: orcid_profile_id, credentials: {token: token.token, refresh_token: token.refresh_token }}
+                                                                                                                                        ^
+spec/features/non_ui_based_interactions_spec.rb:82:3: C: Method has too many lines. [28/10]
+  def claim_the_orcid!(email_prefix)
+  ^^^
+spec/features/non_ui_based_interactions_spec.rb:101:36: C: Prefer map over collect.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                   ^^^^^^^
+spec/features/non_ui_based_interactions_spec.rb:101:66: C: Space between { and | missing.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                 ^^
+spec/features/non_ui_based_interactions_spec.rb:101:68: W: Shadowing outer local variable - href.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                   ^^^^
+spec/features/non_ui_based_interactions_spec.rb:101:68: W: Unused block argument - href. You can omit the argument if you don't care about it.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                   ^^^^
+spec/features/non_ui_based_interactions_spec.rb:101:74: W: Useless assignment to variable - href.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                         ^^^^
+spec/features/non_ui_based_interactions_spec.rb:101:81: C: Use %r for regular expressions matching more than 1 '/' character.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                                ^^^^^^^^^^^
+spec/features/non_ui_based_interactions_spec.rb:101:92: C: Space missing inside }.
+    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+                                                                                           ^
+spec/features/non_ui_based_interactions_spec.rb:114:29: C: Space between { and | missing.
+    page.all('button').find {|i| i.text == 'Claim' }.click
+                            ^^
+spec/features/profile_connection_feature_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/features/public_api_query_spec.rb:10:18: C: Avoid using {...} for multi-line blocks.
+  Given(:runner) {
+                 ^
+spec/features/public_api_query_spec.rb:32:35: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:parameters) { { email: "nobody@gmail.com", text: '"Jeremy+Friesen"' } }
+                                  ^^^^^^^^^^^^^^^^^^
+spec/internal/app/controllers/application_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationController < ActionController::Base
+^^^^^
+spec/internal/app/controllers/application_controller.rb:2:1: C: Use 2 (not 6) spaces for indentation.
+      def index
+^^^^^^
+spec/internal/app/controllers/application_controller.rb:5:1: C: Trailing whitespace detected.
+spec/internal/app/controllers/application_controller.rb:8:3: C: Inconsistent indentation detected.
+  protect_from_forgery with: :exception
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/app/helpers/application_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ApplicationHelper
+^^^^^^
+spec/internal/app/models/user.rb:1:1: C: Missing top-level class documentation comment.
+class User < ActiveRecord::Base
+^^^^^
+spec/internal/app/models/user.rb:5:80: C: Use the new Ruby 1.9 hash syntax.
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:orcid]
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/boot.rb:4:33: W: File.exists? is deprecated in favor of File.exist?.
+require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
+                                ^^^^^^^
+spec/internal/config/environments/test.rb:17:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  config.static_cache_control = "public, max-age=3600"
+                                ^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:4:1: C: Use 2 (not 8) spaces for indentation.
+        config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
+^^^^^^^^
+spec/internal/config/initializers/devise.rb:12:1: C: Trailing whitespace detected.
+spec/internal/config/initializers/devise.rb:16:141: C: Line is too long. [154/140]
+  # config.secret_key = '07af7d8750d7a05a59152b6d5b201a354a4dbfe4f45a261a7ed4e2cf5fdb414dc8358389db71e46075f5d021f46a267018d4940763b53953acb3587673431e52'
+                                                                                                                                            ^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:22:3: C: Inconsistent indentation detected.
+  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:31:3: C: Inconsistent indentation detected.
+  require 'devise/orm/active_record'
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:53:3: C: Inconsistent indentation detected.
+  config.case_insensitive_keys = [ :email ]
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:53:35: C: Space inside square brackets detected.
+  config.case_insensitive_keys = [ :email ]
+                                  ^
+spec/internal/config/initializers/devise.rb:53:42: C: Space inside square brackets detected.
+  config.case_insensitive_keys = [ :email ]
+                                         ^
+spec/internal/config/initializers/devise.rb:58:3: C: Inconsistent indentation detected.
+  config.strip_whitespace_keys = [ :email ]
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:58:35: C: Space inside square brackets detected.
+  config.strip_whitespace_keys = [ :email ]
+                                  ^
+spec/internal/config/initializers/devise.rb:58:42: C: Space inside square brackets detected.
+  config.strip_whitespace_keys = [ :email ]
+                                         ^
+spec/internal/config/initializers/devise.rb:89:3: C: Inconsistent indentation detected.
+  config.skip_session_storage = [:http_auth]
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:106:3: C: Inconsistent indentation detected.
+  config.stretches = Rails.env.test? ? 1 : 10
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:109:141: C: Line is too long. [150/140]
+  # config.pepper = 'e56b0df2ccfc96613a3aa4857d0c63b28e04df50e2b5a6e14197301f86f84b01801341f654687ba1ffd855ac1b1f79d0e680a0cafbf985b8a86817a599fa6e77'
+                                                                                                                                            ^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:131:3: C: Inconsistent indentation detected.
+  config.reconfirmable = true
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:149:3: C: Inconsistent indentation detected.
+  config.password_length = 8..128
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:198:3: C: Inconsistent indentation detected.
+  config.reset_password_within = 6.hours
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/devise.rb:236:3: C: Inconsistent indentation detected.
+  config.sign_out_via = :delete
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/initializers/orcid_initializer.rb:1:21: W: Unused block argument - config. You can omit the argument if you don't care about it.
+Orcid.configure do |config|
+                    ^^^^^^
+spec/internal/config/initializers/orcid_initializer.rb:8:1: C: Extra blank line detected.
+spec/internal/config/initializers/secret_token.rb:12:141: C: Line is too long. [177/140]
+Internal::Application.config.secret_key_base = 'b36c55ad14ec419975fe7e83398b431303efacdae50928fed47e4395d80876ef2f5498fd148f03ffe31b3e6e031050eeb7a290d020d0404e364cd0f811cc5e68'
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/config/routes.rb:2:8: C: Use the new Ruby 1.9 hash syntax.
+  root :to => "application#index"
+       ^^^^^^
+spec/internal/config/routes.rb:2:15: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  root :to => "application#index"
+              ^^^^^^^^^^^^^^^^^^^
+spec/internal/config/routes.rb:3:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  mount Orcid::Engine => "/orcid"
+                         ^^^^^^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:1:1: C: Missing top-level class documentation comment.
+class DeviseCreateUsers < ActiveRecord::Migration
+^^^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:2:3: C: Method has too many lines. [15/10]
+  def change
+  ^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:5:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      t.string :email,              null: false, default: ""
+                                                          ^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:6:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      t.string :encrypted_password, null: false, default: ""
+                                                          ^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:9:15: C: Put one space between the method name and the first argument.
+      t.string   :reset_password_token
+              ^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:16:16: C: Put one space between the method name and the first argument.
+      t.integer  :sign_in_count, default: 0, null: false
+               ^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:19:15: C: Put one space between the method name and the first argument.
+      t.string   :current_sign_in_ip
+              ^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:20:15: C: Put one space between the method name and the first argument.
+      t.string   :last_sign_in_ip
+              ^^^
+spec/internal/db/migrate/20140430033740_devise_create_users.rb:33:1: C: Extra blank line detected.
+spec/internal/db/schema.rb:14:38: C: Separate every 3 digits in the integer portion of a number with underscores(_).
+ActiveRecord::Schema.define(version: 20140430033747) do
+                                     ^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:16:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  create_table "devise_multi_auth_authentications", force: true do |t|
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:17:14: C: Put one space between the method name and the first argument.
+    t.integer  "user_id",       null: false
+             ^^
+spec/internal/db/schema.rb:17:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.integer  "user_id",       null: false
+               ^^^^^^^^^
+spec/internal/db/schema.rb:18:13: C: Put one space between the method name and the first argument.
+    t.string   "provider",      null: false
+            ^^^
+spec/internal/db/schema.rb:18:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "provider",      null: false
+               ^^^^^^^^^^
+spec/internal/db/schema.rb:19:13: C: Put one space between the method name and the first argument.
+    t.string   "uid",           null: false
+            ^^^
+spec/internal/db/schema.rb:19:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "uid",           null: false
+               ^^^^^
+spec/internal/db/schema.rb:20:13: C: Put one space between the method name and the first argument.
+    t.string   "access_token"
+            ^^^
+spec/internal/db/schema.rb:20:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "access_token"
+               ^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:21:13: C: Put one space between the method name and the first argument.
+    t.string   "refresh_token"
+            ^^^
+spec/internal/db/schema.rb:21:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "refresh_token"
+               ^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:22:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "expires_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:23:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "created_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:24:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "updated_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:27:13: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:27:50: C: Use %w or %W for array of words.
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+                                                 ^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:27:51: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+                                                  ^^^^^^^^^^
+spec/internal/db/schema.rb:27:63: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+                                                              ^^^^^
+spec/internal/db/schema.rb:27:77: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:27:141: C: Line is too long. [151/140]
+  add_index "devise_multi_auth_authentications", ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+                                                                                                                                            ^^^^^^^^^^^
+spec/internal/db/schema.rb:29:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  create_table "orcid_profile_requests", force: true do |t|
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:30:14: C: Put one space between the method name and the first argument.
+    t.integer  "user_id",          null: false
+             ^^
+spec/internal/db/schema.rb:30:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.integer  "user_id",          null: false
+               ^^^^^^^^^
+spec/internal/db/schema.rb:31:13: C: Put one space between the method name and the first argument.
+    t.string   "given_names",      null: false
+            ^^^
+spec/internal/db/schema.rb:31:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "given_names",      null: false
+               ^^^^^^^^^^^^^
+spec/internal/db/schema.rb:32:13: C: Put one space between the method name and the first argument.
+    t.string   "family_name",      null: false
+            ^^^
+spec/internal/db/schema.rb:32:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "family_name",      null: false
+               ^^^^^^^^^^^^^
+spec/internal/db/schema.rb:33:13: C: Put one space between the method name and the first argument.
+    t.string   "primary_email",    null: false
+            ^^^
+spec/internal/db/schema.rb:33:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "primary_email",    null: false
+               ^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:34:13: C: Put one space between the method name and the first argument.
+    t.string   "orcid_profile_id"
+            ^^^
+spec/internal/db/schema.rb:34:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "orcid_profile_id"
+               ^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:35:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "created_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:36:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "updated_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:39:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  create_table "users", force: true do |t|
+               ^^^^^^^
+spec/internal/db/schema.rb:40:13: C: Put one space between the method name and the first argument.
+    t.string   "email",                  default: "", null: false
+            ^^^
+spec/internal/db/schema.rb:40:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "email",                  default: "", null: false
+               ^^^^^^^
+spec/internal/db/schema.rb:40:51: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "email",                  default: "", null: false
+                                                  ^^
+spec/internal/db/schema.rb:41:13: C: Put one space between the method name and the first argument.
+    t.string   "encrypted_password",     default: "", null: false
+            ^^^
+spec/internal/db/schema.rb:41:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "encrypted_password",     default: "", null: false
+               ^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:41:51: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "encrypted_password",     default: "", null: false
+                                                  ^^
+spec/internal/db/schema.rb:42:13: C: Put one space between the method name and the first argument.
+    t.string   "reset_password_token"
+            ^^^
+spec/internal/db/schema.rb:42:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "reset_password_token"
+               ^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:43:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "reset_password_sent_at"
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:44:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "remember_created_at"
+               ^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:45:14: C: Put one space between the method name and the first argument.
+    t.integer  "sign_in_count",          default: 0,  null: false
+             ^^
+spec/internal/db/schema.rb:45:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.integer  "sign_in_count",          default: 0,  null: false
+               ^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:46:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "current_sign_in_at"
+               ^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:47:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "last_sign_in_at"
+               ^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:48:13: C: Put one space between the method name and the first argument.
+    t.string   "current_sign_in_ip"
+            ^^^
+spec/internal/db/schema.rb:48:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "current_sign_in_ip"
+               ^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:49:13: C: Put one space between the method name and the first argument.
+    t.string   "last_sign_in_ip"
+            ^^^
+spec/internal/db/schema.rb:49:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.string   "last_sign_in_ip"
+               ^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:50:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "created_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:51:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    t.datetime "updated_at"
+               ^^^^^^^^^^^^
+spec/internal/db/schema.rb:54:13: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+            ^^^^^^^
+spec/internal/db/schema.rb:54:23: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+                      ^^^^^^^
+spec/internal/db/schema.rb:54:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+                                      ^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:55:13: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+            ^^^^^^^
+spec/internal/db/schema.rb:55:23: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+                      ^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/db/schema.rb:55:54: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/lib/generators/test_app_generator.rb:3:1: C: Missing top-level class documentation comment.
+class TestAppGenerator < Rails::Generators::Base
+^^^^^
+spec/internal/lib/generators/test_app_generator.rb:4:15: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  source_root "spec/test_app_templates"
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/lib/generators/test_app_generator.rb:7:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/lib/generators/test_app_generator.rb:8:53: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    application_yml_example_file = File.expand_path("../../../../../config/application.yml.example", __FILE__)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/internal/lib/generators/test_app_generator.rb:10:75: C: Space missing after colon.
+      create_link 'config/application.yml', application_yml_file, symbolic:true
+                                                                          ^
+spec/internal/lib/generators/test_app_generator.rb:12:83: C: Space missing after colon.
+      create_link 'config/application.yml', application_yml_example_file, symbolic:true
+                                                                                  ^
+spec/internal/lib/generators/test_app_generator.rb:24:1: C: Extra empty line detected at body end.
+spec/internal/test/test_helper.rb:1:5: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ENV["RAILS_ENV"] ||= "test"
+    ^^^^^^^^^^^
+spec/internal/test/test_helper.rb:1:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ENV["RAILS_ENV"] ||= "test"
+                     ^^^^^^
+spec/internal/test/test_helper.rb:5:1: C: Missing top-level class documentation comment.
+class ActiveSupport::TestCase
+^^^^^
+spec/internal/test/test_helper.rb:5:7: C: Use nested module/class definitions instead of compact style.
+class ActiveSupport::TestCase
+      ^^^^^^^^^^^^^^^^^^^^^^^
+spec/lib/orcid/configuration/provider_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/lib/orcid/configuration/provider_spec.rb:7:19: C: Avoid using {...} for multi-line blocks.
+    let(:storage) {
+                  ^
+spec/lib/orcid/configuration/provider_spec.rb:15:44: C: Avoid comma after the last item of a hash.
+        'ORCID_APP_SECRET' => '_APP_SECRET',
+                                           ^
+spec/lib/orcid/configuration_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/lib/orcid/configuration_spec.rb:16:20: C: Avoid using {...} for multi-line blocks.
+      let(:legend) {
+                   ^
+spec/lib/orcid/configuration_spec.rb:19:12: C: Use the new lambda literal syntax ->(params) {...}.
+          [lambda{|*| 'spaghetti'}, :work_type]
+           ^^^^^^
+spec/lib/orcid/configuration_spec.rb:19:18: C: Space missing to the left of {.
+          [lambda{|*| 'spaghetti'}, :work_type]
+                 ^
+spec/lib/orcid/configuration_spec.rb:19:18: C: Space between { and | missing.
+          [lambda{|*| 'spaghetti'}, :work_type]
+                 ^^
+spec/lib/orcid/configuration_spec.rb:19:34: C: Space missing inside }.
+          [lambda{|*| 'spaghetti'}, :work_type]
+                                 ^
+spec/lib/orcid/configuration_spec.rb:23:58: C: Space missing inside }.
+      let(:article) { NonOrcid::Article.new(title: title)}
+                                                         ^
+spec/lib/orcid/named_callbacks_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/lib/orcid/named_callbacks_spec.rb:7:24: C: Space inside square brackets detected.
+    Given(:context) { [ ] }
+                       ^
+spec/lib/orcid/named_callbacks_spec.rb:10:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    describe "with a named callback" do
+             ^^^^^^^^^^^^^^^^^^^^^^^
+spec/lib/orcid/named_callbacks_spec.rb:12:52: C: Space missing after comma.
+      When { named_callback.call(callback_name, 'a',:hello) }
+                                                   ^
+spec/lib/orcid/named_callbacks_spec.rb:16:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    describe "with a named callback called by a string" do
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/lib/orcid/named_callbacks_spec.rb:18:52: C: Space missing after comma.
+      When { named_callback.call(callback_name, 'a',:hello) }
+                                                   ^
+spec/lib/orcid/named_callbacks_spec.rb:22:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    describe "with a undeclared callback" do
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/lib/orcid_spec.rb:27:13: C: Space missing to the left of {.
+      expect{|b| Orcid.configure(&b) }.to yield_with_args(Orcid::Configuration)
+            ^
+spec/lib/orcid_spec.rb:27:13: C: Space between { and | missing.
+      expect{|b| Orcid.configure(&b) }.to yield_with_args(Orcid::Configuration)
+            ^^
+spec/lib/orcid_spec.rb:37:48: C: Space missing after comma.
+      Orcid.connect_user_and_orcid_profile(user,orcid_profile_id)
+                                               ^
+spec/lib/orcid_spec.rb:56:14: C: Avoid using {...} for multi-line blocks.
+      expect {
+             ^
+spec/lib/orcid_spec.rb:63:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:client) { double("Client")}
+                          ^^^^^^^^
+spec/lib/orcid_spec.rb:63:36: C: Space missing inside }.
+    let(:client) { double("Client")}
+                                   ^
+spec/lib/orcid_spec.rb:65:30: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:tokenizer) { double("Tokenizer") }
+                             ^^^^^^^^^^^
+spec/lib/orcid_spec.rb:88:1: C: Do not use block comments.
+=begin
+^^^^^^
+spec/models/orcid/profile_connection_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/profile_connection_spec.rb:5:35: C: Space missing inside }.
+    let(:email) { 'test@hello.com'}
+                                  ^
+spec/models/orcid/profile_connection_spec.rb:7:42: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:profile_query_service) { double("Profile Lookup Service") }
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/orcid/profile_connection_spec.rb:9:13: C: Avoid using {...} for multi-line blocks.
+    subject {
+            ^
+spec/models/orcid/profile_connection_spec.rb:10:66: C: Avoid using {...} for multi-line blocks.
+      Orcid::ProfileConnection.new(email: email, user: user).tap { |pc|
+                                                                 ^
+spec/models/orcid/profile_connection_spec.rb:27:71: C: Space missing inside }.
+      subject { Orcid::ProfileConnection.new(email: email, user: user)}
+                                                                      ^
+spec/models/orcid/profile_connection_spec.rb:37:73: C: Space missing inside }.
+        subject { Orcid::ProfileConnection.new(email: email, user: user)}
+                                                                        ^
+spec/models/orcid/profile_connection_spec.rb:44:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      let(:persister) { double("Persister") }
+                               ^^^^^^^^^^^
+spec/models/orcid/profile_connection_spec.rb:55:16: C: Avoid using {...} for multi-line blocks.
+        expect {
+               ^
+spec/models/orcid/profile_connection_spec.rb:67:18: C: Space between { and | missing.
+          expect {|b| subject.with_orcid_profile_candidates(&b) }.to yield_with_args(:query_response)
+                 ^^
+spec/models/orcid/profile_connection_spec.rb:75:18: C: Space between { and | missing.
+          expect {|b| subject.with_orcid_profile_candidates(&b) }.to_not yield_control
+                 ^^
+spec/models/orcid/profile_request_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/profile_request_spec.rb:5:51: C: Space missing inside }.
+    let(:orcid_profile_id) { '0000-0001-8025-637X'}
+                                                  ^
+spec/models/orcid/profile_request_spec.rb:7:22: C: Avoid using {...} for multi-line blocks.
+    let(:attributes) {
+                     ^
+spec/models/orcid/profile_request_spec.rb:42:16: C: Avoid using {...} for multi-line blocks.
+        expect {
+               ^
+spec/models/orcid/profile_request_spec.rb:66:18: C: Avoid using {...} for multi-line blocks.
+          expect {
+                 ^
+spec/models/orcid/profile_request_spec.rb:81:18: C: Avoid using {...} for multi-line blocks.
+          expect {
+                 ^
+spec/models/orcid/profile_request_spec.rb:97:56: C: Place the . on the next line, together with the method name.
+          validator.should_receive(:call).with(subject).
+                                                       ^
+spec/models/orcid/profile_request_spec.rb:99:77: C: Place the . on the next line, together with the method name.
+          payload_xml_builder.should_receive(:call).with(subject.attributes).
+                                                                            ^
+spec/models/orcid/profile_request_spec.rb:101:75: C: Place the . on the next line, together with the method name.
+          profile_creation_service.should_receive(:call).with(xml_payload).
+                                                                          ^
+spec/models/orcid/profile_request_spec.rb:116:56: C: Place the . on the next line, together with the method name.
+          validator.should_receive(:call).with(subject).
+                                                       ^
+spec/models/orcid/profile_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/profile_spec.rb:7:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:mapper) { double("Mapper") }
+                          ^^^^^^^^
+spec/models/orcid/profile_spec.rb:8:35: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:non_orcid_work) { double("A non-ORCID Work") }
+                                  ^^^^^^^^^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:9:31: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:orcid_work) { double("Orcid::Work") }
+                              ^^^^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:10:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:xml_renderer) { double("Renderer") }
+                                ^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:11:31: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:xml_parser) { double("Parser") }
+                              ^^^^^^^^
+spec/models/orcid/profile_spec.rb:12:24: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:xml) { double("XML Payload")}
+                       ^^^^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:12:38: C: Space missing inside }.
+    let(:xml) { double("XML Payload")}
+                                     ^
+spec/models/orcid/profile_spec.rb:14:13: C: Avoid using {...} for multi-line blocks.
+    subject {
+            ^
+spec/models/orcid/profile_spec.rb:29:36: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      let(:parsed_object) { double("Parsed Object")}
+                                   ^^^^^^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:29:52: C: Space missing inside }.
+      let(:parsed_object) { double("Parsed Object")}
+                                                   ^
+spec/models/orcid/profile_spec.rb:30:36: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      let(:response_body) { double("XML Response") }
+                                   ^^^^^^^^^^^^^^
+spec/models/orcid/profile_spec.rb:39:1: C: Extra blank line detected.
+spec/models/orcid/profile_spec.rb:70:60: C: Do not use parentheses for method calls with no arguments.
+        Orcid.stub(:access_token_for).and_return(Object.new())
+                                                           ^
+spec/models/orcid/work/xml_parser_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:16:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:title) { should eq "Another Test Drive" }
+                                ^^^^^^^^^^^^^^^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:17:36: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:put_code) { should eq "303475" }
+                                   ^^^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:18:37: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:work_type) { should eq "test" }
+                                    ^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:33:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:title) { should eq "Test Driven Orcid Integration" }
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:34:36: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:put_code) { should eq "303474" }
+                                   ^^^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:35:37: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        its(:work_type) { should eq "test" }
+                                    ^^^^^^
+spec/models/orcid/work/xml_parser_spec.rb:39:1: C: Extra empty line detected at body end.
+spec/models/orcid/work/xml_renderer_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/work_spec.rb:3:1: C: Missing top-level module documentation comment.
+module Orcid
+^^^^^^
+spec/models/orcid/work_spec.rb:5:22: C: Avoid using {...} for multi-line blocks.
+    let(:attributes) {
+                     ^
+spec/models/orcid/work_spec.rb:10:32: C: Space inside square brackets detected.
+        external_identifiers: [ {type: 'doi', identifier: 'abc-123' }]
+                               ^
+spec/models/orcid/work_spec.rb:10:33: C: Space inside { missing.
+        external_identifiers: [ {type: 'doi', identifier: 'abc-123' }]
+                                ^
+spec/models/orcid/work_spec.rb:25:46: C: Space missing inside }.
+        its(:id) { should eq subject.put_code}
+                                             ^
+spec/models/orcid/work_spec.rb:29:64: C: Space missing inside }.
+        its(:id) { should eq [subject.title, subject.work_type]}
+                                                               ^
+spec/models/orcid/work_spec.rb:52:1: C: Extra empty line detected at body end.
+spec/services/orcid/remote/profile_creation_service_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:4:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:7:22: C: Space inside { missing.
+    Given(:config) { {token: token, headers: request_headers, path: 'path/to/somewhere' } }
+                     ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:8:28: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:token) { double("Token", post: response) }
+                           ^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:10:29: C: Avoid using {...} for multi-line blocks.
+    Given(:request_headers) {
+                            ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:16:22: C: Avoid using {...} for multi-line blocks.
+    Given(:response) {
+                     ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:17:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+             ^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:17:57: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+                                                        ^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:17:76: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+                                                                           ^^^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:23:24: C: Avoid using {...} for multi-line blocks.
+      Given(:response) {
+                       ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:24:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+               ^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:24:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+                                                          ^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:24:78: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
+                                                                             ^^^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:26:52: C: Space missing inside }.
+      Then { returned_value.should eq(minted_orcid)}
+                                                   ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:28:113: C: Space missing inside }.
+      And { token.should have_received(:post).with(config.fetch(:path), body: payload, headers: request_headers)}
+                                                                                                                ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:32:24: C: Avoid using {...} for multi-line blocks.
+      Given(:response) {
+                       ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:33:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        double("Response", headers: { location: "" })
+               ^^^^^^^^^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:33:49: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        double("Response", headers: { location: "" })
+                                                ^^
+spec/services/orcid/remote/profile_creation_service_spec.rb:35:45: C: Space missing inside }.
+      Then { returned_value.should eq(false)}
+                                            ^
+spec/services/orcid/remote/profile_creation_service_spec.rb:37:113: C: Space missing inside }.
+      And { token.should have_received(:post).with(config.fetch(:path), body: payload, headers: request_headers)}
+                                                                                                                ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:4:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:5:1: C: Extra empty line detected at body beginning.
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:9:21: C: Avoid using {...} for multi-line blocks.
+      Given(:input) {
+                    ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:10:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        { text: "Hello", email: 'jeremy.n.friesen@gmail.com' }
+                ^^^^^^^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:16:21: C: Avoid using {...} for multi-line blocks.
+      Given(:input) {
+                    ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:17:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        { text: "" , email: nil}
+                ^^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:17:32: C: Space inside } missing.
+        { text: "" , email: nil}
+                               ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:19:40: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      Then { expect(response).to eq(q: "") }
+                                       ^^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:23:21: C: Avoid using {...} for multi-line blocks.
+      Given(:input) {
+                    ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:30:21: C: Avoid using {...} for multi-line blocks.
+      Given(:input) {
+                    ^
+spec/services/orcid/remote/profile_query_service/query_parameter_builder_spec.rb:37:21: C: Avoid using {...} for multi-line blocks.
+      Given(:input) {
+                    ^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:4:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:6:26: C: Space inside { missing.
+    Given(:attributes) { {id: 'Hello', label: 'World', junk: 'JUNK!', biography: "Extended Biography"} }
+                         ^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:6:82: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:attributes) { {id: 'Hello', label: 'World', junk: 'JUNK!', biography: "Extended Biography"} }
+                                                                                 ^^^^^^^^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:6:102: C: Space inside } missing.
+    Given(:attributes) { {id: 'Hello', label: 'World', junk: 'JUNK!', biography: "Extended Biography"} }
+                                                                                                     ^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:12:17: C: Space missing to the left of {.
+    And { expect{search_response.junk }.to raise_error }
+                ^
+spec/services/orcid/remote/profile_query_service/search_response_spec.rb:12:18: C: Space missing inside {.
+    And { expect{search_response.junk }.to raise_error }
+                 ^
+spec/services/orcid/remote/profile_query_service_spec.rb:5:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:5:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:10:20: C: Avoid using {...} for multi-line blocks.
+    Given(:config) {
+                   ^
+spec/services/orcid/remote/profile_query_service_spec.rb:19:62: C: Space missing inside }.
+    Given(:query_parameter_builder) { double('Query Builder')}
+                                                             ^
+spec/services/orcid/remote/profile_query_service_spec.rb:20:31: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:response) { double("Response", body: response_body)} # See below
+                              ^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:20:63: C: Space missing inside }.
+    Given(:response) { double("Response", body: response_body)} # See below
+                                                              ^
+spec/services/orcid/remote/profile_query_service_spec.rb:21:28: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:token) { double("Token") }
+                           ^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:22:27: C: Avoid using {...} for multi-line blocks.
+    Given(:json_response) {
+                          ^
+spec/services/orcid/remote/profile_query_service_spec.rb:24:24: C: Redundant curly braces around a hash parameter.
+        OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]", 'biography' => biography })
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:24:141: C: Line is too long. [145/140]
+        OpenStruct.new({ 'id' => orcid_profile_id, 'label' => "Corwin Amber (#{email}) [ORCID: #{orcid_profile_id}]", 'biography' => biography })
+                                                                                                                                            ^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:27:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:parameters) { double("Parameters") }
+                                ^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:28:44: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Given(:normalized_parameters) { double("Normalized Parameters") }
+                                           ^^^^^^^^^^^^^^^^^^^^^^^
+spec/services/orcid/remote/profile_query_service_spec.rb:42:27: C: Avoid using {...} for multi-line blocks.
+    Given(:response_body) {
+                          ^
+spec/services/orcid/remote/service_spec.rb:4:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/service_spec.rb:4:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/service_spec.rb:7:20: C: Avoid using {...} for multi-line blocks.
+    Given(:runner) {
+                   ^
+spec/services/orcid/remote/service_spec.rb:8:27: C: Avoid using {...} for multi-line blocks.
+      described_class.new { |on|
+                          ^
+spec/services/orcid/remote/service_spec.rb:9:18: C: Space between { and | missing.
+        on.found {|a,b| context.invoked("FOUND", a,b) }
+                 ^^
+spec/services/orcid/remote/service_spec.rb:9:21: C: Space missing after comma.
+        on.found {|a,b| context.invoked("FOUND", a,b) }
+                    ^
+spec/services/orcid/remote/service_spec.rb:9:41: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        on.found {|a,b| context.invoked("FOUND", a,b) }
+                                        ^^^^^^^
+spec/services/orcid/remote/service_spec.rb:9:51: C: Space missing after comma.
+        on.found {|a,b| context.invoked("FOUND", a,b) }
+                                                  ^
+spec/services/orcid/remote/service_spec.rb:13:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    describe "calling defined callback" do
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/services/orcid/remote/service_spec.rb:15:58: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      Then { context.should have_received(:invoked).with("FOUND", :first, :second) }
+                                                         ^^^^^^^
+spec/services/orcid/remote/service_spec.rb:19:14: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    describe "calling undefined callback" do
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:5:1: C: Missing top-level module documentation comment.
+module Orcid::Remote
+^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:5:8: C: Use nested module/class definitions instead of compact style.
+module Orcid::Remote
+       ^^^^^^^^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:8:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:token) { double("Token") }
+                         ^^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:11:29: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    let(:response) { double("Response", body: 'Body') }
+                            ^^^^^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:14:107: C: Space missing inside }.
+      let(:token) { double('Token', client: client, token: 'access_token', refresh_token: 'refresh_token')}
+                                                                                                          ^
+spec/services/orcid/remote/work_service_spec.rb:15:75: C: Space missing inside }.
+      let(:client) { double('Client', id: '123', site: 'URL', options: {})}
+                                                                          ^
+spec/services/orcid/remote/work_service_spec.rb:17:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        response = double("Response", status: '100', body: 'body')
+                          ^^^^^^^^^^
+spec/services/orcid/remote/work_service_spec.rb:22:16: C: Avoid using {...} for multi-line blocks.
+        expect {
+               ^
+spec/services/orcid/remote/work_service_spec.rb:27:39: C: Place the . on the next line, together with the method name.
+        token.should_receive(:request).
+                                      ^
+spec/services/orcid/remote/work_service_spec.rb:28:104: C: Place the . on the next line, together with the method name.
+          with(:post, "v1.1/#{orcid_profile_id}/orcid-works/", body: payload, headers: request_headers).
+                                                                                                       ^
+spec/spec_helper.rb:5:5: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ENV["RAILS_ENV"] ||= 'test'
+    ^^^^^^^^^^^
+spec/spec_helper.rb:9:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  SimpleCov.command_name "spec"
+                         ^^^^^^
+spec/spec_helper.rb:12:1: C: Extra blank line detected.
+spec/spec_helper.rb:16:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require File.expand_path("../internal/config/environment.rb",  __FILE__)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:33:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+Dir[File.expand_path("../support/**/*.rb",__FILE__)].each {|f| require f}
+                     ^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:33:42: C: Space missing after comma.
+Dir[File.expand_path("../support/**/*.rb",__FILE__)].each {|f| require f}
+                                         ^
+spec/spec_helper.rb:33:59: C: Space between { and | missing.
+Dir[File.expand_path("../support/**/*.rb",__FILE__)].each {|f| require f}
+                                                          ^^
+spec/spec_helper.rb:33:73: C: Space missing inside }.
+Dir[File.expand_path("../support/**/*.rb",__FILE__)].each {|f| require f}
+                                                                        ^
+spec/spec_helper.rb:34:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+Dir[File.expand_path("../factories/**/*.rb",__FILE__)].each {|f| require f}
+                     ^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:34:44: C: Space missing after comma.
+Dir[File.expand_path("../factories/**/*.rb",__FILE__)].each {|f| require f}
+                                           ^
+spec/spec_helper.rb:34:61: C: Space between { and | missing.
+Dir[File.expand_path("../factories/**/*.rb",__FILE__)].each {|f| require f}
+                                                            ^^
+spec/spec_helper.rb:34:75: C: Space missing inside }.
+Dir[File.expand_path("../factories/**/*.rb",__FILE__)].each {|f| require f}
+                                                                          ^
+spec/spec_helper.rb:40:49: C: Place the . on the next line, together with the method name.
+      request.env['warden'].stub(:authenticate!).
+                                                ^
+spec/spec_helper.rb:41:28: C: Redundant curly braces around a hash parameter.
+        and_throw(:warden, {:scope => :user})
+                           ^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:41:28: C: Space inside { missing.
+        and_throw(:warden, {:scope => :user})
+                           ^
+spec/spec_helper.rb:41:29: C: Use the new Ruby 1.9 hash syntax.
+        and_throw(:warden, {:scope => :user})
+                            ^^^^^^^^^
+spec/spec_helper.rb:41:44: C: Space inside } missing.
+        and_throw(:warden, {:scope => :user})
+                                           ^
+spec/spec_helper.rb:42:23: C: Use the new Ruby 1.9 hash syntax.
+      controller.stub :current_user => nil
+                      ^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:45:23: C: Use the new Ruby 1.9 hash syntax.
+      controller.stub :current_user => user
+                      ^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:56:1: C: Extra empty line detected at body end.
+spec/spec_helper.rb:59:1: C: Missing top-level module documentation comment.
+module FixtureFiles
+^^^^^^
+spec/spec_helper.rb:61:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    Pathname.new(File.expand_path(File.join("../fixtures", path), __FILE__))
+                                            ^^^^^^^^^^^^^
+spec/spec_helper.rb:87:18: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  config.order = "random"
+                 ^^^^^^^^
+spec/support/non_orcid_models.rb:2:3: C: Missing top-level class documentation comment.
+  class Article
+  ^^^^^
+spec/support/non_orcid_models.rb:11:4: C: Final newline missing.
+end
+   
+spec/support/stub_callback.rb:1:1: C: Missing top-level class documentation comment.
+class StubCallback
+^^^^^
+spec/support/stub_callback.rb:6:16: W: Unused method argument - args. If it's necessary, use _ or _args as an argument name to indicate that it won't be used. You can also write as invoked(*) if you want the method to accept any arguments but don't care about them.
+  def invoked(*args)
+               ^^^^
+spec/test_app_templates/lib/generators/test_app_generator.rb:3:1: C: Missing top-level class documentation comment.
+class TestAppGenerator < Rails::Generators::Base
+^^^^^
+spec/test_app_templates/lib/generators/test_app_generator.rb:4:15: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  source_root "spec/test_app_templates"
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/test_app_templates/lib/generators/test_app_generator.rb:7:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/test_app_templates/lib/generators/test_app_generator.rb:8:53: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    application_yml_example_file = File.expand_path("../../../../../config/application.yml.example", __FILE__)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/test_app_templates/lib/generators/test_app_generator.rb:10:75: C: Space missing after colon.
+      create_link 'config/application.yml', application_yml_file, symbolic:true
+                                                                          ^
+spec/test_app_templates/lib/generators/test_app_generator.rb:12:83: C: Space missing after colon.
+      create_link 'config/application.yml', application_yml_example_file, symbolic:true
+                                                                                  ^
+spec/test_app_templates/lib/generators/test_app_generator.rb:24:1: C: Extra empty line detected at body end.
+
+93 files inspected, 399 offenses detected

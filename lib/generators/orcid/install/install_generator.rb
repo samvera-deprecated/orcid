@@ -12,22 +12,17 @@ module Orcid
     def create_application_yml
       unless options[:skip_application_yml]
         create_file 'config/application.yml' do
-          prompt_for_orcid_secrets
+          orcid_app_id = ask('What is your Orcid Client ID?')
+          orcid_app_secret = ask('What is your Orcid Client Secret?')
+          [
+            '',
+            "ORCID_APP_ID: #{orcid_app_id}",
+            "ORCID_APP_SECRET: #{orcid_app_secret}",
+            ''
+          ].join("\n")
         end
       end
     end
-
-    def prompt_for_orcid_secrets
-      orcid_app_id = ask('What is your Orcid Client ID?')
-      orcid_app_secret = ask('What is your Orcid Client Secret?')
-      [
-        '',
-        "ORCID_APP_ID: #{orcid_app_id}",
-        "ORCID_APP_SECRET: #{orcid_app_secret}",
-        ''
-      ].join("\n")
-    end
-    private :prompt_for_orcid_secrets
 
     def install_devise_multi_auth
       if options[:devise]
@@ -57,14 +52,7 @@ module Orcid
     end
 
     def update_devise_omniauth_provider
-      insert_into_file(
-        'config/initializers/devise.rb',
-        init_code, after: /Devise\.setup.*$/, verbose: true
-      )
-    end
-
-    def devise_omniauth_provider_init_code
-      %(
+      init_code = %(
         config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
                         scope: Orcid.provider.authentication_scope,
                         client_options: {
@@ -73,6 +61,10 @@ module Orcid
                           token_url: Orcid.provider.token_url
                         }
                         )
+      )
+      insert_into_file(
+        'config/initializers/devise.rb',
+        init_code, after: /Devise\.setup.*$/, verbose: true
       )
     end
 
