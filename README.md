@@ -1,6 +1,54 @@
 # Orcid [![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid) [![Build Status](https://travis-ci.org/jeremyf/orcid.png?branch=master)](https://travis-ci.org/jeremyf/orcid)
 
-A Rails Engine for integrating with Orcid.
+A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org).
+
+* [Installation](#installation)
+* [Using the Orcid widget in your application](#using-the-orcid-widget-in-your-application)
+* [Registering for an ORCID application profile](#registering-for-an-orcid-application-profile)
+* [Setting up your own ORCIDs in the ORCID Development Sandbox](#setting-up-your-own-orcids-in-the-orcid-development-sandbox)
+* [Running the tests](#running-the-tests)
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'orcid'
+```
+
+And then execute:
+
+```console
+$ bundle
+```
+
+If bundle fails, you may need to install Qt: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+
+And then install:
+
+```console
+$ rails generate orcid:install
+```
+
+## Using the Orcid widget in your application
+
+In order to facilitate integration of this ORCID gem into your application, a widget has been provided to offer these functions:
+
+1. Enter a known ORCID and connect to the ORCID repository.
+1. Look up the ORCID of the current user of your application.
+1. Create an ORCID to be associated with the current user of your application.
+
+The widget is contained in the partial `app/views/orcid/profile_connections/_orcid_connector.html.erb`.
+
+An example use of the partial is shown below.
+
+```rails
+# The `if defined?(Orcid)` could be viewed as a courtesy.
+# Don't attempt to render this partial if the Orcid gem is not being used.
+if defined?(Orcid)
+  <%= render partial: 'orcid/profile_connections/orcid_connector', locals: {default_search_text: current_user.name } %>
+end
+```
 
 ## Registering for an ORCID application profile
 
@@ -28,7 +76,8 @@ For development work in particular, there are multiple ways to specify the local
 in the ORCID form's URL for your application and when invoking your application from the browser rather than using any IP address for your local machine.
 
 ## Setting up your own ORCIDs in the ORCID Development Sandbox
-Read about the ORCID Sandbox at http://support.orcid.org/knowledgebase/articles/166623-about-the-orcid-sandbox.
+
+[Read more about the ORCID Sandbox](http://support.orcid.org/knowledgebase/articles/166623-about-the-orcid-sandbox).
 
 1. Register two ORCID users: https://sandbox-1.orcid.org/register (make sure to use <blah>@mailinator.com as your email)
 Save the email addresses, orcid ids, and passwords for editing the application.yml later.
@@ -36,42 +85,14 @@ Save the email addresses, orcid ids, and passwords for editing the application.y
 1. Go to the ORCID sandbox https://sandbox.orcid.org, log in and click on *Account Settings* (https://sandbox.orcid.org/account).  On the Account Settings page,
 click on Email and select the little icon with the group of heads to make your Primary Email publicly accessible.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-<code>
-    gem 'orcid'
-</code>
-
-And then execute:
-
-<code>
-    $ bundle
-</code>
-
-If bundle fails, you may need to install Qt: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
-
-And then install:
-
-```console
-$ rails generate orcid:install
-```
-
 ## Setting up the config/application.yml file
-Customize the sample yml file by first copying it to config/application.yml and opening it for editing.
+Customize the sample application.yml file by first copying it to config/application.yml and opening it for editing.
 
 ```console
 cp config/application.yml.sample config/application.yml
 ```
 
 The config/application.yml file contains 4 sections of information for your application which uses ORCID.
-
-Administrator information for your application should be set in these elements:
-
-    ADMIN_NAME: First User
-    ADMIN_EMAIL: user@example.com
-    ADMIN_PASSWORD: changeme
 
 The next section contains the client-id and client-secret from the xml file sent back to you after registering your application with ORCID.
 
@@ -99,26 +120,6 @@ Run the online tests with
 
 ```console
 rake spec:online
-```
-
-## Using the orcid_connector widget in your application
-
-In order to facilitate integration of this ORCID gem into your application, a widget has been provided to offer these functions:
-
-1. Enter a known ORCID and connect to the ORCID repository.
-1. Look up the ORCID of the current user of your application.
-1. Create an ORCID to be associated with the current user of your application.
-
-The widget is contained in the partial `app/views/orcid/profile_connections/_orcid_connector.html.erb`.
-
-An example use of the partial is shown below.
-
-```rails
-# The `if defined?(Orcid)` could be viewed as a courtesy.
-# Don't attempt to render this partial if the Orcid gem is not being used.
-if defined?(Orcid)
-  <%= render partial: 'orcid/profile_connections/orcid_connector', locals: {default_search_text: current_user.name } %>
-end
 ```
 
 ## TODO Items
