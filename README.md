@@ -2,6 +2,8 @@
 
 A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org).
 
+To fully interact with the Orcid remote services, you will need to [register your ORCID application profile](#registering-for-an-orcid-application-profile).
+
 * [Installation](#installation)
 * [Using the Orcid widget in your application](#using-the-orcid-widget-in-your-application)
 * [Registering for an ORCID application profile](#registering-for-an-orcid-application-profile)
@@ -24,11 +26,13 @@ $ bundle
 
 If bundle fails, you may need to [install Qt](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit).
 
-And then install:
+And then install by running the following:
 
 ```console
 $ rails generate orcid:install
 ```
+
+*Note: It will prompt you for your Orcid application secrets.*
 
 You may find it helpful to review the help text, as there are a few options for the generator.
 
