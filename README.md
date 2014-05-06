@@ -22,7 +22,7 @@ And then execute:
 $ bundle
 ```
 
-If bundle fails, you may need to install Qt: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+If bundle fails, you may need to [install Qt](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit).
 
 And then install:
 
