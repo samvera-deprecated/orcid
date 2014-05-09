@@ -13,6 +13,7 @@ module Orcid
     }
 
     its(:email) { should eq email }
+    its(:to_model) { should eq subject }
     its(:user) { should eq user }
     its(:persisted?) { should eq false }
     its(:orcid_profile_id) { should be_nil }

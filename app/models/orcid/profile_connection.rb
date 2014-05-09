@@ -4,6 +4,7 @@ module Orcid
   class ProfileConnection
     include Virtus.model
     include ActiveModel::Validations
+    include ActiveModel::Conversion
     extend ActiveModel::Naming
 
     class_attribute :available_query_attribute_names
