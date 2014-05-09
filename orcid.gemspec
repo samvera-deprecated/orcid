@@ -34,7 +34,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'virtus'
   s.add_dependency 'email_validator'
   s.add_dependency 'simple_form'
-  s.add_dependency 'byebug'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'engine_cart'
