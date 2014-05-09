@@ -1,14 +1,22 @@
 <% profile_connection = Orcid::ProfileConnection.new %>
-<p><br />
-<%= link_to "Look up your existing ORCID", orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
-  <span>-OR-</span>
-<%= link_to "Create an ORCID", orcid.new_profile_request_path %>
-</p>
-<p>-OR-</p>
-<%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path, method: :post) do |f| %>
-    <%= f.input :orcid_profile_id, label: "Enter your existing ORCID (####-####-####-####)", class:"orcid-input" %>
+<% default_search_text = '' unless defined?(default_search_text) %>
+<div class='orcid-connector'>
+  <h3><i class="icon-user"></i> <%= link_to t('orcid.verbose_name'), 'http://orcid.org/' %></h3>
+  <p>
+    <%= link_to t('orcid/profile_connection.look_up_your_existing_orcid', scope: 'helpers.label'), orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
+  </p>
+  <p>
+    <%= link_to t('orcid/profile_connection.create_an_orcid', scope: 'helpers.label'), orcid.new_profile_request_path %>
+  </p>
+  <p>
+  <%= form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path, method: :post) do |f| %>
+    <%# Note the `scope: 'helpers.label'` option is the default for the label, but I want to call those specifically out %>
+    <%= f.label :orcid_profile_id, value: t('orcid/profile_connection.connect_button_text', scope: 'helpers.label') %>
+    <%= f.text_field :orcid_profile_id, class:"orcid-input" %>
     <button type="submit" class="search-submit btn btn-primary" id="keyword-search-submit" tabindex="2">
-      <span class="orcid-connect">Connect</span>
+      <span class="orcid-connect"><%= t('orcid/profile_connection.connect_button_text', scope: 'helpers.label') %></span>
     </button>
-<% end %>
+  <% end %>
+  </p>
+</div>
 

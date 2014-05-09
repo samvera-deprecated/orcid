@@ -60,6 +60,8 @@ if defined?(Orcid)
 end
 ```
 
+**To customize the labels, review the `./config/locales/orcid.en.yml` file.**
+
 ## Registering for an ORCID application profile
 
 Your application which will interface with ORCID must be registered with ORCID.  Note that you will want to register your production

@@ -30,3 +30,11 @@ en:
       messages:
         profile_connection_not_found: "Unable to find an existing Orcid Profile connection."
         verified_profile_connection_exists: "You have already connected and verified your Orcid Profile (%{orcid_profile_id})."
+    verbose_name: Open Researcher and Contributor ID (ORCID)'
+  helpers:
+    label:
+      orcid/profile_connection:
+        orcid_profile_id: "Enter your existing ORCID (####-####-####-####)"
+        create_an_orcid: Create an ORCID
+        look_up_your_existing_orcid: Look up your existing ORCID
+        connect_button_text: Connect
