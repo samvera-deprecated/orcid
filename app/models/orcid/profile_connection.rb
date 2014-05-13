@@ -7,8 +7,9 @@ module Orcid
     include ActiveModel::Conversion
     extend ActiveModel::Naming
 
+    # See: http://support.orcid.org/knowledgebase/articles/132354-tutorial-searching-with-the-api
     class_attribute :available_query_attribute_names
-    self.available_query_attribute_names = [:email, :text]
+    self.available_query_attribute_names = [:email, :text, :digital_object_ids]
 
     available_query_attribute_names.each do |attribute_name|
       attribute attribute_name
@@ -68,7 +69,16 @@ module Orcid
     private :query_requested?
 
     def query_attributes
-      attributes.slice(*available_query_attribute_names)
+      available_query_attribute_names.each_with_object({}) do |name, mem|
+        orcid_formatted_name = convert_attribute_name_to_orcid_format(name)
+        mem[orcid_formatted_name] = attributes.fetch(name)
+        mem
+      end
     end
+
+    def convert_attribute_name_to_orcid_format(name)
+      name.to_s.gsub(/_+/, '-')
+    end
+    private :convert_attribute_name_to_orcid_format
   end
 end
