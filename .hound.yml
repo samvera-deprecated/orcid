@@ -187,6 +187,7 @@ Documentation:
 
 DotPosition:
   Description: 'Checks the position of the dot in multi-line method calls.'
+  EnforcedStyle: trailing
   Enabled: true
 
 DoubleNegation:
