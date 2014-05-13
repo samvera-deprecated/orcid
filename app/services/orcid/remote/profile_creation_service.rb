@@ -1,8 +1,11 @@
 require 'orcid/remote/service'
+require 'oauth2/error'
+require 'nokogiri'
 module Orcid
   module Remote
     # Responsible for minting a new ORCID for the given payload.
     class ProfileCreationService < Orcid::Remote::Service
+      USER_WITH_THIS_EMAIL_ALREADY_EXISTS =  'User with this email already exists'.freeze
       def self.call(payload, config = {}, &callback_config)
         new(config, &callback_config).call(payload)
       end
@@ -20,6 +23,8 @@ module Orcid
       def call(payload)
         response = deliver(payload)
         parse(response)
+      rescue ::OAuth2::Error => e
+        parse_exception(e)
       end
 
       protected
@@ -37,6 +42,17 @@ module Orcid
         else
           callback(:failure)
           false
+        end
+      end
+
+      def parse_exception(exception)
+        doc = Nokogiri::XML.parse(exception.response.body)
+        error_text = doc.css('error-desc').text
+        if error_text == USER_WITH_THIS_EMAIL_ALREADY_EXISTS
+          callback(:orcid_email_already_exists, error_text)
+          false
+        else
+          fail exception
         end
       end
 
