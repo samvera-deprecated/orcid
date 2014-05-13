@@ -1,0 +1,258 @@
+{
+  "message-version": "1.1",
+  "orcid-search-results": {
+    "orcid-search-result": [
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      },
+      {
+        "relevancy-score": {
+          "value": 0.016482107
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Reserved For Claim"
+              }
+            },
+            "keywords": null,
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      }
+    ],
+    "num-found": 0
+  }
+}

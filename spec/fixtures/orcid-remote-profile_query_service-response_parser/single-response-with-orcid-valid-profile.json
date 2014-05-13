@@ -1,0 +1,71 @@
+{
+  "message-version": "1.1",
+  "orcid-search-results": {
+    "orcid-search-result": [
+      {
+        "relevancy-score": {
+          "value": 14.298138
+        },
+        "orcid-profile": {
+          "orcid": null,
+          "orcid-identifier": {
+            "value": null,
+            "uri": "http://orcid.org/MY-ORCID-PROFILE-ID",
+            "path": "MY-ORCID-PROFILE-ID",
+            "host": "orcid.org"
+          },
+          "orcid-bio": {
+            "personal-details": {
+              "given-names": {
+                "value": "Corwin"
+              },
+              "family-name": {
+                "value": "Amber"
+              }
+            },
+            "biography": {
+              "value": "MY-ORCID-BIOGRAPHY",
+              "visibility": null
+            },
+            "contact-details": {
+              "email": [
+                {
+                  "value": "MY-ORCID-EMAIL",
+                  "primary": true,
+                  "current": true,
+                  "verified": true,
+                  "visibility": null,
+                  "source": null
+                }
+              ],
+              "address": {
+                "country": {
+                  "value": "US",
+                  "visibility": null
+                }
+              }
+            },
+            "keywords": {
+              "keyword": [
+                {
+                  "value": "Lord of Amber"
+                }
+              ],
+              "visibility": null
+            },
+            "delegation": null,
+            "applications": null,
+            "scope": null
+          },
+          "orcid-activities": {
+            "affiliations": null
+          },
+          "type": null,
+          "group-type": null,
+          "client-type": null
+        }
+      }
+    ],
+    "num-found": 1
+  }
+}

@@ -28,6 +28,12 @@ describe 'public api query', requires_net_connect: true do
     Then { expect(result.size).to be > 0 }
   end
 
+  context 'with bogus text query' do
+    Given(:parameters) { { text: 'orcid@sufia.org' } }
+    When(:result) { runner.call(parameters) }
+    Then { expect(result.size).to eq 0 }
+  end
+
   context 'with a compound text query' do
     Given(:parameters) { { email: "nobody@gmail.com", text: '"Jeremy+Friesen"' } }
     When(:result) { runner.call(parameters) }
