@@ -1,0 +1,11 @@
+<div class="pending-connection">
+  <p>
+    You have an ORCID (<a class="orcid-profile-id" href="<%= Orcid.url_for_orcid_id(pending_connection.orcid_profile_id)%>" ><%= pending_connection.orcid_profile_id %></a>).
+  </p>
+  <p>However, your ORCID has not been verified by this system. There are a few possibilities:
+    <ul>
+      <li>You may not have claimed your ORCID. <a class="find-out-more" href="http://support.orcid.org/knowledgebase/articles/164480-creating-claiming-new-records">Find out more about claiming your ORCID.</a></li>
+      <li>You have claimed your ORCID, but have not used it to <%= link_to('sign into this application', user_omniauth_authorize_path(provider: 'orcid'), class: 'signin-via-orcid') %>.</li>
+    </ul>
+  </p>
+</div>
