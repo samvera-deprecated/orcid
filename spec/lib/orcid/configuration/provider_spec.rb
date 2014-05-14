@@ -13,6 +13,7 @@ module Orcid
         'ORCID_AUTHORIZE_URL' => '_AUTHORIZE_URL',
         'ORCID_APP_ID' => '_APP_ID',
         'ORCID_APP_SECRET' => '_APP_SECRET',
+        'ORCID_HOST_URL' => '_HOST_URL',
       }
     }
 
@@ -22,6 +23,7 @@ module Orcid
     its(:site_url) { should eq storage.fetch('ORCID_SITE_URL') }
     its(:token_url) { should eq storage.fetch('ORCID_TOKEN_URL') }
     its(:signin_via_json_url) { should eq storage.fetch('ORCID_REMOTE_SIGNIN_URL') }
+    its(:host_url) { should eq storage.fetch('ORCID_HOST_URL') }
     its(:authorize_url) { should eq storage.fetch('ORCID_AUTHORIZE_URL') }
     its(:id) { should eq storage.fetch('ORCID_APP_ID') }
     its(:secret) { should eq storage.fetch('ORCID_APP_SECRET') }
@@ -32,6 +34,7 @@ module Orcid
       And { expect(provider.site_url).to be_an_instance_of(String) }
       And { expect(provider.token_url).to be_an_instance_of(String) }
       And { expect(provider.signin_via_json_url).to be_an_instance_of(String) }
+      And { expect(provider.host_url).to be_an_instance_of(String) }
       And { expect(provider.authorize_url).to be_an_instance_of(String) }
       And { expect { provider.id }.to raise_error Orcid::ConfigurationError }
       And { expect { provider.secret }.to raise_error Orcid::ConfigurationError }
