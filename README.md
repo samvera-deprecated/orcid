@@ -9,6 +9,7 @@ To fully interact with the Orcid remote services, you will need to [register you
 * [Registering for an ORCID application profile](#registering-for-an-orcid-application-profile)
 * [Setting up your own ORCIDs in the ORCID Development Sandbox](#setting-up-your-own-orcids-in-the-orcid-development-sandbox)
 * [Running the tests](#running-the-tests)
+* [Contributing to this gem](./CONTRIBUTING.md)
 
 ## Installation
 
@@ -120,7 +121,3 @@ Run the online tests with
 ```console
 $ rake spec:online
 ```
-
-## TODO Items
-
-* When searching for your profile, expose Name and associated DOI as query parameters.
