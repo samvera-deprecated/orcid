@@ -3,18 +3,17 @@
   <h3><i class="icon-user"></i> <%= link_to t('orcid.verbose_name'), 'http://orcid.org/' %></h3>
   <% status_processor.call(current_user) do |on|%>
     <% on.profile_request_pending do |pending_request| %>
-      <%= render partial: 'profile_request_pending', object: pending_request %>
+      <%= render partial: 'orcid/profile_connections/profile_request_pending', object: pending_request %>
     <% end %>
     <% on.authenticated_connection do |profile| %>
-      <%= render partial: 'authenticated_connection', object: profile %>
+      <%= render partial: 'orcid/profile_connections/authenticated_connection', object: profile %>
     <% end %>
     <% on.pending_connection do |profile| %>
-      <%= render partial: 'pending_connection', object: profile %>
+      <%= render partial: 'orcid/profile_connections/pending_connection', object: profile %>
     <% end %>
     <% on.unknown do %>
       <% defined?(default_search_text) || default_search_text = '' %>
-      <%= render partial: 'options_to_connect_orcid_profile', locals: { default_search_text: default_search_text } %>
+      <%= render template: 'orcid/profile_connections/_options_to_connect_orcid_profile', locals: { default_search_text: default_search_text } %>
     <% end %>
   <% end %>
 </div>
-
