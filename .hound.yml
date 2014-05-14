@@ -236,7 +236,7 @@ EvenOdd:
 
 FileName:
   Description: 'Use snake_case for source file names.'
-  Enabled: true
+  Enabled: false
 
 FlipFlop:
   Description: 'Checks for flip flops'
