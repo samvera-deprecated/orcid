@@ -71,6 +71,10 @@ module Orcid
     object.run
   end
 
+  def url_for_orcid_id(orcid_profile_id)
+    File.join(provider.host_url, orcid_profile_id)
+  end
+
   def oauth_client
     # passing the site: option as Orcid's Sandbox has an invalid certificate
     # for the api.sandbox.orcid.org

@@ -85,6 +85,14 @@ describe Orcid do
     end
   end
 
+  context '.url_for_orcid_id' do
+    it 'should render a valid uri' do
+      profile_id = '123-456'
+      uri = URI.parse(Orcid.url_for_orcid_id(profile_id))
+      expect(uri.path).to eq('/123-456')
+    end
+  end
+
 =begin
   context '#authenticated_orcid' do
     it 'should be authenticated' do

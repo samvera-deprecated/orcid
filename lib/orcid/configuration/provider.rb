@@ -40,6 +40,14 @@ module Orcid
         end
       end
 
+      attr_writer :host_url
+      def host_url
+        @host_url ||= store.fetch('ORCID_HOST_URL') do
+          uri = URI.parse(signin_via_json_url)
+          "#{uri.scheme}://#{uri.host}"
+        end
+      end
+
       attr_writer :authorize_url
       def authorize_url
         @authorize_url ||= store.fetch('ORCID_AUTHORIZE_URL') do
