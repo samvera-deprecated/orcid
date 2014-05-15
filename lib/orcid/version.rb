@@ -1,3 +1,3 @@
 module Orcid
-  VERSION = '0.1.1'
+  VERSION = '0.8.0'
 end
