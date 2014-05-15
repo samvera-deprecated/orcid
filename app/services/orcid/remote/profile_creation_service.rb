@@ -5,7 +5,6 @@ module Orcid
   module Remote
     # Responsible for minting a new ORCID for the given payload.
     class ProfileCreationService < Orcid::Remote::Service
-      USER_WITH_THIS_EMAIL_ALREADY_EXISTS =  'User with this email already exists'.freeze
       def self.call(payload, config = {}, &callback_config)
         new(config, &callback_config).call(payload)
       end
@@ -48,8 +47,8 @@ module Orcid
       def parse_exception(exception)
         doc = Nokogiri::XML.parse(exception.response.body)
         error_text = doc.css('error-desc').text
-        if error_text == USER_WITH_THIS_EMAIL_ALREADY_EXISTS
-          callback(:orcid_email_already_exists, error_text)
+        if error_text.to_s.size > 0
+          callback(:orcid_validation_error, error_text)
           false
         else
           fail exception

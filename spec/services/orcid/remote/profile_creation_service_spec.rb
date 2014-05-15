@@ -11,7 +11,7 @@ module Orcid::Remote
       { 'Content-Type' => 'application/vdn.orcid+xml', 'Accept' => 'application/xml' }
     }
     Given(:callback) { StubCallback.new }
-    Given(:callback_config) { callback.configure(:orcid_email_already_exists) }
+    Given(:callback_config) { callback.configure(:orcid_validation_error) }
 
     Given(:response) {
       double("Response", headers: { location: File.join("/", minted_orcid, "orcid-profile") })
@@ -38,10 +38,10 @@ module Orcid::Remote
       And { token.should have_received(:post).with(config.fetch(:path), body: payload, headers: request_headers)}
     end
 
-    context 'with requested email already existing' do
+    context 'with an orcid validation error' do
       before { token.should_receive(:post).and_raise(error) }
       Given(:token) { double('Token') }
-      Given(:error_description) { described_class::USER_WITH_THIS_EMAIL_ALREADY_EXISTS }
+      Given(:error_description) { 'My special error' }
       Given(:response) do
         double(
           'Response',
@@ -53,24 +53,8 @@ module Orcid::Remote
       Given(:error) { ::OAuth2::Error.new(response) }
       When(:returned_value) { described_class.call(payload, config, &callback_config) }
       Then { returned_value.should eq(false) }
-      And { expect(callback.invoked).to eq [:orcid_email_already_exists, error_description] }
+      And { expect(callback.invoked).to eq [:orcid_validation_error, error_description] }
     end
 
-    context 'with another OAuth2 failure' do
-      before { token.should_receive(:post).and_raise(error) }
-      Given(:token) { double('Token') }
-      Given(:error_description) { 'Something Else' }
-      Given(:response) do
-        double(
-          'Response',
-          :body => "<error-desc>#{error_description}</error-desc>",
-          :parsed => true,
-          :error= => true
-        )
-      end
-      Given(:error) { ::OAuth2::Error.new(response) }
-      When(:returned_value) { described_class.call(payload, config, &callback_config) }
-      Then { expect(returned_value).to have_failed(OAuth2::Error) }
-    end
   end
 end
