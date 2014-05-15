@@ -27,104 +27,22 @@ module Orcid
 
     end
 
-    context '#handle_profile_creation_response' do
-      it 'should update local' do
+    context '#successful_profile_creation' do
+      it 'should update profile request' do
         # Don't want to hit the database
         subject.should_receive(:update_column).with(:orcid_profile_id, orcid_profile_id)
         Orcid.should_receive(:connect_user_and_orcid_profile).with(user, orcid_profile_id)
 
-        subject.handle_profile_creation_response(orcid_profile_id)
+        subject.successful_profile_creation(orcid_profile_id)
       end
     end
 
-    context '#xml_payload' do
-      it 'should be a parsable XML document' do
-        expect {
-          ActiveSupport::XmlMini.parse(subject.xml_payload)
-        }.to_not raise_error
-      end
-    end
-
-    context '#validate_before_run' do
-      let(:orcid_profile) { double('Orcid Profile', to_param: orcid_profile_id) }
-
-      context 'when no orcid profile has been assigned' do
-        before { Orcid.should_receive(:profile_for).with(user).and_return(nil) }
-        it 'should return true' do
-          expect(subject.validate_before_run).to eq(true)
-        end
-      end
-
-      context 'orcid_profile_id is set' do
-        before { subject.orcid_profile_id = orcid_profile_id }
-
-        it 'should return false' do
-          expect(subject.validate_before_run).to eq(false)
-        end
-
-        it 'should set an error' do
-          expect {
-            subject.validate_before_run
-          }.to change { subject.errors.full_messages.count }.by(1)
-        end
-
-      end
-
-      context 'user has an orcid_profile' do
-        before { Orcid.should_receive(:profile_for).with(user).and_return(orcid_profile) }
-
-        it 'should return false' do
-          expect(subject.validate_before_run).to eq(false)
-        end
-
-        it 'should set an error' do
-          expect {
-            subject.validate_before_run
-          }.to change { subject.errors.full_messages.count }.by(1)
-        end
-
-      end
-    end
-
-    context '#run' do
-      let(:profile_creation_service) { double('Profile Creation Service') }
-      let(:payload_xml_builder) { double('Payload Xml Builder') }
-      let(:validator) { double('Submission Guardian') }
-      let(:xml_payload) { double('Xml Payload') }
-
-      context 'with the submission guardian permitting the request' do
-        before(:each) do
-          validator.should_receive(:call).with(subject).
-            and_return(true)
-          payload_xml_builder.should_receive(:call).with(subject.attributes).
-            and_return(xml_payload)
-          profile_creation_service.should_receive(:call).with(xml_payload).
-            and_return(orcid_profile_id)
-        end
-
-        it 'should run a request and handle the response' do
-          subject.run(
-            payload_xml_builder: payload_xml_builder,
-            profile_creation_service: profile_creation_service,
-            validator: validator
-          )
-        end
-      end
-
-      context 'with the submission guardian returning false' do
-        before(:each) do
-          validator.should_receive(:call).with(subject).
-            and_return(false)
-          payload_xml_builder.should_not_receive(:call)
-        end
-
-        it 'should raise an exception' do
-          subject.run(
-            payload_xml_builder: payload_xml_builder,
-            profile_creation_service: profile_creation_service,
-            validator: validator
-          )
-        end
+    context '#validation_error_on_profile_creation' do
+      it 'should update profile request' do
+        error_message = '123'
+        # Don't want to hit the database
+        subject.should_receive(:update_column).with(:response_text, error_message)
+        subject.validation_error_on_profile_creation(error_message)
       end
     end
   end

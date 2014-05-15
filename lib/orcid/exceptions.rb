@@ -1,6 +1,28 @@
 module Orcid
 
-  class ConfigurationError < RuntimeError
+  # Intended to be the base for all exceptions raised by the Orcid gem.
+  class BaseError < RuntimeError
+  end
+
+  class ProfileRequestStateError < BaseError
+    def initialize(user)
+      super("Unexpected Orcid::ProfileRequest state for #{user.class} ID=#{user.to_param}.")
+    end
+  end
+
+  class ProfileRequestMethodExpectedError < BaseError
+    def initialize(request, method_name)
+      super("Expected #{request.inspect} to respond to :#{method_name}.")
+    end
+  end
+
+  class MissingUserForProfileRequest < BaseError
+    def initialize(request)
+      super("#{request.class} ID=#{request.to_param} is not associated with a :user.")
+    end
+  end
+
+  class ConfigurationError < BaseError
     def initialize(key_name)
       super("Unable to find #{key_name.inspect} in configuration storage.")
     end
@@ -8,7 +30,7 @@ module Orcid
 
   # Because in trouble shooting what all goes into this remote call,
   # you may very well want all of this.
-  class RemoteServiceError < RuntimeError
+  class RemoteServiceError < BaseError
     def initialize(options)
       text = []
       text << "-- Client --"

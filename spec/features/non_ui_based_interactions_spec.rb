@@ -21,6 +21,7 @@ describe 'non-UI based interactions' , requires_net_connect: true do
     let(:profile_request) {
       FactoryGirl.create(:orcid_profile_request, user: user, primary_email: email, primary_email_confirmation: email)
     }
+    let(:profile_request_coordinator) { Orcid::ProfileRequestCoordinator.new(profile_request)}
 
     before(:each) do
       # Making sure things are properly setup
@@ -28,7 +29,8 @@ describe 'non-UI based interactions' , requires_net_connect: true do
     end
 
     it 'creates a profile' do
-      profile_request.run
+      profile_request_coordinator.call
+      profile_request.reload
 
       orcid_profile_id = profile_request.orcid_profile_id
 
