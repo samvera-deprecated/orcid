@@ -1,6 +1,29 @@
 # Orcid [![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid) [![Build Status](https://travis-ci.org/projecthydra-labs/orcid.png?branch=master)](https://travis-ci.org/projecthydra-labs/orcid)
 
-A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org).
+A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org). It leverages the [Devise MultiAuth plugin](https://rubygems.org/gems/devise-multi_auth) for negotiating the interaction with [orcid.org](https://orcid.org).
+
+## Features
+
+Associate ORCID with your user account for the application by:
+
+* Creating an ORCID
+* Looking up and associating with an existing ORCID
+* Providing an ORCID to directly associate with your account
+
+Authentication
+
+* Using OAuth2, you can use orcid.org as one of your authentication mechanisms
+
+Interacting with ORCID Profile Works:
+
+**The functionality exists, but it will be a bit bumpy to implement.**
+**Plans are to improve the integration with Version 1.0.0 of the Orcid gem.**
+
+* Query for your Orcid Profile's works
+* Append one or more works to your Orcid Profile
+* Replace your Orcid Profile works with one or more works
+
+## Getting Started with the Orcid gem
 
 To fully interact with the Orcid remote services, you will need to [register your ORCID application profile](#registering-for-an-orcid-application-profile).
 
@@ -9,6 +32,7 @@ To fully interact with the Orcid remote services, you will need to [register you
 * [Registering for an ORCID application profile](#registering-for-an-orcid-application-profile)
 * [Setting up your own ORCIDs in the ORCID Development Sandbox](#setting-up-your-own-orcids-in-the-orcid-development-sandbox)
 * [Running the tests](#running-the-tests)
+* [Versioning](#versioning)
 * [Contributing to this gem](./CONTRIBUTING.md)
 
 ## Installation
@@ -121,3 +145,7 @@ Run the online tests with
 ```console
 $ rake spec:online
 ```
+
+## Versioning
+
+**Orcid** uses [Semantic Versioning 2.0.0](http://semver.org/)
