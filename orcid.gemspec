@@ -13,7 +13,11 @@ Gem::Specification.new do |s|
   s.email       = [
     'jeremy.n.friesen@gmail.com'
   ]
-  s.homepage    = 'https://github.com/jeremyf/orcid'
+  s.homepage    = 'https://github.com/projecthydra-labs/orcid'
+  s.metadata    = {
+    'source' => 'https://github.com/projecthydra-labs/orcid',
+    'issue_tracker' => 'https://github.com/projecthydra-labs/orcid/issues'
+  }
   s.summary     = 'A Rails engine for orcid.org integration.'
   s.description = 'A Rails engine for orcid.org integration.'
 
