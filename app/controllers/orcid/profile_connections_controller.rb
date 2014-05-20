@@ -1,5 +1,9 @@
 module Orcid
   # Responsible for negotiating a user request Profile Creation.
+  #
+  # @TODO - Leverage the Orcid::ProfileStatus object instead of the really
+  # chatty method names. The method names are fine, but the knowledge of
+  # Orcid::ProfileStatus is encapsulated in that class.
   class ProfileConnectionsController < Orcid::ApplicationController
     respond_to :html
     before_filter :authenticate_user!

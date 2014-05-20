@@ -18,6 +18,9 @@ module Orcid
 
     # Answers the question: Has the user been authenticated via the ORCID
     # system.
+    #
+    # @TODO - Extract this to the Orcid::ProfileStatus object. As the method
+    # is referenced via a controller, this can easily be moved.
     def verified_authentication?
       Orcid.authenticated_orcid?(orcid_profile_id)
     end

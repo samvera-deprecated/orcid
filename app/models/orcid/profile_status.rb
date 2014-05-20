@@ -1,4 +1,11 @@
 module Orcid
+  # Responsible for determining a given user's orcid profile state as it
+  # pertains to the parent application.
+  #
+  # @TODO - There are quite a few locations where the state related behavior
+  # has leaked out (i.e. the Orcid::ProfileConnectionsController and Orcid::
+  # ProfileRequestsController)
+  #
   # ProfileStatus.status
   # **:authenticated_connection** - User has authenticated against the Orcid
   #   remote system
