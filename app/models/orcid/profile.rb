@@ -2,18 +2,14 @@ module Orcid
   # Provides a container around an Orcid Profile and its relation to the Orcid
   # Works.
   class Profile
-    attr_reader(
-      :orcid_profile_id, :mapper, :remote_service, :xml_renderer, :xml_parser
-    )
-    private :mapper
-    def initialize(orcid_profile_id, config = {})
+    attr_reader :orcid_profile_id, :mapper, :remote_service, :xml_renderer, :xml_parser
+    private :mapper, :remote_service, :xml_renderer, :xml_parser
+    def initialize(orcid_profile_id, collaborators = {})
       @orcid_profile_id = orcid_profile_id
-      @mapper = config.fetch(:mapper) { Orcid.mapper }
-      @remote_service = config.fetch(:remote_service) do
-        Orcid::Remote::WorkService
-      end
-      @xml_renderer = config.fetch(:xml_renderer) { Orcid::Work::XmlRenderer }
-      @xml_parser = config.fetch(:xml_parser) { Orcid::Work::XmlParser }
+      @mapper = collaborators.fetch(:mapper) { default_mapper }
+      @remote_service = collaborators.fetch(:remote_service) { default_remote_service }
+      @xml_renderer = collaborators.fetch(:xml_renderer) { default_xml_renderer }
+      @xml_parser = collaborators.fetch(:xml_parser) { default_xml_parser }
     end
 
     # Answers the question: Has the user been authenticated via the ORCID
@@ -46,6 +42,22 @@ module Orcid
     end
 
     protected
+
+    def default_mapper
+      Orcid.mapper
+    end
+
+    def default_remote_service
+      Orcid::Remote::WorkService
+    end
+
+    def default_xml_renderer
+      Orcid::Work::XmlRenderer
+    end
+
+    def default_xml_parser
+      Orcid::Work::XmlParser
+    end
 
     # Note: We can handle
     def normalize_work(*works)
