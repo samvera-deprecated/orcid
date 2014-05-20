@@ -9,10 +9,7 @@ module Orcid
       attr_reader :works, :template
       def initialize(works, options = {})
         self.works = works
-        @template = options.fetch(:template_path) do
-          template_name = 'app/templates/orcid/work.template.v1.1.xml.erb'
-          Orcid::Engine.root.join(template_name).read
-        end
+        @template = options.fetch(:template) { default_template }
       end
 
       def call
@@ -24,6 +21,10 @@ module Orcid
       def works=(thing)
         @works = Array.wrap(thing)
       end
+
+      def default_template
+        template_name = 'app/templates/orcid/work.template.v1.1.xml.erb'
+        Orcid::Engine.root.join(template_name).read
+      end
     end
   end
-end
