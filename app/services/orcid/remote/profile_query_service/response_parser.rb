@@ -2,6 +2,7 @@ require_dependency 'orcid/remote/profile_query_service'
 module Orcid
   module Remote
     class ProfileQueryService
+      # Responsible for parsing a response document
       class ResponseParser
 
         # A convenience method to expose entry into the ResponseParser function
@@ -10,14 +11,10 @@ module Orcid
         end
 
         attr_reader :response_builder, :logger
-
+        private :response_builder, :logger
         def initialize(collaborators = {})
-          @response_builder = collaborators.fetch(:response_builder) do
-            SearchResponse
-          end
-          @logger = collaborators.fetch(:logger) do
-            Rails.logger
-          end
+          @response_builder = collaborators.fetch(:response_builder) { default_response_builder }
+          @logger = collaborators.fetch(:logger) { default_logger }
         end
 
         def call(document)
@@ -46,6 +43,15 @@ module Orcid
             end
             returning_value
           end
+        end
+
+        private
+        def default_logger
+          Rails.logger
+        end
+
+        def default_response_builder
+          SearchResponse
         end
       end
     end
