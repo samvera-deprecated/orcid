@@ -28,3 +28,4 @@ module Orcid
       end
     end
   end
+end
