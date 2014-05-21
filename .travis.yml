@@ -6,7 +6,7 @@ env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
-script: 'rake spec:travis'
+script: 'COVERAGE=true rake spec:travis'
 
 bundler_args: --without headless debug
 
