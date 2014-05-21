@@ -9,6 +9,8 @@
 
 A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org). It leverages the [Devise MultiAuth plugin](https://rubygems.org/gems/devise-multi_auth) for negotiating the interaction with [orcid.org](https://orcid.org).
 
+**Note: While this is part of ProjectHydra, this gem is not dependent on any of the Hydra components.**
+
 ## Features
 
 Associate ORCID with your user account for the application by:
