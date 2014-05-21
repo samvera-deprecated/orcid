@@ -7,6 +7,9 @@ if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
   SimpleCov.command_name "spec"
+end
+
+if ENV['TRAVIS']
   require 'coveralls'
   Coveralls.wear!('rails')
 end
