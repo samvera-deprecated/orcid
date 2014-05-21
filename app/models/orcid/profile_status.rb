@@ -46,7 +46,6 @@ module Orcid
           return callback(:unknown)
         end
       end
-      return callback(:unknown)
     end
 
     private

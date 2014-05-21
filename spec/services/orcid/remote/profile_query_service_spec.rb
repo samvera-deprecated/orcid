@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_helper'
 require 'orcid/remote/profile_query_service'
 require 'ostruct'
 
@@ -8,8 +8,6 @@ module Orcid::Remote
     Given(:config) {
       {
         token: token,
-        path: 'somehwere',
-        headers: 'headers',
         parser: parser,
         query_parameter_builder: query_parameter_builder
       }
@@ -24,13 +22,27 @@ module Orcid::Remote
     Given(:parsed_response) { 'HELLO WORLD!' }
 
     context '.call' do
-      before(:each) do
-        query_parameter_builder.should_receive(:call).with(parameters).and_return(normalized_parameters)
-        token.should_receive(:get).with(config[:path], headers: config[:headers], params: normalized_parameters).and_return(response)
+      context 'with at least one found' do
+        before(:each) do
+          query_parameter_builder.should_receive(:call).with(parameters).and_return(normalized_parameters)
+          token.should_receive(:get).with(kind_of(String), headers: kind_of(Hash), params: normalized_parameters).and_return(response)
+        end
+        When(:result) { described_class.call(parameters, config, &callback_config) }
+        Then { expect(result).to eq(parsed_response) }
+        And { expect(callback.invoked).to eq [:found, parsed_response] }
       end
-      When(:result) { described_class.call(parameters, config, &callback_config) }
-      Then { expect(result).to eq(parsed_response) }
-      And { expect(callback.invoked).to eq [:found, parsed_response] }
+
+      context 'with no objects found' do
+        before(:each) do
+          query_parameter_builder.should_receive(:call).with(parameters).and_return(normalized_parameters)
+          token.should_receive(:get).with(kind_of(String), headers: kind_of(Hash), params: normalized_parameters).and_return(response)
+        end
+        When(:parsed_response) { '' }
+        When(:result) { described_class.call(parameters, config, &callback_config) }
+        Then { expect(result).to eq(parsed_response) }
+        And { expect(callback.invoked).to eq [:not_found] }
+
+      end
     end
   end
 end
