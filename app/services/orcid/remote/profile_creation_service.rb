@@ -12,9 +12,7 @@ module Orcid
       attr_reader :token, :path, :headers
       def initialize(config = {}, &callback_config)
         super(&callback_config)
-        @token = config.fetch(:token) do
-          Orcid.client_credentials_token('/orcid-profile/create')
-        end
+        @token = config.fetch(:token) { default_token }
         @path = config.fetch(:path) { 'v1.1/orcid-profile' }
         @headers = config.fetch(:headers) { default_headers }
       end
@@ -56,10 +54,11 @@ module Orcid
       end
 
       def default_headers
-        {
-          'Accept' => 'application/xml',
-          'Content-Type' => 'application/vdn.orcid+xml'
-        }
+        { 'Accept' => 'application/xml', 'Content-Type' => 'application/vdn.orcid+xml' }
+      end
+
+      def default_token
+        Orcid.client_credentials_token('/orcid-profile/create')
       end
     end
   end

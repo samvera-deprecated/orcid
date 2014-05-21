@@ -8,6 +8,7 @@ describe Orcid do
   its(:provider) { should respond_to :secret }
   its(:mapper) { should respond_to :map }
   its(:use_relative_model_naming?) { should eq true }
+  its(:table_name_prefix) { should be_an_instance_of String }
 
   context '.authentication_model' do
     subject { Orcid.authentication_model }

@@ -56,5 +56,22 @@ module Orcid::Remote
       And { expect(callback.invoked).to eq [:orcid_validation_error, error_description] }
     end
 
+    context 'with a remote error that is not an orcid validation error' do
+      before { token.should_receive(:post).and_raise(error) }
+      Given(:token) { double('Token') }
+      Given(:response) do
+        double(
+          'Response',
+          :body => 'Danger! Problem! Help!',
+          :parsed => true,
+          :error= => true
+        )
+      end
+      Given(:error) { ::OAuth2::Error.new(response) }
+      When(:returned_value) { described_class.call(payload, config, &callback_config) }
+      Then { expect(returned_value).to have_failed }
+      And { expect(callback.invoked).to be_nil }
+    end
+
   end
 end
