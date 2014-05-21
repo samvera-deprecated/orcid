@@ -17,6 +17,7 @@ module Orcid
       end
     end
 
+    its(:default_persister) { should respond_to(:call) }
     its(:email) { should eq email }
     its(:to_model) { should eq subject }
     its(:user) { should eq user }

@@ -1,4 +1,4 @@
-require 'orcid/engine'
+require 'orcid/engine' if defined?(Rails)
 require 'orcid/configuration'
 require 'orcid/exceptions'
 require 'figaro'
@@ -86,5 +86,19 @@ module Orcid
   def client_credentials_token(scope, options = {})
     tokenizer = options.fetch(:tokenizer) { oauth_client.client_credentials }
     tokenizer.get_token(scope: scope)
+  end
+
+  # As per an isolated_namespace Rails engine.
+  # But the isolated namespace creates issues.
+  # @api private
+  def table_name_prefix
+    'orcid_'
+  end
+
+  # Because I am not using isolate_namespace for Orcid::Engine
+  # I need this for the application router to find the appropriate routes.
+  # @api private
+  def use_relative_model_naming?
+    true
   end
 end

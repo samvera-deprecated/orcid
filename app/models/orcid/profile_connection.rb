@@ -38,9 +38,9 @@ module Orcid
     private :persister
 
     def default_persister
+      require 'orcid'
       Orcid.method(:connect_user_and_orcid_profile)
     end
-    private :default_persister
 
     attr_writer :profile_query_service
     def profile_query_service
