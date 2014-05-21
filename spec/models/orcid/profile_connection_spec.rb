@@ -1,15 +1,18 @@
-require 'spec_helper'
+require 'fast_helper'
+require 'orcid/profile_connection'
 
 # :nodoc:
 module Orcid
   describe ProfileConnection do
     let(:email) { 'test@hello.com' }
     let(:dois) { '123' }
-    let(:user) { FactoryGirl.build_stubbed(:user) }
+    let(:user) { double('User') }
     let(:profile_query_service) { double('Profile Lookup Service') }
+    let(:persister) { double('Persister') }
 
     subject do
       Orcid::ProfileConnection.new(email: email, user: user).tap do |pc|
+        pc.persister = persister
         pc.profile_query_service = profile_query_service
       end
     end
@@ -53,7 +56,6 @@ module Orcid
 
     context '#save' do
       let(:orcid_profile_id) { '1234-5678' }
-      let(:persister) { double('Persister') }
 
       it 'should call the persister when valid' do
         subject.orcid_profile_id = orcid_profile_id
@@ -61,15 +63,14 @@ module Orcid
           with(user, orcid_profile_id).
           and_return(:persisted)
 
-        expect(subject.save(persister: persister)).to eq(:persisted)
+        expect(subject.save).to eq(:persisted)
       end
 
       it 'should NOT call the persister and add errors when not valid' do
         subject.user = nil
         subject.orcid_profile_id = nil
 
-        expect { subject.save(persister: persister) }.
-          to change { subject.errors.count }.by(2)
+        expect { subject.save }.to change { subject.errors.count }.by(2)
       end
     end
 
