@@ -1,3 +1,5 @@
+require 'virtus'
+require 'active_model'
 module Orcid
   # Responsible for connecting an authenticated user to the ORCID profile that
   # the user searched for and selected.
@@ -21,16 +23,24 @@ module Orcid
     validates :user, presence: true
     validates :orcid_profile_id, presence: true
 
-    def save(collaborators = {})
-      persister = collaborators.fetch(:persister) do
-        Orcid.method(:connect_user_and_orcid_profile)
-      end
+    def save
       valid? ? persister.call(user, orcid_profile_id) : false
     end
 
     def persisted?
       false
     end
+
+    attr_writer :persister
+    def persister
+      @persister ||= default_persister
+    end
+    private :persister
+
+    def default_persister
+      Orcid.method(:connect_user_and_orcid_profile)
+    end
+    private :default_persister
 
     attr_writer :profile_query_service
     def profile_query_service
