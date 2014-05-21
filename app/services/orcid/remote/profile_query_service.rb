@@ -35,14 +35,11 @@ module Orcid
       end
 
       def default_headers
-        {
-          :accept => 'application/orcid+json',
-          'Content-Type' => 'application/orcid+xml'
-        }
+        { :accept => 'application/orcid+json', 'Content-Type' => 'application/orcid+xml' }
       end
 
       def issue_callbacks(search_results)
-        if Array(search_results).flatten.compact.any?
+        if Array.wrap(search_results).any?(&:present?)
           callback(:found, search_results)
         else
           callback(:not_found)

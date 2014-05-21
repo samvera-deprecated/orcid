@@ -396,6 +396,16 @@ ParenthesesAroundCondition:
 
 PercentLiteralDelimiters:
   Description: 'Use `%`-literal delimiters consistently'
+  PreferredDelimiters:
+    '%':  ()
+    '%i': ()
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': ()
+    '%W': ()
+    '%x': ()
   Enabled: true
 
 PerlBackrefs:

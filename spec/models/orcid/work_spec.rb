@@ -19,6 +19,27 @@ module Orcid
     its(:external_identifiers) { should be_an_instance_of(Array) }
     its(:valid?) { should eq true }
 
+    context '#==' do
+      context 'differing objects' do
+        it 'should not be ==' do
+          expect(subject == 'other').to eq(false)
+        end
+      end
+      context 'same classes but different objects' do
+        it 'should not be ==' do
+          other = described_class.new
+          expect(subject == other).to eq(false)
+        end
+      end
+      context 'same classes with same put code' do
+        it 'should be ==' do
+          other = described_class.new(put_code: 123)
+          subject.put_code = 123
+          expect(subject == other).to eq(true)
+        end
+      end
+    end
+
     context '#id' do
       context 'with put_code' do
         subject { described_class.new(put_code: '123') }
