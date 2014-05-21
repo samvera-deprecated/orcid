@@ -7,8 +7,9 @@ if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
   SimpleCov.command_name "spec"
+  require 'coveralls'
+  Coveralls.wear!('rails')
 end
-
 
 require 'figaro' # must declare before the application loads
 require 'engine_cart'
