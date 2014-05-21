@@ -1,6 +1,11 @@
-# Orcid [![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid) [![Build Status](https://travis-ci.org/projecthydra-labs/orcid.png?branch=master)](https://travis-ci.org/projecthydra-labs/orcid)
+# Orcid
 
+[![Version](https://badge.fury.io/rb/orcid.png)](http://badge.fury.io/rb/orcid)
+[![Build Status](https://travis-ci.org/projecthydra-labs/orcid.png?branch=master)](https://travis-ci.org/projecthydra-labs/orcid)
 [![Coverage Status](https://img.shields.io/coveralls/projecthydra-labs/orcid.svg)](https://coveralls.io/r/projecthydra-labs/orcid)
+[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/orcid/0.8.0/frames)
+[![APACHE 2 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
+[![Contributing Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 
 A [Rails Engine](https://guides.rubyonrails.org/engines.html) for integrating with [Orcid](https://orcid.org). It leverages the [Devise MultiAuth plugin](https://rubygems.org/gems/devise-multi_auth) for negotiating the interaction with [orcid.org](https://orcid.org).
 
