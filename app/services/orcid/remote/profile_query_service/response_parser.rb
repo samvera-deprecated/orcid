@@ -23,20 +23,9 @@ module Orcid
           .each_with_object([]) do |result, returning_value|
             profile = result.fetch('orcid-profile')
             begin
-              identifier = profile.fetch('orcid-identifier').fetch('path')
-              orcid_bio = profile.fetch('orcid-bio')
-              given_names = orcid_bio.fetch('personal-details').fetch('given-names').fetch('value')
-              family_name = orcid_bio.fetch('personal-details').fetch('family-name').fetch('value')
-              emails = []
-              contact_details = orcid_bio['contact-details']
-              if contact_details
-                emails = (contact_details['email'] || []).map {|email| email.fetch('value') }
-              end
-              label = "#{given_names} #{family_name}"
-              label << ' (' << emails.join(', ') << ')' if emails.any?
-              label << " [ORCID: #{identifier}]"
-              biography = ''
-              biography = orcid_bio['biography']['value'] if orcid_bio['biography']
+              identifier = extract_identifier(profile)
+              label = extract_label(identifier, profile)
+              biography = extract_biography(profile)
               returning_value << response_builder.new('id' => identifier, 'label' => label, 'biography' => biography)
             rescue KeyError => e
               logger.warn("Unexpected ORCID JSON Response, part of the response has been ignored.\tException Encountered:#{e.class}\t#{e}")
@@ -46,6 +35,33 @@ module Orcid
         end
 
         private
+        def extract_identifier(profile)
+          profile.fetch('orcid-identifier').fetch('path')
+        end
+
+        def extract_label(identifier, profile)
+          orcid_bio = profile.fetch('orcid-bio')
+          given_names = orcid_bio.fetch('personal-details').fetch('given-names').fetch('value')
+          family_name = orcid_bio.fetch('personal-details').fetch('family-name').fetch('value')
+          emails = []
+          contact_details = orcid_bio['contact-details']
+          if contact_details
+            emails = (contact_details['email'] || []).map {|email| email.fetch('value') }
+          end
+          label = "#{given_names} #{family_name}"
+          label << ' (' << emails.join(', ') << ')' if emails.any?
+          label << " [ORCID: #{identifier}]"
+        end
+
+        def extract_biography(profile)
+          orcid_bio = profile.fetch('orcid-bio')
+          if orcid_bio['biography']
+            orcid_bio['biography'].fetch('value')
+          else
+            ''
+          end
+        end
+
         def default_logger
           Rails.logger
         end
