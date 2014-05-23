@@ -30,18 +30,20 @@ module Orcid
     end
 
     def append_new_work(*works)
-      orcid_works = normalize_work(*works)
-      xml = xml_renderer.call(orcid_works)
-      remote_service.call(orcid_profile_id, request_method: :post, body: xml)
+      request_work_changes_via(:post, *works)
     end
 
     def replace_works_with(*works)
-      orcid_works = normalize_work(*works)
-      xml = xml_renderer.call(orcid_works)
-      remote_service.call(orcid_profile_id, request_method: :put, body: xml)
+      request_work_changes_via(:put, *works)
     end
 
     protected
+
+    def request_work_changes_via(request_method, *works)
+      orcid_works = normalize_work(*works)
+      xml = xml_renderer.call(orcid_works)
+      remote_service.call(orcid_profile_id, request_method: request_method, body: xml)
+    end
 
     def default_mapper
       Orcid.mapper
