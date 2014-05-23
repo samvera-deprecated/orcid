@@ -53,10 +53,7 @@ module Orcid
       end
 
       def default_headers
-        {
-          'Accept' => 'application/xml',
-          'Content-Type' => 'application/orcid+xml'
-        }
+        { 'Accept' => 'application/xml', 'Content-Type' => 'application/orcid+xml' }
       end
 
       def default_path

@@ -2,15 +2,11 @@ module Orcid
   # Responsible for exposing the customization mechanism
   class Configuration
     attr_reader :mapper
-    def initialize(options = {})
-      @mapper = options.fetch(:mapper) { default_mapper }
-      @provider = options.fetch(:provider) { default_provider }
-      @authentication_model = options.fetch(:authentication_model) do
-        default_authenticaton_model
-      end
-      @parent_controller = options.fetch(:parent_controller) do
-        '::ApplicationController'
-      end
+    def initialize(collaborators = {})
+      @mapper = collaborators.fetch(:mapper) { default_mapper }
+      @provider = collaborators.fetch(:provider) { default_provider }
+      @authentication_model = collaborators.fetch(:authentication_model) { default_authenticaton_model }
+      @parent_controller = collaborators.fetch(:parent_controller) { default_parent_controller }
     end
 
     attr_accessor :provider
@@ -19,15 +15,15 @@ module Orcid
 
     def register_mapping_to_orcid_work(source_type, legend)
       mapper.configure do |config|
-        config.register(
-          source: source_type,
-          target: 'orcid/work',
-          legend: legend
-        )
+        config.register(source: source_type, target: 'orcid/work', legend: legend)
       end
     end
 
-    protected
+    private
+
+    def default_parent_controller
+      '::ApplicationController'
+    end
 
     def default_mapper
       require 'mappy'

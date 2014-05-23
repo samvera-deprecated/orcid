@@ -2,14 +2,14 @@ module Orcid
   class Work
     # Responsible for transforming a Work into an Orcid Work XML document
     class XmlRenderer
-      def self.call(works, options = {})
-        new(works, options).call
+      def self.call(works, collaborators = {})
+        new(works, collaborators).call
       end
 
       attr_reader :works, :template
-      def initialize(works, options = {})
+      def initialize(works, collaborators = {})
         self.works = works
-        @template = options.fetch(:template) { default_template }
+        @template = collaborators.fetch(:template) { default_template }
       end
 
       def call
