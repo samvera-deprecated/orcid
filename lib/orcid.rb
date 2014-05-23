@@ -46,9 +46,9 @@ module Orcid
     )
   end
 
-  def access_token_for(orcid_profile_id, options = {})
-    client = options.fetch(:client) { oauth_client }
-    tokenizer = options.fetch(:tokenizer) { authentication_model }
+  def access_token_for(orcid_profile_id, collaborators = {})
+    client = collaborators.fetch(:client) { oauth_client }
+    tokenizer = collaborators.fetch(:tokenizer) { authentication_model }
     tokenizer.to_access_token(
       uid: orcid_profile_id, provider: 'orcid', client: client
     )
@@ -83,8 +83,8 @@ module Orcid
     )
   end
 
-  def client_credentials_token(scope, options = {})
-    tokenizer = options.fetch(:tokenizer) { oauth_client.client_credentials }
+  def client_credentials_token(scope, collaborators = {})
+    tokenizer = collaborators.fetch(:tokenizer) { oauth_client.client_credentials }
     tokenizer.get_token(scope: scope)
   end
 
