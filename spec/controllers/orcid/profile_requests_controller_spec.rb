@@ -96,7 +96,7 @@ module Orcid
 
         it 'should render a profile request form' do
           Orcid::ProfileRequest.should_receive(:find_by_user).with(user).and_return(nil)
-          Orcid.should_receive(:enqueue).with(an_instance_of(Orcid::ProfileRequest))
+          Orcid::ProfileRequestCoordinator.should_receive(:call).with(an_instance_of(Orcid::ProfileRequest))
 
           expect do
             post :create, profile_request: profile_request_attributes, use_route: :orcid
@@ -106,7 +106,7 @@ module Orcid
 
         it 'should handle invalid data' do
           Orcid::ProfileRequest.should_receive(:find_by_user).with(user).and_return(nil)
-          Orcid.should_not_receive(:enqueue)
+          Orcid::ProfileRequestCoordinator.should_not_receive(:call)
 
           expect do
             post :create, profile_request: {}, use_route: :orcid

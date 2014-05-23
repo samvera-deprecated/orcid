@@ -71,7 +71,7 @@ module Orcid
     end
 
     def create_profile_request(profile_request)
-      profile_request.save && Orcid.enqueue(profile_request)
+      profile_request.save && Orcid::ProfileRequestCoordinator.call(profile_request)
     end
 
     def profile_request_params
