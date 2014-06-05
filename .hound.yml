@@ -15,6 +15,14 @@
 ## These options were plucked from below and modified accordingly.
 ##
 ################################################################################
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/**/*
+    - config/**/*
+    - spec/internal/**/*
 MethodLength:
   Max: 10
   Description: 'Avoid methods longer than 10 lines of code.'
@@ -184,6 +192,8 @@ DeprecatedHashMethods:
 Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: true
+  Exclude:
+  - spec/**/*
 
 DotPosition:
   Description: 'Checks the position of the dot in multi-line method calls.'
