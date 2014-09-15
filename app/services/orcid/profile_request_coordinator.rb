@@ -80,15 +80,16 @@ module Orcid
     end
 
     def handle_pending_connection_for(profile)
-      message = "Attempted to request ORCID for #{profile_request.class} ID=#{profile_request.to_param}."
-      message << " There is a pending connection for #{user.class} ID=#{user.to_param}."
-      logger.notice(message)
+      log_proifle_exists("There is a pending connection for #{user.class} ID=#{user.to_param}.")
     end
 
     def handle_authenticated_connection_for(profile)
-      message = "Attempted to request ORCID for #{profile_request.class} ID=#{profile_request.to_param}."
-      message << " There is an authenticated connection for  #{user.class} ID=#{user.to_param}."
-      logger.notice(message)
+      log_proifle_exists("There is an authenticated connection for  #{user.class} ID=#{user.to_param}.")
+    end
+
+    def log_proifle_exists(message)
+      pre_amble = "Attempted to request ORCID for #{profile_request.class} ID=#{profile_request.to_param}."
+      logger.notice("#{pre_amble} #{message}")
     end
 
     def xml_payload(request)
