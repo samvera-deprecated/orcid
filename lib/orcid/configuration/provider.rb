@@ -17,7 +17,7 @@ module Orcid
       def authentication_scope
         @authentication_scope ||=
         store.fetch('ORCID_APP_AUTHENTICATION_SCOPE') do
-          '/authenticate /orcid-works/create /orcid-works/update /read-public'
+          '/authenticate /orcid-works/create /orcid-works/update'
         end
       end
 

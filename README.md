@@ -69,6 +69,23 @@ $ rails generate orcid:install
 
 *Note: It will prompt you for your Orcid application secrets.*
 
+
+### Caveat
+
+You will also need to **update your devise configuration** in your routes.
+
+From something like this:
+
+```ruby
+devise_for :users
+```
+
+To:
+
+```ruby
+devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
+```
+
 You may find it helpful to review the help text, as there are a few options for the generator.
 
 ```console
