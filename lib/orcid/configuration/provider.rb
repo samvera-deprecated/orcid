@@ -11,11 +11,13 @@ module Orcid
         @store = store
       end
 
+      # See http://tools.ietf.org/html/draft-ietf-oauth-v2-10#section-3 for
+      # how to formulate scopes
       attr_writer :authentication_scope
       def authentication_scope
         @authentication_scope ||=
         store.fetch('ORCID_APP_AUTHENTICATION_SCOPE') do
-          '/authenticate,/orcid-works/create,/orcid-works/update,/read-public'
+          '/authenticate /orcid-works/create /orcid-works/update /read-public'
         end
       end
 
