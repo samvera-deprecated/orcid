@@ -22,7 +22,10 @@ AllCops:
   Exclude:
     - db/**/*
     - config/**/*
+    - lib/**/version.rb
     - spec/internal/**/*
+    - spec/*_helper.rb
+
 MethodLength:
   Max: 10
   Description: 'Avoid methods longer than 10 lines of code.'
@@ -183,7 +186,7 @@ DefWithParentheses:
 
 Delegate:
   Description: 'Prefer delegate method for delegations.'
-  Enabled: true
+  Enabled: false
 
 DeprecatedHashMethods:
   Description: 'Checks for use of deprecated Hash methods.'
@@ -194,6 +197,7 @@ Documentation:
   Enabled: true
   Exclude:
   - spec/**/*
+  - lib/**/version.rb
 
 DotPosition:
   Description: 'Checks the position of the dot in multi-line method calls.'
@@ -560,7 +564,7 @@ SpecialGlobalVars:
 
 StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
-  Enabled: true
+  Enabled: false
 
 Tab:
   Description: 'No hard tabs.'
