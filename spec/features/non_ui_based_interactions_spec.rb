@@ -28,23 +28,25 @@ describe 'non-UI based interactions' , requires_net_connect: true do
       expect(profile_request.orcid_profile_id).to be_nil
     end
 
-    it 'creates a profile' do
-      profile_request_coordinator.call
-      profile_request.reload
+    if ENV['MAILINATOR_API_KEY']
+      it 'creates a profile' do
+        profile_request_coordinator.call
+        profile_request.reload
 
-      orcid_profile_id = profile_request.orcid_profile_id
+        orcid_profile_id = profile_request.orcid_profile_id
 
-      expect(orcid_profile_id).to match(/\w{4}-\w{4}-\w{4}-\w{4}/)
+        expect(orcid_profile_id).to match(/\w{4}-\w{4}-\w{4}-\w{4}/)
 
-      claim_the_orcid!(random_valid_email_prefix)
+        claim_the_orcid!(random_valid_email_prefix)
 
-      authenticate_the_orcid!(orcid_profile_id, orcid_profile_password)
+        authenticate_the_orcid!(orcid_profile_id, orcid_profile_password)
 
-      orcid_profile = Orcid::Profile.new(orcid_profile_id)
+        orcid_profile = Orcid::Profile.new(orcid_profile_id)
 
-      orcid_profile.append_new_work(work)
+        orcid_profile.append_new_work(work)
 
-      expect(orcid_profile.remote_works(force: true).count).to eq(1)
+        expect(orcid_profile.remote_works(force: true).count).to eq(1)
+      end
     end
 
   end
@@ -80,32 +82,41 @@ describe 'non-UI based interactions' , requires_net_connect: true do
     Devise::MultiAuth::CaptureSuccessfulExternalAuthentication.call(user, normalized_token)
   end
 
-  # Achtung, this is going to be fragile
   def claim_the_orcid!(email_prefix)
-    Capybara.current_driver = :webkit
-    Capybara.app_host = 'http://mailinator.com'
-    Capybara.run_server = false
+    $stdout.puts "Claiming an ORCID. This could take a while."
+    api_token = ENV.fetch('MAILINATOR_API_KEY')
 
-    sleep(2) # Because Orcid may not have delivered the mail just yet
+    mailbox_uri = "https://api.mailinator.com/api/inbox?to=#{email_prefix}&token=#{api_token}"
 
-    visit("/inbox.jsp?to=#{email_prefix}")
-    sleep(2) # Because mailinator might be slow
-    begin
-      page.find('#mailcontainer a').click
-    rescue Capybara::ElementNotFound => e
-      filename = Rails.root.join('tmp/claim_orcid_failure.png')
-      page.save_screenshot(filename, full: true)
-      `open #{filename}`
-      raise e
+    orcid_messages = []
+    mailinator_requests(mailbox_uri) do |response|
+      orcid_messages = response['messages'].select {|m| m['from'] =~ /\.orcid\.org\Z/ }
+      !!orcid_messages.first
     end
 
-    sleep(2) # Because mailinator might be slow
-    href = page.all('.mailview a').collect { |a| a[:href] }.find {|href| href = /\/claim\//}
+    orcid_message = orcid_messages.first
+    raise "Unable to retrieve email for #{email_prefix}@mailinator.com" unless orcid_message
 
-    uri = URI.parse(href)
+    message_uri = "https://api.mailinator.com/api/email?msgid=#{orcid_message.fetch('id')}&token=#{api_token}"
+    claim_uri = nil
+    mailinator_requests(message_uri) do |response|
+      bodies = response.fetch('data').fetch('parts').map { |part| part.fetch('body') }
+      bodies.each do |body|
+        if body =~ %r{(https://sandbox.orcid.org/claim/[\w\?=]+)}
+          claim_uri = $1.strip
+          break
+        end
+      end
+      claim_uri
+    end
+
+    # I have the href for the claim
+    uri = URI.parse(claim_uri)
+    Capybara.current_driver = :webkit
+    Capybara.run_server = false
     Capybara.app_host = "#{uri.scheme}://#{uri.host}"
 
-    visit(uri.path)
+    visit("#{uri.path}?#{uri.query}")
     page.all('input').each do |input|
       case input[:name]
       when 'password' then input.set(orcid_profile_password)
@@ -114,6 +125,27 @@ describe 'non-UI based interactions' , requires_net_connect: true do
       end
     end
     page.all('button').find {|i| i.text == 'Claim' }.click
-    sleep(2) # Because claiming your orcid could be slowe
+    sleep(5) # Because claiming your orcid could be slow
+  end
+
+  def mailinator_requests(uri)
+    base_sleep_duration = ENV.fetch('MAILINATOR_SECONDS_TO_RETRY', 120).to_i
+    retry_attempts = ENV.fetch('MAILINATOR_RETRY_ATTEMPTS', 6).to_i
+    (0...retry_attempts).each do |attempt|
+      sleep_duration = base_sleep_duration * (attempt +1)
+      $stdout.print "\n=-=-= Connecting to Mailinator. Attempt #{attempt+1}\n\tWaiting #{sleep_duration} seconds to connect: "
+      $stdout.flush
+      (0...sleep_duration).each do |second|
+        $stdout.print 'z' if (second % 5 == 0)
+        $stdout.flush
+        sleep(1)
+      end
+      response = JSON.parse(RestClient.get(uri, format: :json))
+      if yield(response)
+        $stdout.print "\n=-=-= Success on attempt #{attempt+1}. Moving on."
+        $stdout.flush
+        break
+      end
+    end
   end
 end
