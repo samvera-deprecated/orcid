@@ -21,6 +21,7 @@ namespace :spec do
   RSpec::Core::RakeTask.new(:all) do
     ENV['COVERAGE'] = 'true'
   end
+
   desc 'Only run specs that do not require net connect'
   RSpec::Core::RakeTask.new(:offline) do |t|
     t.rspec_opts = '--tag ~requires_net_connect'
@@ -29,6 +30,15 @@ namespace :spec do
   desc 'Only run specs that require net connect'
   RSpec::Core::RakeTask.new(:online) do |t|
     t.rspec_opts = '--tag requires_net_connect'
+  end
+
+  desc 'Run the Jenkins CI specs'
+  task :jenkins do
+    ENV['RAILS_ENV'] = 'test'
+    ENV['SPEC_OPTS'] = '--profile 20'
+    Rake::Task['engine_cart:clean'].invoke
+    Rake::Task['engine_cart:generate'].invoke
+    Rake::Task['spec:all'].invoke
   end
 
   desc 'Run the Travis CI specs'
