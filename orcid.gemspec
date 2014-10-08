@@ -30,10 +30,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(/^(test|spec|features)\//)
   s.require_paths = ['lib']
 
-  s.add_dependency 'railties', '~> 4.0.3'
-  # s.add_dependency 'activesupport', '~> 4.0.3'
-  # s.add_dependency 'activerecord', '~> 4.0.3'
-  s.add_dependency 'mappy', '~> 0.1.0'
+  s.add_dependency 'rails', '~> 4.0.3'
   s.add_dependency 'figaro'
   s.add_dependency 'devise-multi_auth', '~> 0.1'
   s.add_dependency 'omniauth-orcid'
