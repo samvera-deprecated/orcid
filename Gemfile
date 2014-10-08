@@ -13,4 +13,5 @@ gemspec
 # To use debugger
 # gem 'debugger'
 gem 'coveralls', require: false
-gem 'therubyracer'
+gem 'execjs'
+gem 'therubyracer', platforms: :ruby
