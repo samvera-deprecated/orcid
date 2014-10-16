@@ -20,7 +20,7 @@ class RequestSandboxAuthorizationCode
   def call(options = {})
     orcid_profile_id = options.fetch(:orcid_profile_id) { ENV['ORCID_CLAIMED_PROFILE_ID'] }
     password = options.fetch(:password) { ENV['ORCID_CLAIMED_PROFILE_PASSWORD'] }
-
+    puts "Attempting to login to orcid { PROFILE_ID: '#{orcid_profile_id}', PASSWORD: '#{password}' }"
     login_to_orcid(orcid_profile_id, password)
     request_authorization
     request_authorization_code
@@ -47,18 +47,23 @@ class RequestSandboxAuthorizationCode
       client_id: orcid_client_id,
       response_type: 'code',
       scope: access_scope,
+      persistentTokenEnabled: true,
       redirect_uri: oauth_redirect_uri
     }
     RestClient.get(authorize_url, { params: parameters, cookies: cookies })
   end
 
   def request_authorization_code
-    RestClient.post(
-      authorize_url, { user_oauth_approval: true }, { cookies: cookies }
+      RestClient.post(
+      authorize_url, { user_oauth_approval: true, persistentTokenEnabled: true }, { cookies: cookies }
     )
   rescue RestClient::Found => e
     uri = URI.parse(e.response.headers.fetch(:location))
     CGI.parse(uri.query).fetch('code').first
+  rescue RestClient::InternalServerError => e
+    File.open("/Users/jfriesen/Desktop/orcid.html", 'w+') {|f| f.puts e.response.body.force_encoding('UTF-8') }
+    $stderr.puts "Response Code: #{e.response.code}\n\tCookies: #{cookies.inspect}\n\tAuthorizeURL: #{authorize_url.inspect}"
+    raise e
   end
 
 end

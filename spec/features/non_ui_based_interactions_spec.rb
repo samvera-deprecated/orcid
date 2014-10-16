@@ -57,11 +57,11 @@ describe 'non-UI based interactions' , requires_net_connect: true do
 
     before(:each) do
       expect(work).to be_valid
-      authenticate_the_orcid!(orcid_profile_id, orcid_profile_password)
     end
 
     subject { Orcid::Profile.new(orcid_profile_id) }
     it 'should increment orcid works' do
+      authenticate_the_orcid!(orcid_profile_id, orcid_profile_password)
       replacement_work = Orcid::Work.new(title: "Test Driven Orcid Integration", work_type: 'test')
       appended_work = Orcid::Work.new(title: "Another Test Drive", work_type: 'test')
 
