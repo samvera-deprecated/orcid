@@ -31,10 +31,16 @@ class RequestSandboxAuthorizationCode
 
   private
 
+  def resource_options
+    { ssl_version: :SSLv23 }.tap {|options|
+      options[:headers] = { cookies: cookies } if cookies
+    }
+  end
+
   def login_to_orcid(orcid_profile_id, password)
-    response = RestClient.post(
-      login_url, userId: orcid_profile_id, password: password
-    )
+    resource = RestClient::Resource.new(login_url, resource_options)
+    response = resource.post({ userId: orcid_profile_id, password: password })
+
     if JSON.parse(response)['success']
       self.cookies = response.cookies
     else
@@ -50,13 +56,13 @@ class RequestSandboxAuthorizationCode
       persistentTokenEnabled: true,
       redirect_uri: oauth_redirect_uri
     }
-    RestClient.get(authorize_url, { params: parameters, cookies: cookies })
+    resource = RestClient::Resource.new("#{authorize_url}?#{parameters.to_query}", resource_options)
+    resource.get
   end
 
   def request_authorization_code
-      RestClient.post(
-      authorize_url, { user_oauth_approval: true, persistentTokenEnabled: true }, { cookies: cookies }
-    )
+    resource = RestClient::Resource.new(authorize_url, resource_options)
+    response = resource.post({ user_oauth_approval: true, persistentTokenEnabled: true })
   rescue RestClient::Found => e
     uri = URI.parse(e.response.headers.fetch(:location))
     CGI.parse(uri.query).fetch('code').first
