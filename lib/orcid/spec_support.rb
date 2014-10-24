@@ -1,4 +1,7 @@
 require 'rest_client'
+
+# This follows the instructions from:
+# http://support.orcid.org/knowledgebase/articles/179969-methods-to-generate-an-access-token-for-testing#curl
 class RequestSandboxAuthorizationCode
 
   def self.call(options = {}, config = {})
