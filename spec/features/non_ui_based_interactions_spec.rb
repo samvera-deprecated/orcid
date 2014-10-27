@@ -140,7 +140,8 @@ describe 'non-UI based interactions' , requires_net_connect: true do
         $stdout.flush
         sleep(1)
       end
-      response = JSON.parse(RestClient.get(uri, format: :json))
+      resource = RestClient::Resource.new(uri, ssl_version: :SSLv23)
+      response = JSON.parse(resource.get(format: :json))
       if yield(response)
         $stdout.print "\n=-=-= Success on attempt #{attempt+1}. Moving on."
         $stdout.flush
