@@ -173,6 +173,23 @@ Run the online tests with
 $ rake spec:online
 ```
 
+### Running ALL of the Tests
+
+Not all of the tests run. There are a few very long running tests that run.
+
+```console
+$ ORCID_APP_ID=<YOUR ORCID APP ID> \
+  ORCID_APP_SECRET=<YOUR ORCID APP SECRET> \
+  MAILINATOR_API_KEY=<YOUR MAILINATOR KEY> \
+  ORCID_CLAIMED_PROFILE_ID=<AN ORCID PROFILE YOUR APP HAS ALREADY CLAIMED> \
+  ORCID_CLAIMED_PROFILE_PASSWORD=<THE PASSWORD FOR THE ALREADY CLAIMED ORCID> \
+  bundle exec rake spec:jenkins
+```
+
+By setting all of the above environment variables, you will run tests that will:
+
+* Create an Orcid, then claim it, and authenticate with your application via ORCID
+
 ## Versioning
 
 **Orcid** uses [Semantic Versioning 2.0.0](http://semver.org/)
