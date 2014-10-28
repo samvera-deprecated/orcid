@@ -131,7 +131,7 @@ describe 'non-UI based interactions' , requires_net_connect: true do
   def mailinator_requests(uri)
     base_sleep_duration = ENV.fetch('MAILINATOR_SECONDS_TO_RETRY', 120).to_i
     retry_attempts = ENV.fetch('MAILINATOR_RETRY_ATTEMPTS', 6).to_i
-    $stdput.print "\n=-=-= Fetching the mail from #{uri}"
+    $stdout.print "\n=-=-= Fetching the mail from #{uri}"
     (0...retry_attempts).each do |attempt|
       sleep_duration = base_sleep_duration * (attempt +1)
       $stdout.print "\n=-=-= Connecting to Mailinator. Attempt #{attempt+1}\n\tWaiting #{sleep_duration} seconds to connect: "
