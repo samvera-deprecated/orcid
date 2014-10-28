@@ -33,6 +33,18 @@ require 'rspec-html-matchers'
 require 'webmock/rspec'
 require 'capybara'
 require 'capybara-webkit'
+require 'headless'
+
+Capybara.register_driver :webkit do |app|
+  Capybara::Driver::Webkit.new(app, :ignore_ssl_errors => true)
+end
+
+Capybara.javascript_driver = :webkit
+
+if ENV['TRAVIS'] || ENV['JENKINS']
+  headless = Headless.new
+  headless.start
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
