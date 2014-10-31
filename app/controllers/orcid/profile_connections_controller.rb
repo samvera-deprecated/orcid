@@ -72,7 +72,8 @@ module Orcid
         'orcid.connections.messages.verified_profile_connection_exists',
         orcid_profile_id: orcid_profile.orcid_profile_id
       )
-      redirect_to('/', flash: { notice: notice })
+      location = path_for(:orcid_settings_path) { main_app.root_path }
+      redirect_to(location, flash: { notice: notice })
     end
   end
 end
