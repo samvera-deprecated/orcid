@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/projecthydra-labs/orcid.png?branch=master)](https://travis-ci.org/projecthydra-labs/orcid)
 [![Code Climate](https://codeclimate.com/github/projecthydra-labs/orcid.png)](https://codeclimate.com/github/projecthydra-labs/orcid)
 [![Coverage Status](https://img.shields.io/coveralls/projecthydra-labs/orcid.svg)](https://coveralls.io/r/projecthydra-labs/orcid)
+[![Documentation Status](http://inch-ci.org/github/projecthydra-labs/orcid.svg?branch=master)](http://inch-ci.org/github/projecthydra-labs/orcid)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/orcid/0.8.0/frames)
 [![APACHE 2 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 [![Contributing Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
