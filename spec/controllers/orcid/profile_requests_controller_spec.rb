@@ -101,6 +101,7 @@ module Orcid
           expect do
             post :create, profile_request: profile_request_attributes, use_route: :orcid
           end.to change { Orcid::ProfileRequest.count }.by(1)
+          expect(flash[:notice]).to eq(I18n.t('orcid.requests.messages.profile_request_created'))
           expect(response).to redirect_to(orcid.profile_request_path)
         end
 

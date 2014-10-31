@@ -36,7 +36,15 @@ module Orcid
       #
       # Thus we need to pass the location.
       if new_profile_request.valid?
-        respond_with(orcid, location: orcid.profile_request_path)
+        flash[:notice] = I18n.t(
+          'orcid.requests.messages.profile_request_created'
+        )
+
+        location = path_for(:after_successful_orcid_profile_request_path) do
+          orcid.profile_request_path
+        end
+
+        respond_with(orcid, location: location)
       else
         respond_with(orcid, new_profile_request)
       end
