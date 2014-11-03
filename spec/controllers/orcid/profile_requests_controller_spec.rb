@@ -136,7 +136,7 @@ module Orcid
           Orcid::ProfileRequest.should_receive(:find_by_user).with(user).and_return(profile_request)
 
           delete :destroy, use_route: :orcid
-          expect(flash[:notice]).to eq(I18n.t('orcid.requests.message.profile_request_destroyed'))
+          expect(flash[:notice]).to eq(I18n.t('orcid.requests.messages.profile_request_destroyed'))
           expect(profile_request).to have_received(:destroy)
           expect(response).to redirect_to(orcid.new_profile_request_path)
         end

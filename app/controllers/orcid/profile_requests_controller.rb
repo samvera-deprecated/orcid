@@ -52,7 +52,7 @@ module Orcid
 
     def destroy
       existing_profile_request.destroy if existing_profile_request
-      flash[:notice] = I18n.t('orcid.requests.message.profile_request_destroyed')
+      flash[:notice] = I18n.t('orcid.requests.messages.profile_request_destroyed')
       location = path_for(:after_orcid_profile_request_destroyed_path) do
         orcid.new_profile_request_path
       end
