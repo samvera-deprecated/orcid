@@ -42,7 +42,15 @@ module Orcid
         error_message = '123'
         # Don't want to hit the database
         subject.should_receive(:update_column).with(:response_text, error_message)
+        subject.should_receive(:update_column).with(:response_status, ProfileRequest::ERROR_STATUS)
         subject.error_on_profile_creation(error_message)
+      end
+    end
+
+    context '#error_on_profile_creation?' do
+      it 'should be true if there is a response text' do
+        subject.response_status = ProfileRequest::ERROR_STATUS
+        expect(subject.error_on_profile_creation?).to be_truthy
       end
     end
   end

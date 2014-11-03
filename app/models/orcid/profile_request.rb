@@ -4,6 +4,7 @@ module Orcid
   # * submitting a request for an ORCID Profile
   # * handling the response for the ORCID Profile creation
   class ProfileRequest < ActiveRecord::Base
+    ERROR_STATUS = 'error'.freeze
     def self.find_by_user(user)
       where(user: user).first
     end
@@ -27,6 +28,11 @@ module Orcid
 
     def error_on_profile_creation(error_message)
       update_column(:response_text, error_message)
+      update_column(:response_status, ERROR_STATUS)
+    end
+
+    def error_on_profile_creation?
+      response_status == ERROR_STATUS
     end
 
   end
