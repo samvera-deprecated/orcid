@@ -1,5 +1,8 @@
 <div class="profile-request-pending">
-  <p>We are processing your ORCID Profile Request. It was submitted
-    <time datetime="<%= profile_request_pending.created_at.in_time_zone %>"><%= time_ago_in_words(profile_request_pending.created_at) %></time> ago.
-  </p>
+  <%= t(
+      'orcid.views.profile_request_pending',
+      datetime: profile_request_pending.created_at.in_time_zone,
+      time_ago_in_words: time_ago_in_words(profile_request_pending.created_at)
+    ).html_safe
+  %>
 </div>

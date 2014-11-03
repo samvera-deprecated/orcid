@@ -1,5 +1,3 @@
 <div class="authenticated-connection">
-  <p>
-    Your ORCID (<a class="orcid-profile-id" href="<%= Orcid.url_for_orcid_id(authenticated_connection.orcid_profile_id)%>" ><%= authenticated_connection.orcid_profile_id %></a>) has been authenticated for this application.
-  </p>
+  <%= t('orcid.views.authenticated_connection', orcid_profile_url: Orcid.url_for_orcid_id(authenticated_connection.orcid_profile_id), orcid_profile_id: authenticated_connection.orcid_profile_id).html_safe %>
 </div>
