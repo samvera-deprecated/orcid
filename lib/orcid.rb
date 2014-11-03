@@ -64,6 +64,8 @@ module Orcid
 
   def disconnect_user_and_orcid_profile(user)
     authentication_model.where(provider: 'orcid', user: user).destroy_all
+    Orcid::ProfileRequest.where(user: user).destroy_all
+    true
   end
 
   def profile_for(user)

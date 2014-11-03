@@ -66,6 +66,15 @@ describe Orcid do
       expect { Orcid.disconnect_user_and_orcid_profile(user) }.
         to change(Orcid.authentication_model, :count).by(-1)
     end
+
+    it 'deletes any profile request' do
+      Orcid::ProfileRequest.create!(
+        user: user, given_names: 'Hello', family_name: 'World',
+        primary_email: 'hello@world.com', primary_email_confirmation: 'hello@world.com'
+      )
+      expect { Orcid.disconnect_user_and_orcid_profile(user) }.
+        to change(Orcid::ProfileRequest, :count).by(-1)
+    end
   end
 
   context '.access_token_for' do
