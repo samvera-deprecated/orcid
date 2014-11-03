@@ -36,8 +36,7 @@ en:
       authenticated_connection: "<p>Your ORCID (<a class='orcid-profile-id' href='%{orcid_profile_url}'>%{orcid_profile_id}</a>) has been authenticated for this application.</p>"
       profile_request_pending: "<p>We are processing your ORCID Profile Request. It was submitted <time datetime='%{datetime}'>%{time_ago_in_words}</time> ago.</p>"
       pending_connection: >
-        <p>You have an ORCID (<a class="orcid-profile-id" href="%{orcid_profile_url}">%{orcid_profile_id}</a>).
-        </p>
+        <p>You have an ORCID (<a class="orcid-profile-id" href="%{orcid_profile_url}">%{orcid_profile_id}</a>).</p>
         <p>However, your ORCID has not been verified by this system. There are a few possibilities:</p>
         <ul>
           <li>You may not have claimed your ORCID. <a class="find-out-more" href="http://support.orcid.org/knowledgebase/articles/164480-creating-claiming-new-records">Find out more about claiming your ORCID.</a></li>
