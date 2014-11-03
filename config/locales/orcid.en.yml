@@ -28,7 +28,7 @@ en:
         previously_connected_profile: "You have already connected to an ORCID Profile (%{orcid_profile_id})."
         profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
         profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
-        profile_request_destroy: "Your ORCID profile request has been cancelled."
+        profile_request_destroyed: "Your ORCID profile request has been cancelled."
     connections:
       messages:
         profile_connection_not_found: "Unable to find an existing ORCID Profile connection."
@@ -51,4 +51,4 @@ en:
         create_an_orcid: Create an ORCID
         look_up_your_existing_orcid: Look up your existing ORCID
         connect_button_text: Connect
-        cancel_profile_request: Cancel your ORCID request
+        profile_request_destroy: Cancel your ORCID request
