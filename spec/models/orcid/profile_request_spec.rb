@@ -37,12 +37,12 @@ module Orcid
       end
     end
 
-    context '#validation_error_on_profile_creation' do
+    context '#error_on_profile_creation' do
       it 'should update profile request' do
         error_message = '123'
         # Don't want to hit the database
         subject.should_receive(:update_column).with(:response_text, error_message)
-        subject.validation_error_on_profile_creation(error_message)
+        subject.error_on_profile_creation(error_message)
       end
     end
   end

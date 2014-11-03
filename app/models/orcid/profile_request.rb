@@ -25,7 +25,7 @@ module Orcid
       end
     end
 
-    def validation_error_on_profile_creation(error_message)
+    def error_on_profile_creation(error_message)
       update_column(:response_text, error_message)
     end
 

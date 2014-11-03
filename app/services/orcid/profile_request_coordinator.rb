@@ -34,8 +34,8 @@ module Orcid
       payload = xml_payload(profile_request)
       remote_service.call(payload) do |on|
         on.success { |orcid_profile_id| profile_request.successful_profile_creation(orcid_profile_id) }
-        on.failure { }
-        on.orcid_validation_error { |error_message| profile_request.validation_error_on_profile_creation(error_message) }
+        on.failure { profile_request }
+        on.orcid_validation_error { |error_message| profile_request.error_on_profile_creation(error_message) }
       end
     end
 
@@ -45,8 +45,8 @@ module Orcid
       if !request.respond_to?(:user) || !request.user.present?
         fail MissingUserForProfileRequest, request
       end
-      if !request.respond_to?(:validation_error_on_profile_creation)
-        raise ProfileRequestMethodExpectedError.new(request, :validation_error_on_profile_creation)
+      if !request.respond_to?(:error_on_profile_creation)
+        raise ProfileRequestMethodExpectedError.new(request, :error_on_profile_creation)
       end
       if !request.respond_to?(:successful_profile_creation)
         raise ProfileRequestMethodExpectedError.new(request, :successful_profile_creation)
