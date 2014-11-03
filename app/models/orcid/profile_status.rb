@@ -41,7 +41,11 @@ module Orcid
       else
         request = request_finder.call(user)
         if request
-          return callback(:profile_request_pending, request)
+          if request.error_on_profile_creation?
+            return callback(:profile_request_in_error, request)
+          else
+            return callback(:profile_request_pending, request)
+          end
         else
           return callback(:unknown)
         end

@@ -12,7 +12,8 @@ module Orcid
         :unknown,
         :authenticated_connection,
         :pending_connection,
-        :profile_request_pending
+        :profile_request_pending,
+        :profile_request_in_error
       )
     end
     Given(:subject) do
@@ -55,11 +56,22 @@ module Orcid
 
         context 'and does not have a profile' do
           context 'but has submitted a request' do
-            Given(:request) { double('ProfileRequest') }
+            Given(:request) { double('ProfileRequest', :error_on_profile_creation? => error_on_creation) }
             Given(:request_finder) { double('RequestFinder', call: request) }
-            When(:status) { subject.status }
-            Then { expect(status).to eq :profile_request_pending }
-            And { expect(callback.invoked).to eq [:profile_request_pending, request] }
+
+            context "and there weren't problems with the request" do
+              Given(:error_on_creation) { false }
+              When(:status) { subject.status }
+              Then { expect(status).to eq :profile_request_pending }
+              And { expect(callback.invoked).to eq [:profile_request_pending, request] }
+            end
+
+            context "and there were problems with the request" do
+              Given(:error_on_creation) { true }
+              When(:status) { subject.status }
+              Then { expect(status).to eq :profile_request_in_error }
+              And { expect(callback.invoked).to eq [:profile_request_in_error, request] }
+            end
           end
           context 'user does not have a request' do
             When(:status) { subject.status }

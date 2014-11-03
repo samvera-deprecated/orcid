@@ -23,14 +23,16 @@ en:
   orcid:
     requests:
       messages:
-        existing_request_not_found: "Unable to find an existing Orcid Profile request. Go ahead and create one."
-        existing_request: "You have already submitted an Orcid Profile request."
-        previously_connected_profile: "You have already connected to an Orcid Profile (%{orcid_profile_id})."
-        profile_request_created: "Your Orcid profile request has been submitted. Check your email for more information from Orcid."
+        existing_request_not_found: "Unable to find an existing orcid Profile request. Go ahead and create one."
+        existing_request: "You have already submitted an ORCID Profile request."
+        previously_connected_profile: "You have already connected to an ORCID Profile (%{orcid_profile_id})."
+        profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
+        profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
+        profile_request_destroy: "Your ORCID profile request has been cancelled."
     connections:
       messages:
-        profile_connection_not_found: "Unable to find an existing Orcid Profile connection."
-        verified_profile_connection_exists: "You have already connected and verified your Orcid Profile (%{orcid_profile_id})."
+        profile_connection_not_found: "Unable to find an existing ORCID Profile connection."
+        verified_profile_connection_exists: "You have already connected and verified your ORCID Profile (%{orcid_profile_id})."
     verbose_name: Open Researcher and Contributor ID (ORCID)
     views:
       authenticated_connection: "<p>Your ORCID (<a class='orcid-profile-id' href='%{orcid_profile_url}'>%{orcid_profile_id}</a>) has been authenticated for this application.</p>"
@@ -49,3 +51,4 @@ en:
         create_an_orcid: Create an ORCID
         look_up_your_existing_orcid: Look up your existing ORCID
         connect_button_text: Connect
+        cancel_profile_request: Cancel your ORCID request

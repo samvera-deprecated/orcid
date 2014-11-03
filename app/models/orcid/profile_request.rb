@@ -31,8 +31,10 @@ module Orcid
       update_column(:response_status, ERROR_STATUS)
     end
 
+    alias_attribute :error_message, :response_text
+
     def error_on_profile_creation?
-      response_status == ERROR_STATUS
+      error_message.present? || response_status == ERROR_STATUS
     end
 
   end

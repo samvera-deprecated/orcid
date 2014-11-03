@@ -10,7 +10,8 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb' do
       profile_request_pending: true,
       unknown: true,
       authenticated_connection: true,
-      pending_connection: true
+      pending_connection: true,
+      profile_request_in_error: true
     )
   end
   def render_with_params
@@ -39,6 +40,16 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb' do
       render_with_params
 
       expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_pending')
+      expect(rendered).to have_tag('.orcid-connector')
+    end
+  end
+  context 'with :profile_request_in_error status' do
+    let(:pending_request) { Orcid::ProfileRequest.new(created_at: Time.now) }
+    it 'renders the options to view the pending profile request' do
+      expect(handler).to receive(:profile_request_in_error).and_yield(pending_request)
+      render_with_params
+
+      expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_in_error')
       expect(rendered).to have_tag('.orcid-connector')
     end
   end
