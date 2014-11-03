@@ -62,6 +62,10 @@ module Orcid
     return false
   end
 
+  def disconnect_user_and_orcid_profile(user)
+    authentication_model.where(provider: 'orcid', user: user).destroy_all
+  end
+
   def profile_for(user)
     auth = authentication_model.where(provider: 'orcid', user: user).first
     auth && Orcid::Profile.new(auth.uid)

@@ -60,6 +60,14 @@ describe Orcid do
     end
   end
 
+  context '.disconnect_user_and_orcid_profile' do
+    it 'changes the authentication count' do
+      Orcid.connect_user_and_orcid_profile(user, orcid_profile_id)
+      expect { Orcid.disconnect_user_and_orcid_profile(user) }.
+        to change(Orcid.authentication_model, :count).by(-1)
+    end
+  end
+
   context '.access_token_for' do
     let(:client) { double("Client")}
     let(:token) { double('Token') }
