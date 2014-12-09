@@ -1,17 +1,17 @@
 <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.new_profile_connection_path, method: :get, html: {class: 'search-form'}) do |f| %>
-  <%= field_set_tag("Search ORCID Profiles") do %>
+  <%= field_set_tag(t('orcid.views.profile_connections.fieldsets.search_orcid_profiles')) do %>
     <% profile_connection.available_query_attribute_names.each do |field_name| %>
       <%= f.input field_name, as: :search %>
     <% end %>
   <% end %>
   <button type="submit" class="search-submit btn btn-primary" id="keyword-search-submit" tabindex="2">
-    <i class="icon-search icon-white"></i><span>Search</span>
+    <i class="icon-search icon-white"></i><span><%= t('orcid.views.profile_connections.buttons.search') %></span>
   </button>
 <% end %>
 
 <% profile_connection.with_orcid_profile_candidates do |candidates| %>
   <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path,) do |f| %>
-    <%= field_set_tag("Select an ORCID Profile") do %>
+    <%= field_set_tag(t('orcid.views.profile_connections.fieldsets.select_an_orcid_profile')) do %>
       <%= f.collection_radio_buttons :orcid_profile_id, candidates, :id, :label %>
     <% end %>
     <%= f.submit %>

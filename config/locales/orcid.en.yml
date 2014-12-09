@@ -35,6 +35,12 @@ en:
         verified_profile_connection_exists: "You have already connected and verified your ORCID Profile (%{orcid_profile_id})."
     verbose_name: Open Researcher and Contributor ID (ORCID)
     views:
+      profile_connections:
+        fieldsets:
+          search_orcid_profiles: "Search ORCID Profiles"
+          select_an_orcid_profile: "Select an ORCID Profile"
+        buttons:
+          search: 'Search'
       authenticated_connection: "<p>Your ORCID (<a class='orcid-profile-id' href='%{orcid_profile_url}'>%{orcid_profile_id}</a>) has been authenticated for this application.</p>"
       profile_request_pending: "<p>We are processing your ORCID Profile Request. It was submitted <time datetime='%{datetime}'>%{time_ago_in_words}</time> ago.</p>"
       pending_connection: >
