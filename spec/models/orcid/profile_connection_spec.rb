@@ -4,21 +4,21 @@ require 'orcid/profile_connection'
 # :nodoc:
 module Orcid
   describe ProfileConnection do
-    let(:email) { 'test@hello.com' }
+    let(:text) { 'test@hello.com' }
     let(:dois) { '123' }
     let(:user) { double('User') }
     let(:profile_query_service) { double('Profile Lookup Service') }
     let(:persister) { double('Persister') }
 
     subject do
-      Orcid::ProfileConnection.new(email: email, user: user).tap do |pc|
+      Orcid::ProfileConnection.new(text: text, user: user).tap do |pc|
         pc.persister = persister
         pc.profile_query_service = profile_query_service
       end
     end
 
     its(:default_persister) { should respond_to(:call) }
-    its(:email) { should eq email }
+    its(:text) { should eq text }
     its(:to_model) { should eq subject }
     its(:user) { should eq user }
     its(:persisted?) { should eq false }
@@ -26,20 +26,18 @@ module Orcid
 
     context '.available_query_attribute_names' do
       subject { Orcid::ProfileConnection.new.available_query_attribute_names }
-      it { should include(:email) }
       it { should include(:text) }
-      it { should include(:digital_object_ids) }
     end
 
     context '#query_attributes' do
       subject do
         Orcid::ProfileConnection.new(
-          email: email, user: user, digital_object_ids: dois
+          text: text, user: user, digital_object_ids: dois
         )
       end
       its(:query_attributes) do
         should eq(
-          'email' => email, 'text' => nil, 'digital-object-ids' => dois
+          'text' => text
         )
       end
     end
@@ -50,7 +48,7 @@ module Orcid
         its(:query_requested?) { should eq false }
       end
       context 'with attribute set' do
-        subject { Orcid::ProfileConnection.new(email: email, user: user) }
+        subject { Orcid::ProfileConnection.new(text: text, user: user) }
         its(:query_requested?) { should eq true }
       end
     end
@@ -76,10 +74,10 @@ module Orcid
     end
 
     context '#with_orcid_profile_candidates' do
-      context 'with an email' do
+      context 'with an text' do
 
         it 'should yield the query response' do
-          subject.email = email
+          subject.text = text
 
           profile_query_service.
             should_receive(:call).
@@ -91,9 +89,9 @@ module Orcid
         end
       end
 
-      context 'without an email' do
+      context 'without an text' do
         it 'should not yield' do
-          subject.email = nil
+          subject.text = nil
           profile_query_service.stub(:call).and_return(:query_response)
 
           expect { |b| subject.with_orcid_profile_candidates(&b) }.

@@ -11,7 +11,7 @@ module Orcid
 
     # See: http://support.orcid.org/knowledgebase/articles/132354-tutorial-searching-with-the-api
     class_attribute :available_query_attribute_names
-    self.available_query_attribute_names = [:email, :text, :digital_object_ids]
+    self.available_query_attribute_names = [:text]
 
     available_query_attribute_names.each do |attribute_name|
       attribute attribute_name
