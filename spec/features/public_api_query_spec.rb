@@ -29,7 +29,7 @@ describe 'public api query', requires_net_connect: true do
   end
 
   context 'with bogus text query' do
-    Given(:parameters) { { text: 'orcid@sufia.org' } }
+    Given(:parameters) { { text: 'verybogustextthatyoushouldnotfind' } }
     When(:result) { runner.call(parameters) }
     Then { expect(result.size).to eq 0 }
   end
