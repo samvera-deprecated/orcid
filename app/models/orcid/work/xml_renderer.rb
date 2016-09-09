@@ -23,7 +23,7 @@ module Orcid
       end
 
       def default_template
-        template_name = 'app/templates/orcid/work.template.v1.1.xml.erb'
+        template_name = 'app/templates/orcid/work.template.v1.2.xml.erb'
         Orcid::Engine.root.join(template_name).read
       end
     end

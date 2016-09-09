@@ -15,7 +15,7 @@ module Orcid
         @query_builder = config.fetch(:query_parameter_builder) { QueryParameterBuilder }
         @token = config.fetch(:token) { default_token }
         @parser = config.fetch(:parser) { ResponseParser }
-        @path = config.fetch(:path) { 'v1.1/search/orcid-bio/' }
+        @path = config.fetch(:path) { 'v1.2/search/orcid-bio/' }
         @headers = config.fetch(:headers) { default_headers }
       end
 

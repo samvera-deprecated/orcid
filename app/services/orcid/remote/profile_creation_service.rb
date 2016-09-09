@@ -13,7 +13,7 @@ module Orcid
       def initialize(config = {}, &callback_config)
         super(&callback_config)
         @token = config.fetch(:token) { default_token }
-        @path = config.fetch(:path) { 'v1.1/orcid-profile' }
+        @path = config.fetch(:path) { 'v1.2/orcid-profile' }
         @headers = config.fetch(:headers) { default_headers }
       end
 

@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'railties', '~> 4.0'
   s.add_dependency 'figaro'
   s.add_dependency 'devise-multi_auth', '~> 0.1'
-  s.add_dependency 'omniauth-orcid'
+  s.add_dependency 'omniauth-orcid', '0.6'
   s.add_dependency 'mappy'
   s.add_dependency 'virtus'
   s.add_dependency 'email_validator'

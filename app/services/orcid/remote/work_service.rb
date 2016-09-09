@@ -57,7 +57,7 @@ module Orcid
       end
 
       def default_path
-        "v1.1/#{orcid_profile_id}/orcid-works/"
+        "v1.2/#{orcid_profile_id}/orcid-works/"
       end
     end
   end
