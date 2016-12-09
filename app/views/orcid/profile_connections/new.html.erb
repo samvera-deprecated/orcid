@@ -12,8 +12,8 @@
 <% profile_connection.with_orcid_profile_candidates do |candidates| %>
   <%= simple_form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path,) do |f| %>
     <%= field_set_tag(t('orcid.views.profile_connections.fieldsets.select_an_orcid_profile')) do %>
-      <%= f.collection_radio_buttons :orcid_profile_id, candidates, :id, :label %>
+      <%= f.collection_radio_buttons :orcid_profile_id, candidates, :id, :label, item_wrapper_class: 'radio' %>
     <% end %>
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-default' %>
   <% end %>
 <% end %>
