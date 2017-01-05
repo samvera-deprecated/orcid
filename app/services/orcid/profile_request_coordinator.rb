@@ -25,6 +25,9 @@ module Orcid
         on.pending_connection { |profile| handle_pending_connection_for(profile) }
         on.authenticated_connection { |profile| handle_authenticated_connection_for(profile) }
       end
+
+      byebug
+
       true
     end
 
