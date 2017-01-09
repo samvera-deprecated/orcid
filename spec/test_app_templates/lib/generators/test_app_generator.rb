@@ -4,8 +4,8 @@ class TestAppGenerator < Rails::Generators::Base
   source_root "spec/test_app_templates"
 
   def create_application_yml
-    application_yml_file = File.expand_path("../../../../../config/application.yml", __FILE__)
-    application_yml_example_file = File.expand_path("../../../../../config/application.yml.example", __FILE__)
+    application_yml_file = File.expand_path("../../../../config/application.yml", __FILE__)
+    application_yml_example_file = File.expand_path("../../../../config/application.yml.example", __FILE__)
     if File.exist?(application_yml_file)
       create_link 'config/application.yml', application_yml_file, symbolic:true
     else
