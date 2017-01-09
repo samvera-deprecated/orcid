@@ -4,5 +4,6 @@ Orcid::Engine.routes.draw do
     resources :profile_connections, only: [:new, :create, :index]
 
     get 'create_orcid', to: 'create_profile#create'
+    get "disconnect", to: "profile_connections#destroy"
   end
 end
