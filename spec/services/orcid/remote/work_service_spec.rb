@@ -25,7 +25,7 @@ module Orcid::Remote
       end
       it 'instantiates and calls underlying instance' do
         token.should_receive(:request).
-          with(:post, "v1.1/#{orcid_profile_id}/orcid-works/", body: payload, headers: request_headers).
+          with(:post, "v1.2/#{orcid_profile_id}/orcid-works/", body: payload, headers: request_headers).
           and_return(response)
 
         expect(
