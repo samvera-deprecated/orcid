@@ -4,7 +4,8 @@ module Orcid
 		respond_to :html
 
 		def create
-			uri = URI.parse("https://sandbox.orcid.org/oauth/token") 
+			uri = URI.parse(Orcid.provider.token_url) 
+
 			request = Net::HTTP::Post.new(uri) 
 			request["Accept"] = "application/json" 
 			request.set_form_data( "client_id" => ENV['ORCID_APP_ID'], 
