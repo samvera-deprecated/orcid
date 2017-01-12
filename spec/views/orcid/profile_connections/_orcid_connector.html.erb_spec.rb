@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe 'orcid/profile_connections/_orcid_connector.html.erb' do
+describe 'orcid/profile_connections/_orcid_connector.html.erb', type: :view do
   let(:default_search_text) { 'hello' }
   let(:current_user) { double('User') }
   let(:status_processor) { double('Processor') }
+  let(:user) {FactoryGirl.create(User)}
   let(:handler) do
     double(
       'Handler',
@@ -15,6 +16,7 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb' do
     )
   end
   def render_with_params
+    allow(view).to receive(:current_user).and_return(user)
     render(
       partial: 'orcid/profile_connections/orcid_connector',
       locals: { default_search_text: default_search_text, status_processor: status_processor, current_user: current_user }
