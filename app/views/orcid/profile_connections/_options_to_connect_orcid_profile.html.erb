@@ -2,6 +2,9 @@
 <% default_search_text = '' unless defined?(default_search_text) %>
 <div class="options-to-connect-orcid-profile">
   <p>
+    <%= render partial: 'orcid/profile_connections/create_profile' %>
+  </p>
+  <p>
     <%= link_to t('orcid/profile_connection.look_up_your_existing_orcid', scope: 'helpers.label'), orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
   </p>
   <%= form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path, method: :post) do |f| %>
@@ -13,5 +16,4 @@
     </button>
   <% end %>
   </p>
-  <%= render partial: 'orcid/create_profile' %>
 </div>

@@ -3,7 +3,7 @@ require 'spec_helper'
 module Orcid
   describe ProfileRequest do
     let(:orcid_profile_id) { '0000-0001-8025-637X'}
-    let(:user) { mock_model('User') }
+    let(:user) { FactoryGirl.create(:user) }
     let(:attributes) {
       {
         user: user,
@@ -21,7 +21,7 @@ module Orcid
       end
 
       it 'to return nil' do
-        other_user = FactoryGirl.build_stubbed(:user)
+        other_user = FactoryGirl.build(:user)
         expect(described_class.find_by_user(other_user)).to be_nil
       end
 

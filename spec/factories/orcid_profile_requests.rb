@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :orcid_profile_request, :class => 'Orcid::ProfileRequest' do
-    association :user, strategy: :build_stubbed
+    association :user, strategy: :create
     given_names 'All of the Names'
     family_name 'Under-the-sun'
     primary_email 'all-of-the-names@underthesun.com'
