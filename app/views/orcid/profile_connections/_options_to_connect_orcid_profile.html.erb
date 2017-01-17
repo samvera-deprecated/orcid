@@ -2,7 +2,7 @@
 <% default_search_text = '' unless defined?(default_search_text) %>
 <div class="options-to-connect-orcid-profile">
   <p>
-    <%= link_to 'Create an ORCID', on_demand_url(current_user) %>
+    <%= link_to 'Create an ORCID', on_demand_url(current_user), class: "orcid-on-demand" %>
   </p>
   <p>
     <%= link_to t('orcid/profile_connection.look_up_your_existing_orcid', scope: 'helpers.label'), orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
