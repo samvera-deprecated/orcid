@@ -1,7 +1,13 @@
 <% defined?(status_processor) || status_processor = Orcid::ProfileStatus.method(:for) %>
 <div class='orcid-connector'>
-  <h3><i class="icon-user"></i> <%= link_to t('orcid.verbose_name'), Orcid.provider.host_url %></h3>
+  <h3>
+    <%= link_to 'http://orcid.org' do %>
+    <%= image_tag 'http://orcid.org/sites/default/files/images/orcid_16x16.png', alt: 'ORCID logo',width: '16', height: '16' %> 
+    <% end %> 
+    <%= link_to t('orcid.verbose_name'), Orcid.provider.host_url %>
+  </h3>
   <% status_processor.call(current_user) do |on|%>
+    <%= link_to 'What is ORCID?', orcid_about_path %>
     <% on.profile_request_in_error do |pending_request| %>
       <%= render partial: 'orcid/profile_connections/profile_request_in_error', object: pending_request %>
     <% end %>
