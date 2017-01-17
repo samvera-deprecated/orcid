@@ -1,4 +1,6 @@
-<%= link_to 'http://orcid.org' do %>
-  <%= image_tag 'http://orcid.org/sites/default/files/images/orcid_16x16.png', alt: 'ORCID logo',width: '16', height: '16' %> 
+<% !on.authenticated_connection do |profile| %>
+	<%= link_to 'http://orcid.org' do %>
+  	<%= image_tag 'http://orcid.org/sites/default/files/images/orcid_16x16.png', alt: 'ORCID logo',width: '16', height: '16' %> 
+	<% end %>
+	<%= link_to 'Create an ORCID', on_demand_url(current_user), class:'orcid-on-demand' %>
 <% end %>
-<%= link_to 'Create an ORCID', on_demand_url(current_user), class:'orcid-on-demand' %>
