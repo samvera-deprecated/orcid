@@ -2,12 +2,11 @@
 <% default_search_text = '' unless defined?(default_search_text) %>
 <div class="options-to-connect-orcid-profile">
   <p>
+    <%= link_to 'Create an ORCID', on_demand_url(current_user), class: "orcid-on-demand" %>
+  </p>
+  <p>
     <%= link_to t('orcid/profile_connection.look_up_your_existing_orcid', scope: 'helpers.label'), orcid.new_profile_connection_path(profile_connection:{text: default_search_text}) %>
   </p>
-  <p>
-    <%= link_to t('orcid/profile_connection.create_an_orcid', scope: 'helpers.label'), orcid.new_profile_request_path %>
-  </p>
-  <p>
   <%= form_for(profile_connection, as: :profile_connection, url: orcid.profile_connections_path, method: :post) do |f| %>
     <%# Note the `scope: 'helpers.label'` option is the default for the label, but I want to call those specifically out %>
     <%= f.label :orcid_profile_id, t('orcid/profile_connection.orcid_profile_id', scope: 'helpers.label') %>
