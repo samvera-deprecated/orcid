@@ -7,12 +7,6 @@
     <%= link_to t('orcid.verbose_name'), Orcid.provider.host_url %>
   </h3>
   <% status_processor.call(current_user) do |on|%>
-    <% on.profile_request_in_error do |pending_request| %>
-      <%= render partial: 'orcid/profile_connections/profile_request_in_error', object: pending_request %>
-    <% end %>
-    <% on.profile_request_pending do |pending_request| %>
-      <%= render partial: 'orcid/profile_connections/profile_request_pending', object: pending_request %>
-    <% end %>
     <% on.authenticated_connection do |profile| %>
       <%= render partial: 'orcid/profile_connections/authenticated_connection', object: profile %>
     <% end %>

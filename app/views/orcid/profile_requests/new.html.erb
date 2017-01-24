@@ -1,9 +1,0 @@
-<%= simple_form_for profile_request, as: :profile_request, url: orcid.profile_request_path do |f| %>
-  <%= field_set_tag do%>
-    <%= f.input :given_names %>
-    <%= f.input :family_name %>
-    <%= f.input :primary_email %>
-    <%= f.input :primary_email_confirmation %>
-  <% end %>
-  <%= f.submit %>
-<% end %>
