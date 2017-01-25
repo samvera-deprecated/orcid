@@ -1,138 +1,77 @@
-We want your help to make our project great.
+# How to Contribute
+
+We want your help to make Project Hydra great.
 There are a few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
 
-* [The Hydra Way](#the-hydra-way)
-* [Reporting Issues](#reporting-issues)
-  * [What is a well written issue?](#what-is-a-well-written-issue)
-* [Making Changes](#making-changes)
-  * [Where to Engage for Help](#where-to-engage-for-help)
-* [Submitting Changes](#submitting-changes)
-  * [Contributor License Agreement](#contributor-license-agreement)
-  * [Coding Guidelines](#coding-guidelines)
-    * [Stating Your Intent](#stating-your-intent)
-    * [Writing Your Specs](#writing-your-specs)
-    * [Writing Your Code](#writing-your-code)
-    * [Ruby File Structure](#ruby-file-structure)
-  * [Well Written Commit Messages](#well-written-commit-messages)
-    * [Hooks into other Subsystems](#hooks-into-other-subsystems)
-* [Reviewing Changes](#reviewing-changes)
-  * [Responsibilities of a Reviewer](#responsibilities-of-a-reviewer)
-  * [Responsibilities of the Submitter](#responsibilities-of-the-submitter)
-* [Merging Changes](#merging-changes)
+## Code of Conduct
 
-# The Hydra Way
+The Hydra community is dedicated to providing a welcoming and positive experience for all its
+members, whether they are at a formal gathering, in a social setting, or taking part in activities
+online.  Please see our [Code of Conduct](https://wiki.duraspace.org/display/hydra/Code+of+Conduct)
+for more information.
 
-We strive to…
-
-* Provide a [harassment-free community experience](https://wiki.duraspace.org/display/hydra/Anti-Harassment+Policy)
-* Adhere to our [Hierarchy of Promises](https://wiki.duraspace.org/display/hydra/Hydra+Stack+-+The+Hierarchy+of+Promises)
-* Operate under [Lazy Consensus](http://rave.apache.org/docs/governance/lazyConsensus.html)
-* Encourage community participation as guided by [our community principles](https://wiki.duraspace.org/display/hydra/Hydra+Community+Principles)
-
-# Reporting Issues
-
-Submit a [well written issue](#what-is-a-well-written-issue) to [Github's issue tracker](./issues).
-This will require a [GitHub account](https://github.com/signup/free) *(its free)*.
-
-## What is a well written issue?
-
-* Provide a descriptive summary
-* Reference the version in which you encountered the problem
-* Explain the expected behavior
-* Explain the actual behavior
-* Provide steps to reproduce the actual behavior
-
-# Making Changes
-
-Hydra is an open source project, released under the [APACHE 2 license](LICENSE).
-You are free to clone or [fork the repository](https://help.github.com/articles/fork-a-repo) and modify the code as you see fit.
-
-## Where to Engage for Help
-
-This gem is part of ProjectHydra, so you can [connect via the usual ProjectHydra channels](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187).
-
-# Submitting Changes
-
-## Contributor License Agreement
-
-**Note: You can submit a pull request before you've signed the Contributor License Agreement, but we won't merge your changes until we have your CLA on file.**
-
-Before any [ProjectHydra project](https://github.com/projecthydra) can accept your contributions we must have a [Contributor License Agreement on file](https://wiki.duraspace.org/display/hydra/Hydra+Project+Intellectual+Property+Licensing+and+Ownership).
+## Hydra Project Intellectual Property Licensing and Ownership
 
 All code contributors must have an Individual Contributor License Agreement (iCLA) on file with the Hydra Project Steering Group.
 If the contributor works for an institution, the institution must have a Corporate Contributor License Agreement (cCLA) on file.
 
-[More on the Contributor License Agreements](https://wiki.duraspace.org/display/hydra/Hydra+Project+Intellectual+Property+Licensing+and+Ownership)
+https://wiki.duraspace.org/display/hydra/Hydra+Project+Intellectual+Property+Licensing+and+Ownership
 
-## Coding Guidelines
+You should also add yourself to the `CONTRIBUTORS.md` file in the root of the project.
 
-This project is using [HoundCI](https://houndci.com) to help support our agreed upon style guide.
-The style guide is a work in progress, and is declared in the project's `./hound.yml` file.
+## Contribution Tasks
 
-Hound is a Github integration tool that essentially runs [rubocop](http://rubygems.org/gems/rubocop).
+* Reporting Issues
+* Making Changes
+* Documenting Code
+* Committing Changes
+* Submitting Changes
+* Reviewing and Merging Changes
 
-> Automatic Ruby code style checking tool. Aims to enforce the community-driven Ruby Style Guide.
+### Reporting Issues
 
-If you want to run `rubocop` with our style guide, first `gem install rubocop` then inside the project:
+* Make sure you have a [GitHub account](https://github.com/signup/free)
+* Submit a [Github issue](./issues) by:
+  * Clearly describing the issue
+    * Provide a descriptive summary
+    * Explain the expected behavior
+    * Explain the actual behavior
+    * Provide steps to reproduce the actual behavior
 
-```bash
-$ rubocop ./path/to/file ./or/path/to/directory -c ./.hound.yml
-```
-**Can I break these guidelines?** Yes.
-But you may need to convince the person merging your changes.
+### Making Changes
 
-### Stating Your Intent
+* Fork the repository on GitHub
+* Create a topic branch from where you want to base your work.
+  * This is usually the master branch.
+  * To quickly create a topic branch based on master; `git branch fix/master/my_contribution master`
+  * Then checkout the new branch with `git checkout fix/master/my_contribution`.
+  * Please avoid working directly on the `master` branch.
+  * You may find the [hub suite of commands](https://github.com/defunkt/hub) helpful
+* Make sure you have added sufficient tests and documentation for your changes.
+  * Test functionality with RSpec; est features / UI with Capybara.
+* Run _all_ the tests to assure nothing else was accidentally broken.
 
-Think of your written test as a statement of intent.
-The statement of intent can then be used when asking for help or clarity;
-Either from another developer or a stakeholder.
-Someone helping you can then see both what you are trying to do and how you are doing it;
-And that helper may know of a "better" way to do it.
+### Documenting Code
 
-### Writing Your Specs
+* All new public methods, modules, and classes should include inline documentation in [YARD](http://yardoc.org/).
+  * Documentation should seek to answer the question "why does this code exist?"
+* Document private / protected methods as desired.
+* If you are working in a file with no prior documentation, do try to document as you gain understanding of the code.
+  * If you don't know exactly what a bit of code does, it is extra likely that it needs to be documented. Take a stab at it and ask for feedback in your pull request. You can use the 'blame' button on GitHub to identify the original developer of the code and @mention them in your comment.
+  * This work greatly increases the usability of the code base and supports the on-ramping of new committers.
+  * We will all be understanding of one another's time constraints in this area.
+* YARD examples:
+  * [Hydra::Works::RemoveGenericFile](https://github.com/projecthydra-labs/hydra-works/blob/master/lib/hydra/works/services/generic_work/remove_generic_file.rb)
+  * [ActiveTriples::LocalName::Minter](https://github.com/ActiveTriples/active_triples-local_name/blob/master/lib/active_triples/local_name/minter.rb)
+* [Getting started with YARD](http://www.rubydoc.info/gems/yard/file/docs/GettingStarted.md)
 
-Your code changes should include supporting tests.
+### Committing changes
 
-Before you begin writing code, think about the test that will verify the code you plan to write.
-A [well written story with Gherkin syntax](http://pivotallabs.com/well-formed-stories/) can help formulate the pre-conditions (Given), invocation (When), and post-conditions (Then).
-
-*This is the first step of Test Driven Development, and something that we encourage.*
-
-Now write that test; It should be your guidepost for any changes you plan on making.
-The test you just wrote should be executable code;
-If you are uncomfortable with where to put the executable code, a well formed Gherkin-syntax story is a suitable proxy.
-
-### Writing Your Code
-
-We are going to do our best to follow [Sandi Metz' Rules for Developers](http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers)
-
-> Here are the rules:
->
-> * Classes can be no longer than one hundred lines of code.
-> * Methods can be no longer than five lines of code.
-> * Pass no more than four parameters into a method. Hash options are parameters.
-> * Controllers can instantiate only one object. Therefore, views can only know about one instance variable and views should only send messages to that object (`@object.collaborator.value` is not allowed).
-
-## Well Written Commit Messages
-
-**TL;DR**
-
-* First line is 50 characters or less
-* The message body explains what the code changes are about
-* [Reference any Github issues](https://help.github.com/articles/writing-on-github#references) on new lines.
-  * It is helpful if you [close a related issue via the commit message](https://help.github.com/articles/closing-issues-via-commit-messages)
-
-### Terse Example
-
-```
-    Removing Document title validation
-
-    We thought we wanted title validation but that was too complicated.
-
-    Closes #12
-```
-
-### Verbose Example
+* Make commits of logical units.
+  * Your commit should include a high level description of your work in HISTORY.textile
+* Check for unnecessary whitespace with `git diff --check` before committing.
+* Make sure your commit messages are [well formed](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+* If you created an issue, you can close it by including "Closes #issue" in your commit message. See [Github's blog post for more details](https://github.com/blog/1386-closing-issues-via-commit-messages)
 
 ```
     Present tense short summary (50 characters or less)
@@ -143,12 +82,16 @@ We are going to do our best to follow [Sandi Metz' Rules for Developers](http://
     should add such description also if it's already present in bug tracker,
     it should not be necessary to visit a webpage to check the history.
 
+    Include Closes #<issue-number> when relavent.
+
     Description can have multiple paragraphs and you can use code examples
     inside, just indent it with 4 spaces:
 
         class PostsController
           def index
-            respond_with Post.limit(10)
+            respond_to do |wants|
+              wants.html { render 'index' }
+            end
           end
         end
 
@@ -160,54 +103,57 @@ We are going to do our best to follow [Sandi Metz' Rules for Developers](http://
       long to fit in 72 characters
 ```
 
-> When appropriate, please squash your commits into logical units of work.
-> This simplifies future cherry picks, and also keeps the git log clean.
+### Submitting Changes
 
-### Hooks into other Subsystems
+* Read the article ["Using Pull Requests"](https://help.github.com/articles/using-pull-requests) on GitHub.
+* Make sure your branch is up to date with its parent branch (i.e. master)
+  * `git checkout master`
+  * `git pull --rebase`
+  * `git checkout <your-branch>`
+  * `git rebase master`
+  * It is a good idea to run your tests again.
+* If you've made more than one commit take a moment to consider whether squashing commits together would help improve their logical grouping.
+  * [Detailed Walkthrough of One Pull Request per Commit](http://ndlib.github.io/practices/one-commit-per-pull-request/)
+  * `git rebase --interactive master` ([See Github help](https://help.github.com/articles/interactive-rebase))
+  * Squashing your branch's changes into one commit is "good form" and helps the person merging your request to see everything that is going on.
+* Push your changes to a topic branch in your fork of the repository.
+* Submit a pull request from your fork to the project.
 
-**[ci skip]**: If your commit does not need to go through the Continuous Integration server, add `[ci skip]` to your commit message.
-This is used for updates to the documentation and stylesheet changes.
+### Reviewing and Merging Changes
 
-# Reviewing Changes
+We adopted [Github's Pull Request Review](https://help.github.com/articles/about-pull-request-reviews/) for our repositories.
+Common checks that may occur in our repositories:
 
-The review process is a conversation between the submitter and the team as a whole.
-Please feel free to bring other people into the conversation as necessary.
+1. Travis CI - where our automated tests are running
+2. Hound CI - where we check for style violations
+3. Approval Required - Github enforces at least one person approve a pull request. Also, all reviewers that have chimed in must approve.
+4. CodeClimate - is our code remaining healthy (at least according to static code analysis)
 
-As either the submitter or reviewer, feel free to assign the Pull Request to a repository contributor.
-This is a way of indicating that you want that repository contributor to review the change.
+If one or more of the required checks failed (or are incomplete), the code should not be merged (and the UI will not allow it). If all of the checks have passed, then anyone on the project (including the pull request submitter) may merge the code.
 
-When you do assign someone to the Pull Request, please make sure to add a comment stating why you assigned it to them.
+*Example: Carolyn submits a pull request, Justin reviews the pull request and approves. However, Justin is still waiting on other checks (Travis CI is usually the culprit), so he does not merge the pull request. Eventually, all of the checks pass. At this point, Carolyn or anyone else may merge the pull request.*
 
-## Responsibilities of a Reviewer
+#### Things to Consider When Reviewing
 
-As a reviewer, it is important that the pull request:
+First, the person contributing the code is putting themselves out there. Be mindful of what you say in a review.
 
-* Has a [well written commit message](#well-written-commit-messages)
-* Has [well written code](#coding-guidelines)
-* All tests pass in the test suite
-* Any questions regarding the pull request are answered
-* Adjudicate if the Pull Request should be squashed into a smaller number of commits
+* Ask clarifying questions
+* State your understanding and expectations
+* Provide example code or alternate solutions, and explain why
 
-## Responsibilities of the Submitter
+This is your chance for a mentoring moment of another developer. Take time to give an honest and thorough review of what has changed. Things to consider:
 
-**As the submitter**, you should be responsive to the review process:
+  * Does the commit message explain what is going on?
+  * Does the code changes have tests? _Not all changes need new tests, some changes are refactors_
+  * Do new or changed methods, modules, and classes have documentation?
+  * Does the commit contain more than it should? Are two separate concerns being addressed in one commit?
+  * Does the description of the new/changed specs match your understanding of what the spec is doing?
 
-* answering questions
-* making refinements
-* providing clarification
-* rebasing your commits.
+If you are uncertain, bring other contributors into the conversation by assigning them as a reviewer.
 
-*If your changes are gridlocked please notify [@jeremyf](https://github.com/jeremyf) via a comment on the pull request.*
+# Additional Resources
 
-# Merging Changes
-
-*If a pull request has received at least one Thumbs Up, but has still not been merged, please notify [@jeremyf](https://github.com/jeremyf) via a comment on the pull request.*
-
-**As the submitter,** you should not merge your own pull request.
-That is bad form.
-
-**As the reviewer,** if you are comfortable merge the pull request.
- Otherwise feel free to assign the pull request to another contributor for final merging.
-
-**As the merger,** once you have merged the pull request, go ahead and delete the pull request's topic branch.
-You are now on the hook for any breaking of the build.
+* [General GitHub documentation](http://help.github.com/)
+* [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
+* [Pro Git](http://git-scm.com/book) is both a free and excellent book about Git.
+* [A Git Config for Contributing](http://ndlib.github.io/practices/my-typical-per-project-git-config/)
