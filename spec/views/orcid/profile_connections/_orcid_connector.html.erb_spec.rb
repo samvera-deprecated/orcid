@@ -35,26 +35,6 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb', type: :view do
       expect(rendered).to have_tag('.orcid-connector')
     end
   end
-  context 'with :profile_request_pending status' do
-    let(:pending_request) { double('Pending Request', created_at: Time.now) }
-    it 'renders the options to view the pending profile request' do
-      expect(handler).to receive(:profile_request_pending).and_yield(pending_request)
-      render_with_params
-
-      expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_pending')
-      expect(rendered).to have_tag('.orcid-connector')
-    end
-  end
-  context 'with :profile_request_in_error status' do
-    let(:pending_request) { Orcid::ProfileRequest.new(created_at: Time.now) }
-    it 'renders the options to view the pending profile request' do
-      expect(handler).to receive(:profile_request_in_error).and_yield(pending_request)
-      render_with_params
-
-      expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_in_error')
-      expect(rendered).to have_tag('.orcid-connector')
-    end
-  end
   context 'with :authenticated_connection status' do
     let(:profile) { double('Profile', orcid_profile_id: '123-456') }
     it 'renders the options to view the authenticated connection' do
