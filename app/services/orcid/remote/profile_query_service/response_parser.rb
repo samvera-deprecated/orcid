@@ -52,6 +52,8 @@ module Orcid
           label = "#{given_names} #{family_name}"
           label << ' (' << emails.join(', ') << ')' if emails.any?
           label << " [ORCID: #{identifier}]"
+          label << " <a class=\"orcid-profile-id\" target=\"_blank\" href=\"#{ Orcid.url_for_orcid_id(identifier)}\"> Look Up Orcid Profile</a>"
+          label.html_safe
         end
 
         def extract_biography(profile)
