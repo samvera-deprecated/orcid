@@ -30,14 +30,17 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(/^(test|spec|features)\//)
   s.require_paths = ['lib']
 
+  s.add_dependency 'nokogiri', '1.6.8'
   s.add_dependency 'railties', '~> 4.0'
   s.add_dependency 'figaro'
   s.add_dependency 'devise-multi_auth', '~> 0.1'
-  s.add_dependency 'omniauth-orcid'
+  s.add_dependency 'omniauth-orcid', '0.6'
   s.add_dependency 'mappy'
   s.add_dependency 'virtus'
   s.add_dependency 'email_validator'
   s.add_dependency 'simple_form'
+  s.add_dependency 'omniauth-oauth2', '< 1.4'
+  s.add_dependency 'hashie', '3.4.6'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'engine_cart'
@@ -58,4 +61,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-expectations', '~>2.99'
   s.add_development_dependency 'rspec-its'
   s.add_development_dependency 'rspec-activemodel-mocks'
+  s.add_development_dependency 'rake', '11.2.2'
 end

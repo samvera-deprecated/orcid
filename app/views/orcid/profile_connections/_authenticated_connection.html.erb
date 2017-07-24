@@ -1,3 +1,4 @@
 <div class="authenticated-connection">
   <%= t('orcid.views.authenticated_connection', orcid_profile_url: Orcid.url_for_orcid_id(authenticated_connection.orcid_profile_id), orcid_profile_id: authenticated_connection.orcid_profile_id).html_safe %>
+  <%= render partial: 'orcid/profile_connections/orcid_disconnector' %>
 </div>

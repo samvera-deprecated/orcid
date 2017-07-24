@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Orcid do
-  let(:user) { FactoryGirl.build_stubbed(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:orcid_profile_id) { '0001-0002-0003-0004' }
   subject { described_class }
   its(:provider) { should respond_to :id }

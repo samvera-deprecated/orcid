@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe 'orcid/profile_connections/_orcid_connector.html.erb' do
+describe 'orcid/profile_connections/_orcid_connector.html.erb', type: :view do
   let(:default_search_text) { 'hello' }
   let(:current_user) { double('User') }
   let(:status_processor) { double('Processor') }
+  let(:user) {FactoryGirl.create(User)}
   let(:handler) do
     double(
       'Handler',
@@ -15,6 +16,7 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb' do
     )
   end
   def render_with_params
+    allow(view).to receive(:current_user).and_return(user)
     render(
       partial: 'orcid/profile_connections/orcid_connector',
       locals: { default_search_text: default_search_text, status_processor: status_processor, current_user: current_user }
@@ -30,26 +32,6 @@ describe 'orcid/profile_connections/_orcid_connector.html.erb' do
       render_with_params
 
       expect(view).to render_template(partial: 'orcid/profile_connections/_options_to_connect_orcid_profile')
-      expect(rendered).to have_tag('.orcid-connector')
-    end
-  end
-  context 'with :profile_request_pending status' do
-    let(:pending_request) { double('Pending Request', created_at: Time.now) }
-    it 'renders the options to view the pending profile request' do
-      expect(handler).to receive(:profile_request_pending).and_yield(pending_request)
-      render_with_params
-
-      expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_pending')
-      expect(rendered).to have_tag('.orcid-connector')
-    end
-  end
-  context 'with :profile_request_in_error status' do
-    let(:pending_request) { Orcid::ProfileRequest.new(created_at: Time.now) }
-    it 'renders the options to view the pending profile request' do
-      expect(handler).to receive(:profile_request_in_error).and_yield(pending_request)
-      render_with_params
-
-      expect(view).to render_template(partial: 'orcid/profile_connections/_profile_request_in_error')
       expect(rendered).to have_tag('.orcid-connector')
     end
   end

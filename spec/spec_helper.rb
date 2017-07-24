@@ -17,7 +17,7 @@ end
 require 'figaro' # must declare before the application loads
 require 'engine_cart'
 require 'omniauth-orcid'
-require File.expand_path("../internal/config/environment.rb",  __FILE__)
+require File.expand_path("../../.internal_test_app/config/environment.rb",  __FILE__)
 
 EngineCart.load_application!
 

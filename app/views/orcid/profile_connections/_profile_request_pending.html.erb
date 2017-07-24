@@ -1,8 +1,0 @@
-<div class="profile-request-pending">
-  <%= t(
-      'orcid.views.profile_request_pending',
-      datetime: profile_request_pending.created_at.in_time_zone,
-      time_ago_in_words: time_ago_in_words(profile_request_pending.created_at)
-    ).html_safe
-  %>
-</div>

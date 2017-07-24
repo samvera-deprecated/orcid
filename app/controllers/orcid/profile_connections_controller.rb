@@ -27,6 +27,12 @@ module Orcid
       respond_with(orcid, new_profile_connection)
     end
 
+    SUCCESS_NOTICE = "You have been disconnected from your ORCID record."
+    def destroy
+      Orcid.disconnect_user_and_orcid_profile(current_user)
+      redirect_to root_path, notice: SUCCESS_NOTICE
+    end
+
     protected
 
     attr_reader :profile_connection

@@ -42,7 +42,8 @@ module Orcid
         def extract_label(identifier, profile)
           orcid_bio = profile.fetch('orcid-bio')
           given_names = orcid_bio.fetch('personal-details').fetch('given-names').fetch('value')
-          family_name = orcid_bio.fetch('personal-details').fetch('family-name').fetch('value')
+          # family name is not a required field on orcid record
+          family_name = orcid_bio.try(:[], 'personal-details').try(:[], 'family-name').try(:[], 'value')
           emails = []
           contact_details = orcid_bio['contact-details']
           if contact_details
@@ -51,6 +52,8 @@ module Orcid
           label = "#{given_names} #{family_name}"
           label << ' (' << emails.join(', ') << ')' if emails.any?
           label << " [ORCID: #{identifier}]"
+          label << " <a class=\"orcid-profile-id\" target=\"_blank\" href=\"#{ Orcid.url_for_orcid_id(identifier)}\"> Look Up Orcid Profile</a>"
+          label.html_safe
         end
 
         def extract_biography(profile)
